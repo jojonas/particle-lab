@@ -7,10 +7,16 @@ import math
 import ROOT
 import numpy as np
 import matplotlib.pyplot as plt
+from uncertainties import ufloat
+
+from myoptimize import curve_fit
+#from scipy.optimize import curve_fit
 
 from rootwrapper import *
 from jhist import Hist
 import jmpl
+
+#curve_fit(lambda x, a: x*a, [1,0],[1,1])
 
 def weight_to_mass(i): 
     return [
@@ -69,7 +75,7 @@ def task_2():
     with contextlib.nested(root_open("data/mc_all.root"), root_open("data/d0.root")) as (mc_file, data_file):
         # NOTE: determine cuts on the "standard" weight, 9
         
-        data_lumi = 198.0 # +- 20, pb
+        data_lumi = 198.0 # +- 20, pb^-1
         process_xsec = 2.58e3 # +- 0.09e3 pb
         
         magic_factor = 0.90 # given in manual
@@ -127,12 +133,15 @@ def task_2():
             for event_number, event in enumerate(tree):
                 if event_number < first_event:
                     continue
-                    
+
+                #if event_number % 10 != 0:
+                #    continue
+                                        
                 #if hists["E_T_el"].count() > 1000:
                 #    break
                     
                 if event_number % 1000 == 0:
-                    print("\rProgress: %.1f %%" % (100*float(event_number)/float(N_events)), end="")
+                    print("\r", name, "- progress: %.1f %%           " % (100*float(event_number)/float(N_events)), end="")
                     sys.stdout.flush()
 
                 if hasattr(event, "weight"):
@@ -140,26 +149,26 @@ def task_2():
                 else:
                     weight = 1.0
                 
-                # transverse energy of the electron
                 E_T_el = math.sqrt(event.el_e**2 - event.el_pz**2)
-                hists["E_T_el"].fill(E_T_el, weight)
-
-                # missing transverse energy 
                 E_T_miss = math.sqrt(event.metx_calo**2 + event.mety_calo**2)
-                hists["E_T_miss"].fill(E_T_miss, weight)
-                
+                phi_miss = math.atan2(event.metx_calo, event.mety_calo) + math.pi
+                delta_z = event.el_track_z - event.met_vertex_z
                 m_T = math.sqrt(E_T_el*E_T_miss*(1-math.cos(event.el_met_calo_dphi)))
-                hists["m_T"].fill(m_T, weight)
 
+                cuts = False
+                if cuts:
+                    # GOOD CUTS!
+                    if E_T_miss < 20 or E_T_el < 30 or event.el_iso > 0.03 \
+                        or event.el_met_calo_dphi < 2.85 or abs(delta_z) > 0.2:
+                        continue
+                
+                hists["E_T_el"].fill(E_T_el, weight)
+                hists["E_T_miss"].fill(E_T_miss, weight)
+                hists["m_T"].fill(m_T, weight)
                 hists["eta_el"].fill(event.el_eta, weight)
                 hists["phi_el"].fill(event.el_phi, weight)
-
-                phi_miss = math.atan2(event.metx_calo, event.mety_calo) + math.pi
                 hists["phi_miss"].fill(phi_miss, weight)
-
                 hists["delta_phi"].fill(event.el_met_calo_dphi, weight)
-
-                delta_z = event.el_track_z - event.met_vertex_z
                 hists["delta_z"].fill(delta_z, weight)
 
         xlabels = {
@@ -186,6 +195,9 @@ def task_2():
             tau_hist = all_hists["mc_tau"][quantity]
             tau_hist.rescale(lumi_scale)
             tau_hist.steps(label="MC Tau", color="red")
+
+            text = "Data: %d\nMC: %d" % (data_hist.count(), mc_hist.count())
+            data_hist.annotate(text, loc=2)
             
             plt.xlabel(xlabels[quantity])
             plt.ylabel("Number of Events")
@@ -193,7 +205,113 @@ def task_2():
             plt.savefig("images/%s.pdf" % quantity)
             plt.show()
                 
-            
+def task_3():
+    #mc_nocuts = 164233.
+    mc_gen_count = 1164699
+    mc_allcuts = 74072. # cached ;)
+
+    correction = ufloat(0.9, 0.1)
+    luminosity = ufloat(198., 20.)
+
+    data = 67329.
+    n_data = ufloat(data, math.sqrt(data))
+
+    efficiency = mc_allcuts / mc_gen_count
+    xsec = n_data / (luminosity * efficiency * correction) *1e-3
+
+    print("Efficiency: %.1f %%" % (efficiency*100))
+    print("XSec: {xsec:.1f} nb".format(xsec=xsec))
+
+def task_4():
+    with contextlib.nested(root_open("data/mc_all.root"), root_open("data/d0.root")) as (mc_file, data_file):
+        mc_hist = list( Hist(40, 70, 50) for _ in range(19) )
+        data_hist = Hist(40, 70, 50)
+
+        for name, tree in zip(("mc", "data"), (mc_file.MCTree, data_file.MessTree)):
+            N_events = tree.GetEntries()
+            for event_number, event in enumerate(tree):
+                #if event_number % 5 != 0:
+                #    continue
+                    
+                if event_number % 1000 == 0:
+                    print("\rProgress: %.1f %%" % (100*float(event_number)/float(N_events)), end="")
+                    sys.stdout.flush()
+                    
+                E_T_el = math.sqrt(event.el_e**2 - event.el_pz**2)
+                E_T_miss = math.sqrt(event.metx_calo**2 + event.mety_calo**2)
+                m_T = math.sqrt(E_T_el*E_T_miss*(1-math.cos(event.el_met_calo_dphi)))
+                delta_z = event.el_track_z - event.met_vertex_z
+                
+                if E_T_miss < 20 or E_T_el < 30 or event.el_iso > 0.03 \
+                    or event.el_met_calo_dphi < 2.85 or abs(delta_z) > 0.2:
+                    continue
+
+                if name == "data":
+                    data_hist.fill(m_T)
+                elif name == "mc":
+                    for i, weight in enumerate(event.weight):
+                        mc_hist[i].fill(m_T, weight)
+                else:
+                    raise ValueError("WTF")
+
+
+    X = np.zeros(19)
+    Y = np.zeros(19)
+    for weight_index in range(19):
+
+        factor = data_hist.count() / mc_hist[weight_index].count()
+        mc_hist[weight_index].rescale(factor)
         
+        Nmc = mc_hist[weight_index].histogram
+        Ndata = data_hist.histogram
+        
+        error = np.sqrt(np.maximum(Ndata, 1))
+        chisquare = (np.power(Nmc-Ndata, 2)/np.power(error, 2)).sum() 
+        
+        X[weight_index] = weight_to_mass(weight_index)
+        Y[weight_index] = chisquare
+
+        if weight_index in (0, 18):
+            #plt.clf()
+            mc_hist[weight_index].steps(label="MC")
+            data_hist.errorbar(label="Data", fmt=",")
+            data_hist.annotate("Chi^2 = %.1f" % chisquare, loc=2)
+
+    plt.xlabel("Transverse Mass / GeV")
+    plt.ylabel("Number of Events")
+    plt.legend()
+    plt.savefig("comparison.pdf")
+    plt.show()
+
+    print()
+       
+    parabel = lambda x, a, b, c: c*np.power(x-a, 2) + b
+    min_mass = weight_to_mass(0)
+    max_mass = weight_to_mass(18)
+    window = 0.2 # GeV
+    for i in range(5):
+        f = np.logical_and(X>=min_mass, X<=max_mass)
+        popt, pcov = curve_fit(parabel, X[f], Y[f], p0=(80, 100, 100))
+        min_mass = popt[0] - window
+        max_mass = popt[0] + window
+
+    xnew = np.linspace(X.min(), X.max(), 1000)
+    ynew = parabel(xnew, *popt)
+
+    print("W mass:", popt[0], "GeV")
+    
+    plt.clf()
+    plt.xlabel("W Boson Mass / GeV")
+    plt.ylabel("Chi^2")
+    plt.grid()
+    plt.plot(X,Y, 's', color="black")
+    plt.plot(xnew,ynew, '-', color="grey")
+    plt.savefig("chisquare.pdf")
+    plt.show()
+
+    
+                
+                
+                
 if __name__=="__main__":
     task_2()

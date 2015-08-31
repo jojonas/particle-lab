@@ -28,18 +28,18 @@ class Hist:
         self.max = float(max)
         self.nbins = int(nbins)
         
-        self.histogram = np.zeros(self.nbins)
+        self.histogram = np.zeros(self.nbins, dtype=float)
         self.bin_width = float(self.max-self.min)/self.nbins
         self.bin_edges = np.arange(self.nbins) * self.bin_width + self.min
                        
-        self.underflow = 0
-        self.overflow = 0
+        self.underflow = 0.
+        self.overflow = 0.
 
     def fill(self, value, weight=1.0):
         if value < self.min:
-            self.underflow += 1
+            self.underflow += weight
         elif value >= self.max:
-            self.overflow += 1
+            self.overflow += weight
         else:
             index = int(math.floor((value-self.min)/(self.max-self.min) * self.nbins))
             if index < 0 or index > self.nbins-1:
@@ -49,12 +49,8 @@ class Hist:
 
     def rescale(self, factor):
         self.histogram *= factor
-
-    def underflow_count(self):
-        return self.underflow
-        
-    def overflow_count(self):
-        return self.overflow
+        self.overflow *= factor
+        self.underflow *= factor
 
     def std(self):
         return math.sqrt(np.power(self.histogram*(self.bin_centers-self.mean()), 2).sum() / self.histogram.sum())
@@ -63,7 +59,7 @@ class Hist:
         return (self.histogram*self.bin_centers).sum() / self.histogram.sum()
 
     def count(self):
-        return self.histogram.sum()
+        return self.histogram.sum() + self.overflow + self.underflow
 
     @property
     def bin_centers(self):
@@ -98,8 +94,8 @@ class Hist:
 
     def stats_box(self, **kwargs):
         n = "%d" % self.count()
-        m = "%f" % self.mean() #round_signifcant_digits(self.mean(), 2, string=True)
-        s = "%f" % self.std() #round_signifcant_digits(self.std(), 2, string=True)
+        m = "%.1f" % self.mean() #round_signifcant_digits(self.mean(), 2, string=True)
+        s = "%.1f" % self.std() #round_signifcant_digits(self.std(), 2, string=True)
         text = "$N = %s$\n$\\bar{x} = %s$\n$\\sigma = %s$" % (n, m, s)
         self.annotate(text, **kwargs)
 
@@ -111,6 +107,10 @@ class Hist:
     def adjust_axes(self):        
         plt.xlim(self.min, self.max)
         plt.ylim(0, plt.ylim()[1])
+
+    def normalize(self):
+        factor = 1.0 / self.count()
+        self.rescale(factor)
 
     @contextmanager
     def _plot_context(self):

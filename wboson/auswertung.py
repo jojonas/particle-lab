@@ -9,14 +9,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 from uncertainties import ufloat
 
-from myoptimize import curve_fit
-#from scipy.optimize import curve_fit
+try:
+	from scipy.optimize import curve_fit
+except ImportError:
+	from myoptimize import curve_fit
+
 
 from rootwrapper import *
 from jhist import Hist
-import jmpl
-
-#curve_fit(lambda x, a: x*a, [1,0],[1,1])
+#import jmpl
 
 def weight_to_mass(i): 
     return [
@@ -317,11 +318,7 @@ def task_4():
     plt.plot(X,Y, 's', color="black")
     plt.plot(xnew,ynew, '-', color="grey")
     plt.savefig("chisquare.pdf")
-    plt.show()
-
-    
-                
-                
+    plt.show()  
                 
 if __name__=="__main__":
     task_3()

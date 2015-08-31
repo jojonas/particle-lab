@@ -1,0 +1,83 @@
+% !TeX encoding = UTF-8
+% !TeX spellcheck = en_US
+
+\documentclass[
+	paper=A4,
+	parskip=full,
+	chapterprefix=true,
+	11pt,
+	headings=normal,
+	bibliography=totoc,
+	listof=totoc,
+	titlepage=on,
+]{scrreprt}
+
+\usepackage{../../lieb}
+
+\usepackage{feynmp}
+
+\graphicspath {{out/}{bilder/}{data/}}
+\heads{RWTH Aachen \\ Particlephyics Lab}{T17 \\ W-Boson}{Lieb | Stettner \\ \today} 
+\date{\today}
+
+\newcommand{\thirdwidth}{0.32\textwidth}
+\newcommand{\halfwidth}{0.48\textwidth}
+\newcommand{\fullwidth}{1.0\textwidth}
+
+\setlength\parindent{0pt}
+\setlength{\parskip}\medskipamount
+
+\title{Particle Physics Laboratory Class \\ \quad \\ Experiment T17 | W-Boson }
+\author{Jonas Lieb, (312136) \\ Jöran Stettner (312169) \\ \\  RWTH Aachen}
+
+\begin{document}
+
+\maketitle
+
+\cleardoublepage
+
+\setcounter{tocdepth}{2}
+\tableofcontents
+
+\cleardoublepage
+
+\chapter{Introduction}
+Moepse.
+
+\section{Example for Copying}
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=\halfwidth]{Example}
+		\caption{Blabla}
+	\label{fig:exp}
+\end{figure}
+
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{ 
+				c 
+				S[table-format=3.2(2)] 
+				S[table-format=0.4(4)] 
+				S[table-format=2.1] 
+			}
+		\toprule
+		{Strombereich} & {Threshold / \si{\milli\ampere}} & {Slope / \si{\watt\per\ampere}} & {$\chi^2 / \textrm{ndf}$} \\ 
+		\midrule
+		alles $ > \SI{200}{\milli\ampere}$ & 188.10 +- 0.15 & 0.8530 +- 0.0005 & 40.0 \\
+		\SIrange{200}{410}{\milli\ampere} & 182.10 +- 0.23 & 0.8139 +- 0.0013 & 2.1 \\
+		$ > \SI{410}{\milli\ampere}$ & 201.6 +- 0.5 & 0.8892 +- 0.0014 & 2.2 \\
+		\bottomrule
+	\end{tabular}
+	\caption{Ergebnisse von Anpassungen für verschiedene Bereiche}
+	\label{tbl:diode}
+\end{table}
+
+Test-Citation: D0-Paper \cite{PhysRevLett.77.3309}
+
+\newpage
+
+\bibliography{T17_bib}{}
+\bibliographystyle{plain}
+
+\end{document}

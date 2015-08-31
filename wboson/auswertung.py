@@ -129,7 +129,7 @@ def task_2():
                 first_event = N_events - N_mc_tau_events
             else:
                 first_event = 0
-            
+                
             for event_number, event in enumerate(tree):
                 if event_number < first_event:
                     continue
@@ -155,7 +155,7 @@ def task_2():
                 delta_z = event.el_track_z - event.met_vertex_z
                 m_T = math.sqrt(E_T_el*E_T_miss*(1-math.cos(event.el_met_calo_dphi)))
 
-                cuts = False
+                cuts = True
                 if cuts:
                     # GOOD CUTS!
                     if E_T_miss < 20 or E_T_el < 30 or event.el_iso > 0.03 \
@@ -189,6 +189,9 @@ def task_2():
             data_hist.errorbar(label="Data", color="black", fmt=".")
             
             mc_hist = all_hists["mc"][quantity]
+
+            Nmc = mc_hist.count()
+            
             mc_hist.rescale(lumi_scale)
             mc_hist.steps(label="MC")
 
@@ -196,7 +199,7 @@ def task_2():
             tau_hist.rescale(lumi_scale)
             tau_hist.steps(label="MC Tau", color="red")
 
-            text = "Data: %d\nMC: %d" % (data_hist.count(), mc_hist.count())
+            text = "Data: %d\nMC: %d\nMC raw: %d" % (data_hist.count(), mc_hist.count(), Nmc)
             data_hist.annotate(text, loc=2)
             
             plt.xlabel(xlabels[quantity])
@@ -206,21 +209,28 @@ def task_2():
             plt.show()
                 
 def task_3():
-    #mc_nocuts = 164233.
-    mc_gen_count = 1164699
-    mc_allcuts = 74072. # cached ;)
-
-    correction = ufloat(0.9, 0.1)
-    luminosity = ufloat(198., 20.)
-
+    # CACHE
+    mc_allcuts = 74072. 
+    #mc_allcuts = 187647. 
     data = 67329.
+
+    #mc_gen_count = 1164699.
+    process_xsec = ufloat(2.58e3, 0.09e3)
+    #correction = ufloat(0.9, 0.1)
+    #luminosity = ufloat(198., 20.)
+
     n_data = ufloat(data, math.sqrt(data))
 
-    efficiency = mc_allcuts / mc_gen_count
-    xsec = n_data / (luminosity * efficiency * correction) *1e-3
+    #lumi_scale = luminosity * process_xsec / mc_gen_count * correction
+    #mc_gen_count *= lumi_scale
+    
+    #efficiency = mc_allcuts / mc_gen_count
+    #xsec = n_data / (luminosity * efficiency * correction)
 
-    print("Efficiency: %.1f %%" % (efficiency*100))
-    print("XSec: {xsec:.1f} nb".format(xsec=xsec))
+    xsec = n_data / mc_allcuts * process_xsec
+
+    #print("Efficiency: {eff:.1f} %%".format(eff=efficiency*100))
+    print("XSec: {xsec:.2f} nb".format(xsec=xsec*1e-3))
 
 def task_4():
     with contextlib.nested(root_open("data/mc_all.root"), root_open("data/d0.root")) as (mc_file, data_file):
@@ -314,4 +324,4 @@ def task_4():
                 
                 
 if __name__=="__main__":
-    task_2()
+    task_3()

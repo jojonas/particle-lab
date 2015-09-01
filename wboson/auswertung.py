@@ -153,8 +153,12 @@ def task_1():
         plt.xlabel("Generated W Mass / GeV")
         plt.ylabel("Number of Events")
         plt.legend()
+<<<<<<< HEAD
         plt.ylim(0, hists[0].histogram.max()*1.4)
         plt.savefig("images/mc_examples.pdf")
+=======
+        plt.savefig("mc_examples.pdf")
+>>>>>>> 64f9299f89b05289651b82f9cf7f488d0ff91206
 
 def task_2():    
     with contextlib.nested(root_open("data/mc_all.root"), root_open("data/d0.root")) as (mc_file, data_file):

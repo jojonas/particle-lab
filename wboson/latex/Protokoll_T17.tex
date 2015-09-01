@@ -16,7 +16,7 @@
 
 \usepackage{feynmp}
 
-\graphicspath {{out/}{bilder/}{data/}}
+\graphicspath {{../images}}
 \heads{RWTH Aachen \\ Particlephyics Lab}{T17 \\ W-Boson}{Lieb | Stettner \\ \today} 
 \date{\today}
 
@@ -45,14 +45,22 @@
 Moepse.
 
 \section{Example for Copying}
-%\begin{figure}[htbp]
-%	\centering
-%		\includegraphics[width=\halfwidth]{Example}
-%		\caption{Blabla}
-%	\label{fig:exp}
-%\end{figure}
 
 
+Test-Citation: D0-Paper \cite{PhysRevLett.77.3309}
+
+
+
+\chapter{Selection of Events}
+In this chapter, the measured variables are introduced and the selection of events is explained. \\
+The distributions of the measured and simulated quanities are shown in figures \ref{no_cuts_Ets}, \ref{nocuts_etaphi} and \ref{nocuts_dziso}. It becomes clear that the MC did not simulate all processes which occur in the detector, see for example the double-bump structure in the distribution of transverse electron energy. To perform the analysis as sketched above, it is important to select only those events which fall in regions where data and MC are in good agreement. Otherwise, a discrepancy coming from background processes would be interpretated as a mismatch to the simulated W-mass. Among others, these background processes are possible: 
+\begin{itemize}
+\item $\pi_0 \rightarrow 2 \gamma$ decays which could account for the lower electron energies.
+\item Jets which are misidentified as electrons. The electron isolation variable becomes smaller in this case.
+\item $Z \rightarrow e^{+} e^{-}$ decays where one of the leptons leaves the detector unnoticed.
+\end{itemize}
+
+To constrain the analysis to regions of good agreement between MC and data, the following cuts are applied to all events:
 \begin{table}[htbp]
 	\centering
 	\begin{tabular}{ 
@@ -62,18 +70,41 @@ Moepse.
 				S[table-format=2.1] 
 			}
 		\toprule
-		{Strombereich} & {Threshold / \si{\milli\ampere}} & {Slope / \si{\watt\per\ampere}} & {$\chi^2 / \textrm{ndf}$} \\ 
+		{Quantity} & {Threshold} & { } \\ 
 		\midrule
-		alles $ > \SI{200}{\milli\ampere}$ & 188.10 +- 0.15 & 0.8530 +- 0.0005 & 40.0 \\
-		\SIrange{200}{410}{\milli\ampere} & 182.10 +- 0.23 & 0.8139 +- 0.0013 & 2.1 \\
-		$ > \SI{410}{\milli\ampere}$ & 201.6 +- 0.5 & 0.8892 +- 0.0014 & 2.2 \\
+		\MET & $>\SI{20}{\giga\electronvolt}$ & \\
+		\ELET & $>\SI{30}{\giga\electronvolt}$ & No low energy electrons (e.g. $\pi^{0}$) \\
+		 		
 		\bottomrule
 	\end{tabular}
 	\caption{Ergebnisse von Anpassungen für verschiedene Bereiche}
 	\label{tbl:diode}
 \end{table}
 
-Test-Citation: D0-Paper \cite{PhysRevLett.77.3309}
+
+\begin{figure}%
+\centering
+\subfloat[Distribution of Transverse Electron Energy measurend in the Central Calorimeter.]{nocuts/E_T_el}\qquad
+\subfloat[Distribution of Missing Transverse Energy, calculated using the constraint of momentum conservation in the transveral plane.]{nocuts/E_T_miss}\\
+\label{no_cuts_Ets}
+\end{figure}
+
+\begin{figure}%
+\centering
+\subfloat[Distribution of the Pseudorapidity of the Electron.]{nocuts/eta_el}\qquad
+\subfloat[Distribution of the Difference in Polar Angle $\Phi$ between the directions of MET and the electron.]{nocuts/delta_phi}\\
+\label{no_cuts_etaphi}
+\end{figure}
+
+\begin{figure}%
+\centering
+\subfloat[Distribution of the distance of the intersection point between MET and electron track to the collision point.]{nocuts/delta_z}\qquad
+\subfloat[Distribution of the Isolation variable describing the tidiness in the vicinity of the electron\'s impact in the EM calorimeter]{Example}\\
+
+\label{no_cuts_dziso}
+\end{figure}
+
+
 
 \newpage
 

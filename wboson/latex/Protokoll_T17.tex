@@ -112,12 +112,17 @@ Only a limited amount of measured data is available. The integrated luminosity o
 \end{equation}
 Opposed to this, $N_\mathrm{gen} = \num{1164699}$ Monte Carlo events have been generated. An intuitive way to compare the number of MC events to the number of data events is to construct a "MC luminosity". For this, the theoretical cross section from equation \ref{eq:theoretical_cross_section} is used to predict the luminosity at $N_\mathrm{gen}$ events. Here and in the following equations (if not stated otherwise), Gaussian error propagation is used:
 \begin{equation}
-	\mathcal{L_\mathrm{MC}} = \frac{N_\mathrm{gen}}{\sigma_\mathrm{theo}} = \SI{451 +- 16}{\per\pico\barn}
+	\mathcal{L}_\mathrm{MC} = \frac{N_\mathrm{gen}}{\sigma_\mathrm{theo}} = \SI{451 +- 16}{\per\pico\barn}
 \end{equation}
 This shows that the number of MC events has to be scaled down by a factor of about \num{2.3}. Curiously enough, the lab manual suggests an additional correction factor of $\mathrm{corr} = \num{0.90 +- 0.10}$ of unknown origin.
 Combined, the weight for each MC event (not including the shape-reweighting) is:
 \begin{equation}
-	w = \frac{\mathcal{L_\mathrm{data}}}{\mathcal{L_\mathrm{MC}}} \cdot (\num{0.90 +- 0.10}) = \num{0.40 +- 0.06}
+	w = \frac{\mathcal{L}_\mathrm{data}}{\mathcal{L}_\mathrm{MC}} \cdot \mathrm{corr} = \mathcal{L}_\mathrm{data} \cdot \frac{\sigma_\mathrm{theo}}{N_\mathrm{gen}} \cdot \mathrm{corr} = \num{0.395 +- 0.061}
+	\label{eq:reweighting_total}
+\end{equation}
+From this, all MC events counts can be reweighted:
+\begin{equation}
+	N_\mathrm{MC}' = w \cdot N_\mathrm{MC} = \frac{\mathcal{L}_\mathrm{data}}{\mathcal{L}_\mathrm{MC}} \cdot \mathrm{corr} \cdot N_\mathrm{MC}
 \end{equation}
 
 
@@ -215,6 +220,47 @@ The distribution of this quantity is shown in figure \ref{fig:cuts_Mt} and shows
 	\label{fig:cuts_Mt}
 \end{figure}
 
+\chapter{Determination of the Process Cross Section}
+To determine the process cross section $\sigma_\mathrm{data}$ from the data, the lab manual poses a complex formula:
+\begin{equation}
+	N_\mathrm{data} = \mathrm{eff} \cdot \mathrm{corr} \cdot \sigma_\mathrm{data} \cdot \mathcal{L}_\mathrm{data}
+	\label{eq:data_xsec}
+\end{equation}
+Here, the efficiency $\mathrm{eff}$ contains detector efficiency as well as analysis (e.g. cut) efficiency and is the only unknown factor in this equation. The correction factor $\mathrm{corr}$ and data luminosity $\mathcal{L}_\mathrm{data}$ are defined according to chapter \ref{ch:mc_samples}, $N_\mathrm{data}$ is the number of event after the application of all cuts.
+
+The efficiency can be determined by executing the analysis on the entire Monte Carlo dataset and comparing this to the initial number of generated events, $N_\mathrm{gen}$:
+\begin{equation}
+	\mathrm{eff} = \frac{N_\mathrm{MC}}{N_\mathrm{gen}}
+\end{equation}
+
+Substitution back into equation \ref{eq:data_xsec} and combining this result with \ref{eq:reweighting_total} yields:
+\begin{equation}
+	N_\mathrm{data} = \frac{N_\mathrm{MC}}{N_\mathrm{gen}} \cdot \mathrm{corr} \cdot \mathcal{L}_\mathrm{data} \cdot \sigma_\mathrm{data} = \frac{N_\mathrm{MC} \cdot w}{\sigma_\mathrm{theo}} \cdot \sigma_\mathrm{data}
+\end{equation}
+This gives the final equation for the cross section
+\begin{equation}
+	\sigma_\mathrm{data} = \frac{N_\mathrm{data}}{N_\mathrm{MC} \cdot w} \cdot \sigma_\mathrm{theo}
+\end{equation}
+
+Here, the rescaled number of MC events from chapter \ref{ch:mc_samples} can be reused. The formula is plausible, since for a perfect MC simulation $N_\mathrm{data} = N_\mathrm{MC}'$ and thus $\sigma_\mathrm{data} = \sigma_\mathrm{theo}$.
+
+The measurement can be read off from figure \ref{fig:cuts_Mt}:
+\begin{equation}
+	N_\mathrm{MC} = \num{187647}, \quad
+	N_\mathrm{data} = \num{67329 +- 259} 
+\end{equation}
+Here, the conventional Poission error of $\sigma_N = \sqrt{N}$ is used for the data, which is valid for $N \gg 1$ (fulfilled in this case).
+The total cross section is:
+\begin{equation}
+	\sigma_\mathrm{data} = \frac{\num{67329 +- 259}}{\num{187647} \cdot (\num{0.395 +- 0.061})} \cdot \SI{2.58 +- 0.09}{\nano\barn} = \SI{2.35 +- 0.35}{\nano\barn}
+\end{equation}
+
+This formula also directly shows the comparison between theoretical prediction and this measurement. The factor between both values is \begin{equation}
+	\frac{N_\mathrm{data}}{N_\mathrm{MC} \cdot w} = \num{0.909 +- 0.140}
+\end{equation} 
+Although this results is slightly lower than the theoretical expectation, the measurements are compatible within their errors.
+
+The largest error sources on this method are the determination of the measured luminosity $\mathcal{L}_\mathrm{data}$ and the odd correction factor $\mathrm{corr}$, both contribute a relative uncertainty of \SI{10}{\percent} each. The error on the theoretical value and the statistical uncertainty on $N_\mathrm{data}$ are negligible.
 
 \chapter{Determination of the W-boson mass}
 The central analysis of this experiment is the determination of the W-boson mass in a template fit. The idea is to extract the correct W mass from the distribution of measured quantities like the transverse mass by comparing it to the generated MC-datasets. 

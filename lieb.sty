@@ -99,7 +99,7 @@
 \RequirePackage[l2tabu, orthodox]{nag}
 
 % for custom Math typesetting 
-\RequirePackage{mathtools}
+%\RequirePackage{mathtools}
 
 % ceil and floor macro
 %\DeclarePairedDelimiter\bceil{\lceil}{\rceil}
@@ -174,5 +174,5 @@
 % commands
 
 % definition sign
-\newcommand{\defeq}{\vcentcolon=}
-\newcommand{\eqdef}{=\vcentcolon}
+\newcommand{\defeq}{\mathrel{\mathop:}=}
+\newcommand{\eqdef}{=\mathrel{\mathop:}}

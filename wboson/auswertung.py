@@ -13,9 +13,9 @@ from uncertainties import ufloat, umath, correlated_values_norm
 from mpl_toolkits.axes_grid.anchored_artists import AnchoredText
 
 try:
-	from scipy.optimize import curve_fit
+    from scipy.optimize import curve_fit
 except ImportError:
-	from myoptimize import curve_fit
+    from myoptimize import curve_fit
 
 
 from rootwrapper import *
@@ -135,7 +135,7 @@ def task_1():
         plt.xlabel("Generated W Mass / GeV")
         plt.ylabel("Number of Events")
         plt.legend()
-        plt.show()
+        plt.savefig("mc_examples.pdf")
 
 def task_2():    
     with contextlib.nested(root_open("data/mc_all.root"), root_open("data/d0.root")) as (mc_file, data_file):
@@ -428,4 +428,4 @@ def task_6():
     
                 
 if __name__=="__main__":
-    task_6()
+    task_1()

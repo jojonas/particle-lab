@@ -17,7 +17,7 @@
 \usepackage{feynmp}
 \DeclareGraphicsRule{.1}{mps}{*}{}
 
-\graphicspath {{../images}}
+\graphicspath {{../images/}}
 
 \heads{RWTH Aachen \\ Particlephyics Lab}{T17 \\ W-Boson}{Lieb | Stettner \\ \today} 
 \date{\today}
@@ -33,7 +33,7 @@
 \setlength{\parskip}\medskipamount
 
 \title{Particle Physics Laboratory Class \\ \quad \\ Experiment T17 | W-Boson }
-\author{Jonas Lieb, (312136) \\ Jöran Stettner (312169) \\ \\  RWTH Aachen}
+\author{Jonas Lieb (312136) \\ Jöran Stettner (312169) \\ \\  RWTH Aachen}
 
 \newcommand{\dnull}{D$\slashed{\mathrm{0}}$\xspace}
 
@@ -50,7 +50,7 @@
 
 \chapter{Introduction}
 
-This analysis deals with \PW-Boson physics conducted at the \dnull experiment at the Tevatron accelerator (FERMILAB, Chicago). The data has been taken in proton-antiproton collisions at a center-of-mass energy of $\sqrt{s} = \SI{1960}{\giga\electronvolt}$.
+This analysis deals with \PW boson physics conducted at the \dnull experiment at the Tevatron accelerator (FERMILAB, Chicago). The data has been taken in proton-antiproton collisions at a center-of-mass energy of $\sqrt{s} = \SI{1960}{\giga\electronvolt}$.
 
 \section{Units}
 In this report, a natural unit system of particle physics is used: first, the speed of light and Planck's constant are fixed:
@@ -59,8 +59,8 @@ c \defeq \num{1},\quad \hbar \defeq \num{1}
 \end{equation}
 From this convention, many quantities arise in units of energy. Additionally, the gigaelectronvolt (\si{\giga\electronvolt}) is chosen as basic energy unit, in order to deal with numbers of magnitude $\order{1}$.
 
-\subsection{\PW-Boson Production and Decay}
-The process of interest is the \PW-Boson production from the valence quarks of the protons and antiprotons, and the decay into an electron and an electron neutrino.
+\section{\PW Boson Production and Decay}
+The process of interest is the \PW boson production from the valence quarks of the protons and antiprotons, and the decay into an electron and an electron neutrino.
 \begin{equation}
 	\Pproton\APproton \rightarrow \PWminus \rightarrow \Pelectron \APnue
 \end{equation}
@@ -86,11 +86,21 @@ Inside the detector, a Cartesian coordinate system and a cylindrical coordinate 
 
 Because the colliding protons are composite particles, the longitudinal momentum of the interacting quarks is unknown. The transversal components, however, are zero in the initial state. From momentum conservation it follows that the sum of all transversal momenta in the final state is also zero. 
 To represent this conservation in the transversal plane, energies and momenta are projected onto it. This introduces the transverse electron energy \ELET.
-Another important definition is the missing transverse energy \MET. 
+Another important definition is the missing transverse energy \MET which is calculated as negative sum of all particles momenta, projected onto the transverse plane.
 
 
 \chapter{Monte-Carlo Samples}
+\label{ch:mc_samples}
+The final goal of this experiment is to perform a template fit between distributions of Monte Carlo (MC) simulated events and measured data, in order to find the \PW-Boson mass $m_{\PW}$. For the template fit, multiple MC distributions are necessary, one for each hypothetical \PW boson mass. Since MC simulations are computation intensive, an alternative approach is used: the actual simulation has only been performed once, but each MC event additionally contains a set of \num{19} weights, which correspond to different hypothetical \PW masses in the range of \SIrange{79.9446}{80.8446}{\giga\electronvolt} (for a complete reference, see the appendix of \cite{HBK+2013Experiment}). When aggregating distributions, each event has to be counted with the weight of the \PW mass of interest.
 
+\begin{figure}
+	\centering
+	\includegraphics{mc_examples}
+	\caption{Histogram of \PW masses. Shown is the generator W mass, which is stored inside the MC events, reweighted for three different example masses. One can observe the expected Breit-Wigner distribution, with the centers shifted.}
+	\label{fig:mc_examples}
+\end{figure}
+
+Figure \ref{fig:mc_examples} shows the result of reweighting for example values. For this plot, the \quote{true} \PW mass has been obtained from the Monte Carlo generator data. The histogram has been filled with the generator mass and the weighs corresponding to the \PW masses \SI{79.9446}{\giga\electronvolt}, \SI{80.3946}{\giga\electronvolt} and \SI{80.8446}{\giga\electronvolt}. The illustration shows that the reweighting approach is valid, although the weights only change the plot along the vertical axis, the overall Breit-Wigner curve has shifted to different masses.
 
 
 \chapter{Selection of Events}
@@ -127,11 +137,11 @@ To constrain the analysis to regions of good agreement between MC and data, the 
 \begin{figure}%
 	\centering
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics{./nocuts/E_T_el}
+		\includegraphics{nocuts/E_T_el}
 		\caption{Distribution of Transverse Electron Energy measured in the Central Calorimeter.}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics{./nocuts/E_T_miss}
+		\includegraphics{nocuts/E_T_miss}
 		\caption{Distribution of Missing Transverse Energy, calculated using the constraint of momentum conservation in the transveral plane.}
 	\end{subfigure}
 	\label{no_cuts_Ets}
@@ -140,11 +150,11 @@ To constrain the analysis to regions of good agreement between MC and data, the 
 \begin{figure}%
 	\centering
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics{./nocuts/eta_el}
+		\includegraphics{nocuts/eta_el}
 		\caption{Distribution of the Pseudorapidity of the Electron.}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics{./nocuts/delta_phi}
+		\includegraphics{nocuts/delta_phi}
 		\caption{Distribution of the Difference in Polar Angle $\Phi$ between the directions of MET and the electron.}
 	\end{subfigure}
 	\label{no_cuts_etaphi}
@@ -153,7 +163,7 @@ To constrain the analysis to regions of good agreement between MC and data, the 
 \begin{figure}%
 	\centering
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics{./nocuts/delta_z}
+		\includegraphics{nocuts/delta_z}
 		\caption{Distribution of the distance of the intersection point between MET and electron track to the collision point.}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}

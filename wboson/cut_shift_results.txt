@@ -1,0 +1,58 @@
+Cuts:
+    MET > 20 GeV
+    Ele_ET > 30 GeV
+    Iso < 0.03
+    Dphi > 2.85
+    |delta z| < 0.2
+
+=> W_mt = 80.2065919031 GeV
+=> W_elet = 80.4647889552 GeV
+
+
+
+
+Variation:
+    MET > 23 GeV
+=> W_mt = 80.2356502739 GeV
+=> W_elet = 80.4564368527 GeV
+
+    MET > 17 GeV
+=> W_mt = 80.1838982387 GeV
+=> W_elet = 80.4500403671 GeV
+
+
+    Ele_ET > 35 GeV
+=> W_mt = 80.1722402594 GeV
+=> W_elet = 80.6129692201 GeV
+
+    Ele_ET > 25 GeV
+=> W_mt = 80.2217285223 GeV
+=> W_elet = 80.4962177936 GeV
+
+
+    Iso < 0.02
+=> W_mt = 80.0696728905 GeV
+=> W_elet = 80.2962779996 GeV
+
+    Iso < 0.04
+=> W_mt = 80.2141632906 GeV
+=> W_elet = 80.477347009 GeV
+
+
+    Dphi < 2.7
+=> W_mt = 80.1995909073 GeV
+=> W_elet = 80.4638765632 GeV
+
+    Dphi < 3.0
+=> W_mt = 80.1738522135 GeV
+=> W_elet = 80.4189297375 GeV
+
+
+    delta_z < 0.15
+=> W_mt = 80.1913193623 GeV
+=> W_elet = 80.4628464057 GeV
+
+    delta_z < 0.25
+=> W_mt = 80.1898332455 GeV
+=> W_elet = 80.446633186 GeV
+

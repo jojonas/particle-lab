@@ -27,7 +27,7 @@
 
 % enables graphics inclusion
 \RequirePackage[final]{graphicx}
-\setkeys{Gin}{width=\linewidth}
+%\setkeys{Gin}{width=\linewidth}
 
 % floating figures (with [h])
 \RequirePackage{float}
@@ -92,6 +92,7 @@
 
 % pretty ToC
 \RequirePackage[titles]{tocloft}
+\renewcommand\cftchapfont{\Large \fontfamily{qhv}\selectfont}
 
 % nagging about obsolete commands
 \RequirePackage[l2tabu, orthodox]{nag}
@@ -123,12 +124,14 @@
 ]{geometry}
 
 % font
-\RequirePackage{lmodern}	% font set: Latin Modern
-\RequirePackage{charter}	% font set: Charter
-\setkomafont{part}{\huge \fontfamily{qhv}\selectfont} % for chapter entries
-\setkomafont{chapter}{\huge \fontfamily{phv}\selectfont} % for chapter entries
-\setkomafont{section}{\LARGE \fontfamily{qhv}\selectfont} % for section entries
-\setkomafont{subsection}{\Large \fontfamily{qhv}\selectfont} % for section entries
+\RequirePackage{lmodern}
+\RequirePackage{charter}
+
+\setkomafont{title}{\Huge \fontfamily{qhv}\selectfont}
+\setkomafont{part}{\huge \fontfamily{qhv}\selectfont}
+\setkomafont{chapter}{\huge \fontfamily{phv}\selectfont}
+\setkomafont{section}{\LARGE \fontfamily{qhv}\selectfont}
+\setkomafont{subsection}{\Large \fontfamily{qhv}\selectfont}
 \setkomafont{paragraph}{\fontfamily{qhv}\selectfont\small\bfseries}
 
 % typesetting improvements
@@ -172,24 +175,3 @@
 % definition sign
 \newcommand{\defeq}{\vcentcolon=}
 \newcommand{\eqdef}{=\vcentcolon}
-
-\newcommand{\Minv}{\ensuremath{{M_\mathrm{inv}}}\xspace}
-\newcommand{\pT}{\ensuremath{{\vec{p_\mathrm{T}}}}\xspace}
-\newcommand{\sumpT}{\ensuremath{{\sum \abs{\pT}}}\xspace}
-\newcommand{\ET}{\ensuremath{{E_\mathrm{T}}}\xspace}
-\newcommand{\MET}{\ensuremath{{\slashed{E}_\mathrm{T}}}\xspace}
-
-\newcommand{\ptilde}{\ensuremath{\tilde{p}}\xspace}
-\newcommand{\p}{\ensuremath{p}\xspace}
-\newcommand{\pxlio}{\texttt{pxlio}\xspace}
-\newcommand{\deltaptilde}{\ensuremath{\Delta \tilde{p}}\xspace}
-
-\newcommand{\eventclass}[1]{\framebox{\textsf{#1}}}
-\newcommand{\Ndata}{\ensuremath{{N_\mathrm{obs}}}\xspace}
-\newcommand{\Nmc}{\ensuremath{{N_\mathrm{SM}}}\xspace}
-\newcommand{\sigmamc}{\ensuremath{{\sigma_\mathrm{SM}}}\xspace}
-
-\newcommand{\mychi}{\ensuremath{\chi}\xspace}
-\newcommand{\paramregions}{\ensuremath{{n_\mathrm{regions}}}\xspace}
-\newcommand{\parambinbase}{\ensuremath{{n_\mathrm{base}}}\xspace}
-\newcommand{\sigmarel}{\ensuremath{\sigma_\mathrm{rel}}\xspace}

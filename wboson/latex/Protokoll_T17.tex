@@ -94,10 +94,10 @@ Another important definition is the missing transverse energy \MET.
 
 
 \chapter{Selection of Events}
-In this chapter, the measured variables are introduced and the selection of events is explained. \\
-The distributions of the measured and simulated quantities are shown in figures \ref{fig:no_cuts_Etmet}, \ref{fig:no_cuts_etadphi} and \ref{fig:no_cuts_dziso}. The histogram labeled \quote{MC} contains all simulated events but the small component of $\tau$-leptons is plotted separately to point out it's contribution. It becomes clear that the MC did not simulate all processes which occur in the detector, see for example the double-bump structure in the distribution of transverse electron energy. To perform the analysis as sketched above, it is important to select only those events which fall in regions where data and MC are in good agreement. Otherwise, a discrepancy coming from background processes would be interpreted as a mismatch to the simulated W-mass. Among others, these background processes are possible: 
+In this chapter, the measured variables are presented and the selection of events is explained. \\
+The distributions of the measured and simulated quantities are shown in figures \ref{fig:no_cuts_Etmet}, \ref{fig:no_cuts_etadphi} and \ref{fig:no_cuts_dziso}. The histogram labeled 'MC' contains all simulated events but the small component of $\tau$-leptons is plotted separately to point out it's contribution. It becomes clear that the MC-generator did not simulate all processes which occur in the detector, see for example the double-bump structure in the distribution of transverse electron energy. To perform the analysis as sketched above, it is important to select only those events which fall in regions where data and MC are in good agreement. Otherwise, a discrepancy coming from background processes or missing simulation would be interpreted as a mismatch to the simulated W-mass. Among others, occuring background processes are: 
 \begin{itemize}
-	\item $\Ppizero \rightarrow 2 \Pphoton$ decays which could account for the lower electron energies.
+	\item $\Ppizero \rightarrow 2 \Pphoton$ decays which could account for the lower electron energies if the $\gamma$ is misidentified.
 	\item Jets which are misidentified as electrons. The electron isolation variable becomes smaller in this case.
 	\item $\PZ \rightarrow \Ppositron \Pelectron$ decays where one of the leptons leaves the detector unnoticed.
 	\item $\tau \rightarrow e+\bar{\nu_e}+\nu_{\tau}$ (also simulated in MC)
@@ -170,12 +170,12 @@ To constrain the analysis to regions of good agreement between MC and data, the 
 	\label{fig:no_cuts_dziso}
 \end{figure}
 
-After applying these cuts, the agreement between data and MC becomes much better as can be seen in the distribution of the transverse electron energy (see figure \ref{fig:cuts_EtMt}). Furthermore, the transverse mass is shown and shows good agreement, too. Since the reconstruction of the neutrino is only possible in the transverse plane, the invariant mass of the W-boson can not calculated directly. The following analysis is therefore based on the transverse mass, which is calculated for each event:
+After applying these cuts, the agreement between data and MC becomes much better as can be seen in the distribution of the transverse electron energy (see figure \ref{fig:cuts_EtMt}). Since the reconstruction of the neutrino is only possible in the transverse plane of the detector, the invariant mass of the W-boson can not be calculated directly. The following analysis is therefore based on the transverse mass, which is calculated for each event:
 \begin{equation}
 M_t:=\sqrt{(p_T^{el}+p_T^{miss})^2} = \sqrt{\MET \ELET (1-\cos{\Delta \phi})}
 \label{eq:m_t}
 \end{equation} 
-The distribution of this quantity is shown in figure \ref{fig:cuts_EtMt} and shows good agreement after applying the described cuts.
+The distribution of this quantity is shown in figure \ref{fig:cuts_EtMt} and shows good agreement after applying the described cuts. Since rescaling of the MC events to the luminosity of the data sample as described in section \ref{ch:mc_samples} is very uncertain, the agreement of the absolute height is not very good. This discrepancy will not influence the main goal of the analysis and is therefore not investigated further. 
 
 \begin{figure}%
 	\centering

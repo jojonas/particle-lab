@@ -13,9 +13,9 @@ from uncertainties import ufloat, umath, correlated_values_norm
 from mpl_toolkits.axes_grid.anchored_artists import AnchoredText
 
 try:
-	from scipy.optimize import curve_fit
+    from scipy.optimize import curve_fit
 except ImportError:
-	from myoptimize import curve_fit
+    from myoptimize import curve_fit
 
 
 from rootwrapper import *
@@ -44,6 +44,24 @@ def weight_to_mass(i):
         80.7946,
         80.8446
     ][i]
+
+plot_colors = [
+            "#396ab1",
+            "#da7c30",
+            "#3e9651",
+            "#cc2529",
+            "#535154",
+            "#6b4c9a",
+            "#922428",
+            "#948b3d",
+        ]
+
+plot_linestyles = [
+            "-",
+            "--",
+            "..",
+            "-.",
+        ]
 
 def annotate(text, loc=1, frameon=True, **kwargs):
     at = AnchoredText(text, loc=loc, frameon=frameon, prop=kwargs)
@@ -129,13 +147,14 @@ def task_1():
 
         plt.clf()
         for i, weight in enumerate(interesting_weights):
-            hists[i].steps(label="m = %g GeV" % weight_to_mass(weight), alpha=0.5)
+            hists[i].steps(label="m = %g GeV" % weight_to_mass(weight), color=plot_colors[i], ls=["--", "-", "-."][i], linewidth=1)
             #hists[i].stats_box(loc=3)
             
         plt.xlabel("Generated W Mass / GeV")
         plt.ylabel("Number of Events")
         plt.legend()
-        plt.show()
+        plt.ylim(0, hists[0].histogram.max()*1.4)
+        plt.savefig("images/mc_examples.pdf")
 
 def task_2():    
     with contextlib.nested(root_open("data/mc_all.root"), root_open("data/d0.root")) as (mc_file, data_file):
@@ -160,6 +179,7 @@ def task_2():
                 "phi_miss": Hist(0, 2*math.pi, 100),
                 "delta_phi": Hist(0, 1*math.pi, 100),
                 "delta_z": Hist(-1, 1, 100),
+                "el_iso": Hist(0, 0.1, 100),
             },
             "data": {
                 "E_T_el": Hist(0, 100, 100),
@@ -170,6 +190,7 @@ def task_2():
                 "phi_miss": Hist(0, 2*math.pi, 100),
                 "delta_phi": Hist(0, 1*math.pi, 100),
                 "delta_z": Hist(-1, 1, 100),
+                "el_iso": Hist(0, 0.1, 100),
             },
             "mc_tau": {
                 "E_T_el": Hist(0, 100, 100),
@@ -180,6 +201,7 @@ def task_2():
                 "phi_miss": Hist(0, 2*math.pi, 100),
                 "delta_phi": Hist(0, 1*math.pi, 100),
                 "delta_z": Hist(-1, 1, 100),
+                "el_iso": Hist(0, 0.1, 100),
             }
         }
         
@@ -200,8 +222,8 @@ def task_2():
                 if event_number < first_event:
                     continue
 
-                if event_number % 100 != 0:
-                    continue
+                #if event_number % 100 != 0:
+                #    continue
                                    
                 if event_number % 1000 == 0:
                     print("\r", name, "- progress: %.1f %%           " % (100*float(event_number)/float(N_events)), end="")
@@ -209,8 +231,8 @@ def task_2():
 
                 event = MyEvent(root_event)
                 
-                if not event.passes_cuts():
-                    continue
+                #if not event.passes_cuts():
+                #    continue
                 
                 weight = event.get_weight(9)
                 hists["E_T_el"].fill(event.el_e_t, weight)
@@ -221,17 +243,33 @@ def task_2():
                 hists["phi_miss"].fill(event.met_phi, weight)
                 hists["delta_phi"].fill(event.el_met_calo_dphi, weight)
                 hists["delta_z"].fill(event.delta_z, weight)
+                hists["el_iso"].fill(event.el_iso, weight)
 
         xlabels = {
             "E_T_el": "Electron Transverse Energy / GeV",
             "E_T_miss": "Missing Transverse Energy / GeV",
             "m_T": "Transverse Mass / GeV",
             "eta_el": "Electron Eta",
-            "phi_el": "Electron Phi",
-            "phi_miss": "MET Phi",
-            "delta_phi": "Delta Phi",
+            "phi_el": "Electron Phi / rad",
+            "phi_miss": "MET Phi / rad",
+            "delta_phi": "Delta Phi / rad",
             "delta_z": "Delta z / mm",
+            "el_iso": "Isolation",
         }
+
+        upper_cuts = {
+            "E_T_el": 30,
+            "E_T_miss": 20,
+            "delta_phi": 2.85,
+            "delta_z": -0.2,
+        }
+        
+        lower_cuts = {
+            "el_iso": 0.03,
+            "delta_z": 0.2,
+        }
+
+        draw_cuts = False
 
         for quantity in all_hists["data"].keys():
             plt.clf()
@@ -244,20 +282,28 @@ def task_2():
             Nmc = mc_hist.count()
             
             mc_hist.rescale(lumi_scale)
-            mc_hist.steps(label="MC")
+            mc_hist.steps(label="MC (all)", color=plot_colors[0], linestyle="-")
 
             tau_hist = all_hists["mc_tau"][quantity]
             tau_hist.rescale(lumi_scale)
-            tau_hist.steps(label="MC Tau", color="red")
+            tau_hist.steps(label="MC (tau only)", color=plot_colors[0], linestyle="-.")
 
             text = "Data: %d\nMC: %d\nMC raw: %d" % (data_hist.count(), mc_hist.count(), Nmc)
             data_hist.annotate(text, loc=2)
-            
+
+            if draw_cuts:
+                if quantity in lower_cuts:
+                    cut = lower_cuts[quantity]
+                    plt.axvspan(cut, plt.xlim()[1], hatch="/", color="red", fill=False)
+                    
+                if quantity in upper_cuts:
+                    cut = upper_cuts[quantity]
+                    plt.axvspan(plt.xlim()[0], cut, hatch="\\", color="red", fill=False)
+                
             plt.xlabel(xlabels[quantity])
             plt.ylabel("Number of Events")
             plt.legend()
-            plt.savefig("images/%s.pdf" % quantity)
-            plt.show()
+            plt.savefig("images2/%s.pdf" % quantity)
                 
 def task_3():
     # CACHE
@@ -337,7 +383,6 @@ def task_4():
         plt.ylabel("Number of Events")
         plt.legend()
         plt.savefig("comparison_%s.pdf" % name)
-        #plt.show()
 
         print()
 
@@ -378,7 +423,6 @@ def task_4():
         plt.ylabel(r"$\chi^2$")
         #plt.grid()
         plt.savefig("chisquare_%s.pdf" % name)
-        #plt.show()
 
 def task_5():
     with root_open("data/d0.root") as data_file:
@@ -410,7 +454,6 @@ def task_5():
         plt.xlim(20,100)
         plt.ylim(20,70)
         plt.savefig("correlation.pdf")
-        plt.show()
 
 def task_6():
     m_W = ufloat(80.46, 0.06)
@@ -428,4 +471,4 @@ def task_6():
     
                 
 if __name__=="__main__":
-    task_6()
+    task_2()

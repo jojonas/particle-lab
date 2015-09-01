@@ -27,10 +27,11 @@
 
 % enables graphics inclusion
 \RequirePackage[final]{graphicx}
-%\setkeys{Gin}{width=\linewidth}
+\setkeys{Gin}{width=\linewidth}
 
 % floating figures (with [h])
 \RequirePackage{float}
+\RequirePackage{subcaption}
 \RequirePackage{placeins}
 \floatplacement{table}{h}
 \floatplacement{figure}{h}
@@ -98,7 +99,7 @@
 \RequirePackage[l2tabu, orthodox]{nag}
 
 % for custom Math typesetting 
-%\RequirePackage{mathtools}
+\RequirePackage{mathtools}
 
 % ceil and floor macro
 %\DeclarePairedDelimiter\bceil{\lceil}{\rceil}

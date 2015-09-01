@@ -18,6 +18,7 @@
 \DeclareGraphicsRule{.1}{mps}{*}{}
 
 \graphicspath {{../images}}
+
 \heads{RWTH Aachen \\ Particlephyics Lab}{T17 \\ W-Boson}{Lieb | Stettner \\ \today} 
 \date{\today}
 
@@ -96,19 +97,19 @@ Another important definition is the missing transverse energy \MET.
 In this chapter, the measured variables are introduced and the selection of events is explained. \\
 The distributions of the measured and simulated quanities are shown in figures \ref{no_cuts_Ets}, \ref{nocuts_etaphi} and \ref{nocuts_dziso}. It becomes clear that the MC did not simulate all processes which occur in the detector, see for example the double-bump structure in the distribution of transverse electron energy. To perform the analysis as sketched above, it is important to select only those events which fall in regions where data and MC are in good agreement. Otherwise, a discrepancy coming from background processes would be interpretated as a mismatch to the simulated W-mass. Among others, these background processes are possible: 
 \begin{itemize}
-	\item $\pi_0 \rightarrow 2 \gamma$ decays which could account for the lower electron energies.
+	\item $\Ppizero \rightarrow 2 \Pphoton$ decays which could account for the lower electron energies.
 	\item Jets which are misidentified as electrons. The electron isolation variable becomes smaller in this case.
-	\item $Z \rightarrow e^{+} e^{-}$ decays where one of the leptons leaves the detector unnoticed.
+	\item $\PZ \rightarrow \Ppositron \Pelectron$ decays where one of the leptons leaves the detector unnoticed.
 \end{itemize}
 
 To constrain the analysis to regions of good agreement between MC and data, the following cuts are applied to all events:
 \begin{table}[htbp]
 	\centering
 	\begin{tabular}{ 
-			c 
-			S[table-format=3.2(2)] 
-			S[table-format=0.4(4)] 
-			S[table-format=2.1] 
+			l 
+			l
+			l
+			l
 		}
 		\toprule
 		{Quantity} & {Threshold} & { } \\ 
@@ -125,23 +126,40 @@ To constrain the analysis to regions of good agreement between MC and data, the 
 
 \begin{figure}%
 	\centering
-	\subfloat[Distribution of Transverse Electron Energy measurend in the Central Calorimeter.]{nocuts/E_T_el}\qquad
-	\subfloat[Distribution of Missing Transverse Energy, calculated using the constraint of momentum conservation in the transveral plane.]{nocuts/E_T_miss}\\
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics{./nocuts/E_T_el}
+		\caption{Distribution of Transverse Electron Energy measured in the Central Calorimeter.}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics{./nocuts/E_T_miss}
+		\caption{Distribution of Missing Transverse Energy, calculated using the constraint of momentum conservation in the transveral plane.}
+	\end{subfigure}
 	\label{no_cuts_Ets}
 \end{figure}
 
 \begin{figure}%
 	\centering
-	\subfloat[Distribution of the Pseudorapidity of the Electron.]{nocuts/eta_el}\qquad
-	\subfloat[Distribution of the Difference in Polar Angle $\Phi$ between the directions of MET and the electron.]{nocuts/delta_phi}\\
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics{./nocuts/eta_el}
+		\caption{Distribution of the Pseudorapidity of the Electron.}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics{./nocuts/delta_phi}
+		\caption{Distribution of the Difference in Polar Angle $\Phi$ between the directions of MET and the electron.}
+	\end{subfigure}
 	\label{no_cuts_etaphi}
 \end{figure}
 
 \begin{figure}%
 	\centering
-	\subfloat[Distribution of the distance of the intersection point between MET and electron track to the collision point.]{nocuts/delta_z}\qquad
-	\subfloat[Distribution of the Isolation variable describing the tidiness in the vicinity of the electron\'s impact in the EM calorimeter]{Example}\\
-	
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics{./nocuts/delta_z}
+		\caption{Distribution of the distance of the intersection point between MET and electron track to the collision point.}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics{Example}
+		\caption{Distribution of the Isolation variable describing the tidiness in the vicinity of the electron\'s impact in the EM calorimeter}
+	\end{subfigure}
 	\label{no_cuts_dziso}
 \end{figure}
 

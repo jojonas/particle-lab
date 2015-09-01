@@ -72,7 +72,8 @@ With the assumption that the \PWplus and \PWminus have similar properties (excep
 
 Both processes combined have an expected cross section\cite{HBK+2013Experiment} of 
 \begin{equation}
-	\sigma = \SI{2.58 +- 0.09}{\nano\barn}
+	\sigma_\mathrm{theo} = \SI{2.58 +- 0.09}{\nano\barn}
+	\label{eq:theoretical_cross_section}
 \end{equation}
 and should show a resonance at the predicted \PW-Boson mass\cite{Oo2014Review} of 
 \begin{equation}
@@ -91,6 +92,8 @@ Another important definition is the missing transverse energy \MET which is calc
 
 \chapter{Monte-Carlo Samples}
 \label{ch:mc_samples}
+
+\section{Reweighting}
 The final goal of this experiment is to perform a template fit between distributions of Monte Carlo (MC) simulated events and measured data, in order to find the \PW-Boson mass $m_{\PW}$. For the template fit, multiple MC distributions are necessary, one for each hypothetical \PW boson mass. Since MC simulations are computation intensive, an alternative approach is used: the actual simulation has only been performed once, but each MC event additionally contains a set of \num{19} weights, which correspond to different hypothetical \PW masses in the range of \SIrange{79.9446}{80.8446}{\giga\electronvolt} (for a complete reference, see the appendix of \cite{HBK+2013Experiment}). When aggregating distributions, each event has to be counted with the weight of the \PW mass of interest.
 
 \begin{figure}
@@ -100,7 +103,22 @@ The final goal of this experiment is to perform a template fit between distribut
 	\label{fig:mc_examples}
 \end{figure}
 
-Figure \ref{fig:mc_examples} shows the result of reweighting for example values. For this plot, the \quote{true} \PW mass has been obtained from the Monte Carlo generator data. The histogram has been filled with the generator mass and the weighs corresponding to the \PW masses \SI{79.9446}{\giga\electronvolt}, \SI{80.3946}{\giga\electronvolt} and \SI{80.8446}{\giga\electronvolt}. The illustration shows that the reweighting approach is valid, although the weights only change the plot along the vertical axis, the overall Breit-Wigner curve has shifted to different masses.
+Figure \ref{fig:mc_examples} shows the result of reweighting for example values. For this plot, the "true" \PW mass has been obtained from the Monte Carlo generator data. The histogram has been filled with the generator mass and the weighs corresponding to the \PW masses \SI{79.9446}{\giga\electronvolt}, \SI{80.3946}{\giga\electronvolt} and \SI{80.8446}{\giga\electronvolt}. The illustration shows that the reweighting approach is valid, although the weights only change the plot along the vertical axis, the overall Breit-Wigner curve has shifted to different masses.
+
+\section{Scaling}
+Only a limited amount of measured data is available. Its integrated luminosity of the data sample\cite{HBK+2013Experiment} is:
+\begin{equation}
+	\mathcal{L_\mathrm{data}} = \SI{198 +- 20}{\per\pico\barn}
+\end{equation}
+Opposed to this, only $N_\mathrm{gen} = \num{1164699}$ Monte Carlo events have been generated. An intuitive way to match the number of MC events to the number of data events is to construct a "MC luminosity". For this, the theoretical cross section from equation \ref{eq:theoretical_cross_section} is used:
+\begin{equation}
+	\mathcal{L_\mathrm{MC}} = \frac{N_\mathrm{gen}}{\sigma_\mathrm{theo}} = \SI{451 +- 16}{\per\pico\barn}
+\end{equation}
+This shows that the number of MC events has to be scaled down by a factor of about \num{2.3}. Curiously enough, the lab manual suggests an additional correction factor of $\mathrm{corr} = \num{0.90 +- 0.10}$.
+Thus, the complete weight for each MC event (not including the shape-reweighting) is:
+\begin{equation}
+	w = \frac{\mathcal{L_\mathrm{data}}}{\mathcal{L_\mathrm{MC}}} \cdot (\num{0.90 +- 0.01}) = \num{0.40 +- 0.06}
+\end{equation}
 
 
 \chapter{Selection of Events}

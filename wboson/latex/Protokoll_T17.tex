@@ -216,10 +216,63 @@ The distribution of this quantity is shown in figure \ref{fig:cuts_Mt} and shows
 \end{figure}
 
 
-\chapter{Determination of the W-boson mass}
-The central analysis of this experiment is the determination of the W-boson mass in a template fit. The idea is to extract the correct W mass from the distribution of measured quantities like the transverse mass by comparing it to the generated MC-datasets. 
+\chapter{Determination of the W-Boson Mass}
+The central analysis of this experiment is the determination of the W-boson mass in a template fit. The idea is to extract the correct W mass from the distribution of measured quantities like the transverse mass by comparing it to the generated MC-datasets. Since the information of the W-mass is fully contained in the shape, the MC-datasets are rescaled again in this part of the analysis. By normalizing them to the total number of measured events, the unpleasant correction factor is not used anymore and the absolute height matches much better between Data and MC.  
+
+
+
 \section{$\chi^2$-Minimization}
-As a measure for the agreement between the data points and the MC-dataset for one given W-mass, the $\chi^2$ is calculated and stored. In some cases, the discrepancy or agreement can even be 	 
+As a measure for the agreement between the data points and the MC-dataset for one given W-mass, the $\chi^2$ is calculated. For each bin, the number of datapoints is used to calculate the error estimate $\sigma_{\mathrm{bin}}=\sqrt{N^{\mathrm{data}}}$. Since $N^{\mathrm{data}} \gg 1$ holds for all bins in the investigated region, the estimate is well justified (Poissonian statistics). Furthermore, $N^{\mathrm{data}}$ is chosen by convention while $N^{\mathrm{expected}}$ would correspond to the initial definition of $\chi^2$. 
+\begin{equation}
+\chi^2=\sum_{\mathrm{bins}}^{} \frac{(N_i^{\mathrm{data}}-N_i^{\mathrm{MC}})^2}{\sigma_i^2}
+\label{eq:Chi2}
+\end{equation}
+
+In some cases, the discrepancy between the distributions can even be identified by eye. As can be seen in figure \ref{fig:comparison_m_t}, the generated distribution for the lowest W-mass ($\approx\SI{79.95}{\giga\electronvolt}$) tends to be shifted slightly to lower values in $m_T$ and vice versa for the highest generated W-mass($\approx\SI{80.85}{\giga\electronvolt}$). 
+\begin{figure}
+	\centering
+	\includegraphics{comparison_m_t}
+	\caption{Comparison of the transverse mass between data and MC with different input W-boson masses.}
+	\label{fig:comparison_m_t}
+\end{figure}
+
+The calculated $\chi^2$-values for each MC-set are presented in figure \ref{fig:chisquare_m_t}. The expected shape of a quadratic function can be confirmed and a fit has been performed to find the best matching W-mass. The fit range extends over the region where the minimum lies because a quadratic structure can be expected there. The statistical error on this fit-result can be obtained by intersecting the $chi^2$-function with the horizontal line at $y=\chi^2_{\mathrm{min}}+1$. The final result is stated in table \ref{tbl:m_results}.
+
+
+\begin{figure}
+	\centering
+	\includegraphics{chisquare_m_t}
+	\caption{Result of the $\chi^2$ calculation for the 19 different input W-boson masses.}
+	\label{fig:chisquare_m_t}
+\end{figure}
+
+
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{ 
+			l 
+			l
+			l
+			l
+		}
+		\toprule
+		{Investigated Quantity} & {Result $m_W$} \\ 
+		\midrule
+		Transverse Mass $m_T$ & BICHES \\
+		\bottomrule
+	\end{tabular}
+	\caption{Determined W-Boson mass from different fitted quantities.}
+	\label{tbl:m_results}
+\end{table}
+
+
+
+
+
+
+
+
 
 
 \cleardoublepage

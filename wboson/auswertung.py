@@ -413,19 +413,7 @@ def task_5():
         plt.show()
 
 def task_6():
-    m_w_m_t = ufloat(80.21, 0.05)
-    m_w_el_e_t = ufloat(80.46, 0.06)
-
-    print("W Mass M_T:", m_w_m_t)
-    print("W Mass el_E_T:", m_w_el_e_t)
-
-    if m_w_m_t.s < m_w_el_e_t.s:
-        print("Using W Mass from M_T measurement.")
-        m_W = m_w_m_t
-    else:
-        print("Using W Mass from El_e_T measurement.")
-        m_W = m_w_el_e_t
-        
+    m_W = ufloat(80.46, 0.06)
     m_Z = ufloat(91.1876, 0.0021)
 
     theta_W = umath.acos(m_W/m_Z)
@@ -440,5 +428,4 @@ def task_6():
     
                 
 if __name__=="__main__":
-    for i in range(10000):
-        task_4()
+    task_6()

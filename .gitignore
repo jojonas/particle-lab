@@ -64,6 +64,7 @@ data/
 *.bbl
 *.bcf
 *.blg
+*.dvi
 *.out
 *.run.xml
 *.synctex.gz

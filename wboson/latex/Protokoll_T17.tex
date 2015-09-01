@@ -110,20 +110,20 @@ Only a limited amount of measured data is available. Its integrated luminosity o
 \begin{equation}
 	\mathcal{L_\mathrm{data}} = \SI{198 +- 20}{\per\pico\barn}
 \end{equation}
-Opposed to this, only $N_\mathrm{gen} = \num{1164699}$ Monte Carlo events have been generated. An intuitive way to match the number of MC events to the number of data events is to construct a "MC luminosity". For this, the theoretical cross section from equation \ref{eq:theoretical_cross_section} is used:
+Opposed to this, $N_\mathrm{gen} = \num{1164699}$ Monte Carlo events have been generated. An intuitive way to compare the number of MC events to the number of data events is to construct a "MC luminosity". For this, the theoretical cross section from equation \ref{eq:theoretical_cross_section} is used to predict the luminosity at $N_\mathrm{gen}$ events. Here and in the following equations (if not stated otherwise), Gaussian error propagation is used:
 \begin{equation}
 	\mathcal{L_\mathrm{MC}} = \frac{N_\mathrm{gen}}{\sigma_\mathrm{theo}} = \SI{451 +- 16}{\per\pico\barn}
 \end{equation}
-This shows that the number of MC events has to be scaled down by a factor of about \num{2.3}. Curiously enough, the lab manual suggests an additional correction factor of $\mathrm{corr} = \num{0.90 +- 0.10}$.
-Thus, the complete weight for each MC event (not including the shape-reweighting) is:
+This shows that the number of MC events has to be scaled down by a factor of about \num{2.3}. Curiously enough, the lab manual suggests an additional correction factor of $\mathrm{corr} = \num{0.90 +- 0.10}$ of unknown origin.
+Combined, the weight for each MC event (not including the shape-reweighting) is:
 \begin{equation}
-	w = \frac{\mathcal{L_\mathrm{data}}}{\mathcal{L_\mathrm{MC}}} \cdot (\num{0.90 +- 0.01}) = \num{0.40 +- 0.06}
+	w = \frac{\mathcal{L_\mathrm{data}}}{\mathcal{L_\mathrm{MC}}} \cdot (\num{0.90 +- 0.10}) = \num{0.40 +- 0.06}
 \end{equation}
 
 
 \chapter{Selection of Events}
 In this chapter, the measured variables are presented and the selection of events is explained. \\
-The distributions of the measured and simulated quantities are shown in figures \ref{fig:no_cuts_Et},\ref{fig:no_cuts_met}, \ref{fig:no_cuts_eta}, \ref{fig:no_cuts_dphi}, \ref{fig:no_cuts_dz} and \ref{fig:no_cuts_iso}. The histogram labeled 'MC' contains all simulated events but the small component of $\tau$-leptons is plotted separately to point out it's contribution. It becomes clear that the MC-generator did not simulate all processes which occur in the detector, see for example the double-bump structure in the distribution of transverse electron energy. To perform the analysis as sketched above, it is important to select only those events which fall in regions where data and MC are in good agreement. Otherwise, a discrepancy coming from background processes or missing simulation would be interpreted as a mismatch to the simulated W-mass. Among others, occuring background processes are: 
+The distributions of the measured and simulated quantities are shown in figures \ref{fig:no_cuts_Et},\ref{fig:no_cuts_met}, \ref{fig:no_cuts_eta}, \ref{fig:no_cuts_dphi}, \ref{fig:no_cuts_dz} and \ref{fig:no_cuts_iso}. The histogram labeled "MC" contains all simulated events for the weight $m_\mathrm{\PW} = \SI{80.3946}{\giga\electronvolt}$. The small component of $\tau$-leptons is plotted separately to point out its contribution. It becomes clear that the MC-generator did not simulate all processes which occur in the detector, see for example the double-bump structure in the distribution of transverse electron energy. To perform the analysis as sketched above, it is important to select only those events which fall in regions where data and MC are in good agreement. Otherwise, a discrepancy coming from background processes or missing simulation would be interpreted as a mismatch to the simulated W-mass. Among others, occuring background processes are: 
 \begin{itemize}
 	\item $\Ppizero \rightarrow 2 \Pphoton$ decays which could account for the lower electron energies if the $\gamma$ is misidentified.
 	\item Jets which are misidentified as electrons. The electron isolation variable becomes smaller in this case.
@@ -141,13 +141,13 @@ To constrain the analysis to regions of good agreement between MC and data, the 
 			l
 		}
 		\toprule
-		{Quantity} & {Threshold} & { } \\ 
+		{Quantity} & {Threshold} & {Motivation} \\ 
 		\midrule
-		\MET & $>\SI{20}{\giga\electronvolt}$ & \\
+		\MET & $>\SI{20}{\giga\electronvolt}$ & Beginning of background-dominated region \\
 		\ELET & $>\SI{30}{\giga\electronvolt}$ & No low energy electrons (e.g. \Ppizero) \\
-		Electron Isolation & $<0.03$ & Reject misidentified Jets \\
-		$\Delta \phi_{\MET,\ELET}$ & $>2.85$ & Expected back-to-back \\
-		$\Delta z_{\MET,\ELET} $ & $<\SI{0.2}{\milli\meter}$ & Short lifetime of the W-boson, no offset expected \\
+		Electron Isolation & $< \num{0.03}$ & Reject misidentified Jets \\
+		$\Delta \phi\left(\MET,\ELET\right)$ & $> \num{2.85}$ & Expected to be back-to-back \\
+		$\Delta z\left(\MET,\ELET\right)$ & $<\SI{0.2}{\milli\meter}$ & Short lifetime of the \PW boson, no offset expected \\
 		
 		\bottomrule
 	\end{tabular}
@@ -200,7 +200,7 @@ After applying these cuts, the agreement between data and MC becomes much better
 M_t:=\sqrt{(p_T^{el}+p_T^{miss})^2} = \sqrt{\MET \ELET (1-\cos{\Delta \phi})}
 \label{eq:m_t}
 \end{equation} 
-The distribution of this quantity is shown in figure \ref{fig:cuts_Mt} and shows good agreement after applying the described cuts. Since rescaling of the MC events to the luminosity of the data sample as described in section \ref{ch:mc_samples} is very uncertain, the agreement of the absolute height is not very good. This discrepancy will not influence the main goal of the analysis and is therefore not investigated further. 
+The distribution of this quantity is shown in figure \ref{fig:cuts_Mt} and shows good agreement after applying the described cuts. Since rescaling of the MC events to the luminosity of the data sample as described in chapter \ref{ch:mc_samples} is very uncertain, the agreement of the absolute height is not very good. This discrepancy will not influence the main goal of the analysis and is therefore not investigated further. 
 
 \begin{figure}%
 	\centering
@@ -214,7 +214,6 @@ The distribution of this quantity is shown in figure \ref{fig:cuts_Mt} and shows
 	\caption{Reconstructed Transverse Mass, all cuts applied.}
 	\label{fig:cuts_Mt}
 \end{figure}
-
 
 
 

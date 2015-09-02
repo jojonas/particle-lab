@@ -349,10 +349,13 @@ E_{\mathrm{meas}'} = E_{\mathrm{meas}} \pm ( 0.2 \% E_{\mathrm{meas}} + 0.015)
 The template fits are repeated and the impact of this fixed shift on the final result of \MW is investigated. Since this process is not stochastic, an estimator for the impact can be obtained as half of the width between the two shifted results:
 \begin{equation}
 \Delta \MW = (\MW(\mathrm{shift up}) - \MW(\mathrm{shift down})) / 2
+\label{eq:sys_prop}
 \end{equation} 
-The determined uncertainties lie in the same order of magnitude as the one from the energy resolution and can be found in table \ref{tbl:systematics}.
+The determined uncertainties lie in the same order of magnitude as those from the energy resolution and can be found in table \ref{tbl:systematics}.
 
 \subsection{Impact of the Cut Selection}
+A third source of systematic uncertainties is the selection of cuts. Some of the cuts are motivated physically, some just to find a region of good agreement between MC and Data. However, another choice of cuts would have been possible as well. To estimate the impact of this ambiguity on \MW, the cuts are shifted separately in a reasonable range and the template fits are repeated. As explained above, the uncertainty on the final result can then be estimated from equation \ref{eq:sys_prop}. The result of this procedure is shown in table \ref{tbl:sys_cuts}. Afterwards, the uncertainties are summed in quadrature (no correlation assumed).
+
 
 \begin{table}[htbp]
 	\centering
@@ -360,19 +363,39 @@ The determined uncertainties lie in the same order of magnitude as the one from 
 			l 
 			l
 			l
+			}
+		\toprule
+		Changed Cut (range)$\backslash$Template Fit & \MT & \ELET \\ 
+		\midrule
+		\MET ($\pm \SI{3}{\giga\electronvolt}$) & asd & asd \\
+		\ELET ($\pm \SI{5}{\giga\electronvolt}$) & asd & asd \\
+		Electron Iso ($\pm 0.01$) & asd & asd\\
+		$\Delta \phi\left(\MET,\ELET\right)$ $(\pm 0.15)$ &  asd & asd\\ 
+		$\Delta z\left(\MET,\ELET\right)$ $(\pm 0.05)$  &   asd & asd\\
+		\bottomrule
+	\end{tabular}
+	\caption{ {$\Delta \MW$ / \SI{}{\giga\electronvolt}} showing the impact of different applied cuts on the determined \PW Boson mass from template fits.}
+	\label{tbl:sys_cuts}
+\end{table}
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{ 
+			l 
+			l
 			l
 		}
 		\toprule
-		Fitted Quantity $\backslash$ Systematic & Energy Resolution & Energy Scale & Cut Selection \\
+		Systematic Uncertainty $\backslash$ Template Fit & \MT & \ELET \\ 
 		\midrule
-		Transverse Mass \MT & 0.018 &  0.009 & \\
-		Transverse Electron Energy & 0.045 & 0.010 &  \\
+		Energy Resolution &  0.018 & 0.045 \\
+		Energy Scale & 0.009 & 0.010  \\
+		Cut Selection & xxx & xxx  \\
 		\bottomrule
-	\end{tabular}
-	\caption{ {$\Delta \MW$ / \SI{}{\giga\electronvolt}} showing the impact of systematic effects on the determined \PW Boson mass from template fits.}
+		\end{tabular}
+	\caption{ {$\Delta \MW$ / \SI{}{\giga\electronvolt}} showing the summarized impact of systematic effects on the determined \PW Boson mass from template fits.}
 	\label{tbl:systematics}
 \end{table}
-
 
 
 \section{Discussion of Results}
@@ -389,7 +412,7 @@ The determined uncertainties lie in the same order of magnitude as the one from 
 		{Investigated Quantity} & {\MW / \SI{}{\giga\electronvolt}} \\ 
 		\midrule
 		Transverse Mass \MT & BICHES \\
-		Transverse Electron Energy & More Bitches\\
+		Transverse Electron Energy \ELET & More Bitches\\
 		\midrule
 		Literature Value & 80.385 +- 0.015 \\   
 		\bottomrule

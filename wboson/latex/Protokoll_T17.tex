@@ -268,12 +268,17 @@ Although this results is slightly lower than the theoretical expectation, the me
 The largest error sources on this method are the determination of the measured luminosity $\mathcal{L}_\mathrm{data}$ and the odd correction factor $\mathrm{corr}$, both contribute a relative uncertainty of \SI{10}{\percent} each. The error on the theoretical value and the statistical uncertainty on $N_\mathrm{data}$ are negligible.
 
 \chapter{Determination of the W-Boson Mass}
-The central analysis of this experiment is the determination of the \PW boson mass in a template fit. The idea is to extract the correct \PW mass from the distribution of measured quantities like the transverse mass by comparing it to the generated MC-datasets. Since the information of the \PW mass is fully contained in the shape, the MC-datasets are rescaled again in this part of the analysis. By normalizing them to the total number of measured events, the unpleasant correction factor is not used anymore and the absolute height matches much better between Data and MC.  
+The central analysis of this experiment is the determination of the \PW boson mass in a template fit. The idea is to extract the correct \PW mass from the distribution of measured quantities like the transverse mass by comparing it to the generated MC-datasets. 
 
 
+\section{Renormalization of the MC dataset}
+Since the information of the \PW mass is fully contained in the shape, the MC-datasets are rescaled again in this part of the analysis. By normalizing them to the total number of measured events, the unpleasant correction factor is not needed anymore and the absolute height matches much better between Data and MC. The rescaling is done by the modified factor, which is applied to the MC events:
+\begin{equation}
+w_{\mathrm{normalize}}=\frac{N_{\mathrm{Data}}}{N_{\mathrm{MC}}}
+\end{equation}
 
 \section{$\chi^2$-Minimization}
-As a measure for the agreement between the data points and the MC-dataset for one given W-mass, $\chi^2$ is calculated. For each bin, the number of datapoints is used to calculate the error estimate $\sigma_\mathrm{bin}=\sqrt{N_\mathrm{data}}$. Since $N_\mathrm{data} \gg 1$ holds for all bins in the investigated region, the estimate is well justified (Poissonian statistics). Furthermore, by convention, the uncertainty on the data measurement is used, instead of the expected uncertainty on the model, as it would be required for a proper  $\chi^2$: 
+As a measure for the agreement between the data points and the MC dataset for one given W-mass, $\chi^2$ is calculated. For each bin, the number of datapoints is used to calculate the error estimate $\sigma_\mathrm{bin}=\sqrt{N_\mathrm{data}}$. Since $N_\mathrm{data} \gg 1$ holds for all bins in the investigated region, the estimate is well justified (Poissonian statistics). Furthermore, by convention, the uncertainty on the data measurement is used, instead of the expected uncertainty on the model, as it would be required for the definition of $\chi^2$. 
 \begin{equation}
 \chi^2=\sum_i^{\mathrm{bins}} \frac{\left(N^i_\mathrm{data}-N^i_\mathrm{MC}\right)^2}{\sigma_i^2}
 \label{eq:Chi2}
@@ -287,7 +292,12 @@ In some cases, the discrepancy between the distributions can even be identified 
 	\label{fig:comparison_m_t}
 \end{figure}
 
-The calculated $\chi^2$-values for each MC-set are presented in figure \ref{fig:chisquare_m_t}. The expected shape of a quadratic function can be confirmed and a fit has been performed to find the best matching W-mass. The fit range extends over the region where the minimum lies because a quadratic structure can be expected there. The statistical error on this fit-result can be obtained by intersecting the $\chi^2$-function with the horizontal line at $y=\chi^2_{\mathrm{min}}+1$. The final result is stated in table \ref{tbl:m_results}.
+The calculated $\chi^2$-values for each MC-set are presented in figure \ref{fig:chisquare_m_t}. In the minimum of the expected quadratic function, a $\chi^2 $ value of $\approx 60$ is found. Together with the number of bins, this confirms the agreement between data and the MC set for this specific mass:
+\begin{equation}
+\frac{\chi^2}{n_{\mathrm{DoF}}} = \frac{\chi^2}{n_{\mathrm{bins}-1}} \approx 1.5 
+\end{equation}
+
+A fit of a quadratic function has been performed to find the best matching W-mass. The fit range is chosen to the region around the minimum. The statistical error on the complete template method can be obtained by intersecting the $\chi^2$-function with the horizontal line at $y=\chi^2_{\mathrm{min}}+1$. The final result of the minimization is stated in table \ref{tbl:m_results}.
 
 
 \begin{figure}

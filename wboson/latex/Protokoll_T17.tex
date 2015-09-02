@@ -28,6 +28,10 @@
 \newcommand{\ELPT}{\ensuremath{{p_\mathrm{T}^\mathrm{el}}}\xspace}
 \newcommand{\MT}{\ensuremath{{m_\mathrm{T}}}\xspace}
 \newcommand{\MW}{\ensuremath{{m_\mathrm{\PW}}}\xspace}
+\newcommand{\NC}{\ensuremath{N_\mathrm{C}}\xspace}
+\newcommand{\weinberg}{\ensuremath{\theta_\mathrm{W}}\xspace}
+\newcommand{\Gammaff}{\ensuremath{\Gamma_\mathrm{\Pfermion \Pfermion}}\xspace}
+\newcommand{\GammaW}{\ensuremath{\Gamma_\mathrm{\PW}}\xspace}
 
 \newcommand{\thirdwidth}{0.32\textwidth}
 \newcommand{\halfwidth}{0.48\textwidth}
@@ -319,12 +323,50 @@ The calculated $\chi^2$-values for each MC-set are presented in figure \ref{fig:
 
 
 
+\chapter{Sequential Calculations}
 
+\section{Determination of the Color Factor}
+The lab manual proposes a Standard Model equation describing the decay width of the \PW boson into fermions. Quark mixing, which is introduced by the CKM (Cabbibo-Kobayashi-Maskawa) matrix is neglected, thus a purely diagonal CKM matrix is assumed:
+\begin{equation}
+	\Gammaff = \frac{\NC}{12} \cdot \frac{\alpha}{\sin^2 \weinberg} \cdot \MW
+	\label{eq:color_factor}
+\end{equation}
+The total decay width of the \PW boson is assumed to be equally distributed between fermions, with the exception of the top and bottom quarks, which cannot be produced in the decay due to their higher mass. The decay width to quarks is additionally \NC times more because of the strong color charge:
+\begin{equation}
+	\GammaW = 3 \cdot \Gamma_\mathrm{\Plepton \Pnu} + 2 \cdot \Gamma_\mathrm{\Pquark \Pquark} = 3 \cdot \Gammaff + 2 \cdot \NC \cdot \Gammaff = \left( 3 + 2 \NC \right) \cdot \Gammaff
+\end{equation}
+Assuming that $\GammaW$ stays constant, one can calculate a fermion decay width which is also valid for a Standard Model variation with $\NC \neq 3$ colors:
+\begin{equation}
+	\Gammaff(\NC) = \frac{\GammaW(\NC = 3)}{3 + 2 \cdot \NC}
+\end{equation}
+Going back to equation \ref{eq:color_factor}, this can be solved for the measured color factor $N_\mathrm{C}^\mathrm{meas}$ now to find the number of colors, assuming a Standard Model with $N_\mathrm{C}^\mathrm{SM}$ strong colors:
+\begin{equation}
+	N_\mathrm{C}^\mathrm{meas} = \frac{12 \cdot \Gammaff\left(N_\mathrm{C}^\mathrm{SM}\right) \cdot \sin^2 \weinberg}{\alpha \cdot \MW}
+\end{equation}
 
+For the Standard Model decay width for \num{3} colors, the value of the Particle Data Group\cite{Oo2014Review} is used:
+\begin{equation}
+	\GammaW = \SI{2.085 +- 0.042}{\giga\electronvolt}
+\end{equation}
 
-
-
-
+\begin{table}
+	\centering
+	\begin{tabular}{ 
+			S[table-format=1] 
+			S[table-format=1.4(4)] 
+			S[table-format=1.1(1)] 
+		}
+		\toprule
+		{$N_\mathrm{C}^\mathrm{SM}$} & {$\Gammaff\left(N_\mathrm{C}^\mathrm{SM}\right)$ / \si{\giga\electronvolt}} & {$N_\mathrm{C}^\mathrm{meas}$} \\
+		\midrule
+		2 & 0.2979 +- 0.0060 & XXX \\
+		3 & 0.2317 +- 0.0047 & XXX \\		
+		4 & 0.1895 +- 0.0038 & XXX \\
+		\bottomrule
+	\end{tabular}
+	\caption{Comparison of the measured color factor for Standard Model variations with $N_\mathrm{C}^\mathrm{SM}$ colors.}
+\end{table}
+	
 \cleardoublepage
 
 \bibliographystyle{utphys}

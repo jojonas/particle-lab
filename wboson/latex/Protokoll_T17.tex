@@ -278,11 +278,14 @@ The central analysis of this experiment is the determination of the \PW boson ma
 \section{Renormalization of the MC dataset}
 Since the information of the \PW mass is fully contained in the shape, the MC-datasets are rescaled again in this part of the analysis. By normalizing them to the total number of measured events, the unpleasant correction factor is not needed anymore and the absolute height matches much better between Data and MC. The rescaling is done by the modified factor, which is applied to the MC events:
 \begin{equation}
-w_{\mathrm{normalize}}=\frac{N_{\mathrm{Data}}}{N_{\mathrm{MC}}}
+w_{\mathrm{normalize}}=\frac{N_{\mathrm{data}}}{N_{\mathrm{MC}}}
 \end{equation}
 
+\section{Binning}
+The bin width is chosen by visual inspection. There are multiple criteria that have to be fulfilled for a reasonable bin width: each bin has to contain a large number of events ($N^i_\mathrm{data} \gg 1$), in order to satisfy the Poissonian approach of $\sigma_N = \sqrt{N}$. Additionally, bins should not be smaller than the detector resolution, otherwise bin migration artifact occur. On the other hand, the binning should be fine enough to represent all features in the distribution. By trying different values, \num{50} is determined to be a suitable number of bins and will be used in the template fit.
+
 \section{$\chi^2$-Minimization}
-As a measure for the agreement between the data points and the MC dataset for one given \PW mass, $\chi^2$ is calculated. For each bin, the number of datapoints is used to calculate the error estimate $\sigma_\mathrm{bin}=\sqrt{N_\mathrm{data}}$. Since $N_\mathrm{data} \gg 1$ holds for all bins in the investigated region, the estimate is well justified (Poissonian statistics). Furthermore, by convention, the uncertainty on the data measurement is used, instead of the expected uncertainty on the model, as it would be required for the definition of $\chi^2$. 
+As a measure for the agreement between the data points and the MC dataset for one given \PW mass, $\chi^2$ is calculated. For each bin, the number of data points is used to calculate the error estimate $\sigma_\mathrm{bin}=\sqrt{N_\mathrm{data}}$. $N_\mathrm{data} \gg 1$ has been ensured by choosing the correct bin width. By convention, the uncertainty on the data measurement is used, instead of the expected uncertainty on the model, as it would be required for the definition of $\chi^2$. 
 \begin{equation}
 \chi^2=\sum_i^{\mathrm{bins}} \frac{\left(N^i_\mathrm{data}-N^i_\mathrm{MC}\right)^2}{\sigma_i^2}
 \label{eq:Chi2}
@@ -298,9 +301,9 @@ In some cases, the discrepancy between the distributions can even be identified 
 	\label{fig:comparison_m_t}
 \end{figure}
 
-The calculated $\chi^2$-values for each MC-set are presented in figure \ref{fig:chisquare_m_t}. In the minimum of the expected quadratic function, a $\chi^2 $ value of $\approx 60$ is found. Together with the number of bins, this confirms the agreement between data and the MC set for this specific mass:
+The calculated $\chi^2$-values for each MC-set are presented in figure \ref{fig:chisquare_m_t}. In the minimum of the expected quadratic function, a $\chi^2 $ value of \num{68.0} is found. Together with the number of bins, this confirms the agreement between data and the MC set for this specific mass:
 \begin{equation}
-\frac{\chi^2}{n_{\mathrm{DoF}}} = \frac{\chi^2}{n_{\mathrm{bins}-1}} \approx JIPSIE 
+\frac{\chi^2}{n_{\mathrm{DoF}}} = \frac{\chi^2}{n_{\mathrm{bins}-1}} =  \frac{\num{68.0}}{\num{50} - \num{1}} \approx \num{1.39} 
 \end{equation}
 
 A fit of a quadratic function has been performed to find the best matching \PW mass. The fit range is chosen to the region around the minimum. The statistical error on the complete template method can then be obtained by intersecting the $\chi^2$-function with the horizontal line at $y=\chi^2_{\mathrm{min}}+1$. The final result of the minimization is stated in table \ref{tbl:m_results}.
@@ -319,7 +322,7 @@ In almost the same manner as the distribution of \MT contains information on the
 
 \begin{figure}
 	\centering
-	\includegraphics{comparison_m_t}
+	\includegraphics{comparison_el_e_t}
 	\caption{Comparison of the transverse electron energy between data and MC with different input \PW boson masses.}
 	\label{fig:comparison_el_et}
 \end{figure}
@@ -327,7 +330,7 @@ In almost the same manner as the distribution of \MT contains information on the
 
 \begin{figure}
 	\centering
-	\includegraphics{chisquare_m_t}
+	\includegraphics{chisquare_el_e_t}
 	\caption{Result of the $\chi^2$ calculation for the 19 different \ELET distributions compared to the dataset.}
 	\label{fig:chisquare_el_et}
 \end{figure}
@@ -370,15 +373,16 @@ A third source of systematic uncertainties is the selection of cuts. Some of the
 			l
 			}
 		\toprule
-		Changed Cut (Shifted Range) & Fitted Quantity \\
+		Changed Cut & Shifted Range & Fitted Quantity \\
 		\midrule
-		& \MT & \ELET \\ 
+		&	& \MT & \ELET \\ 
 		\midrule
-		\MET ($\pm \SI{3}{\giga\electronvolt}$) & 0.026 & 0.003 \\
-		\ELET ($\pm \SI{5}{\giga\electronvolt}$) & 0.025 & 0.058 \\
-		Electron Iso ($\pm 0.01$) & 0.072 & 0.091\\
-		$\Delta \phi\left(\MET,\ELET\right)$ ($\pm 0.15$) &  0.013 & 0.023\\ 
-		$\Delta z\left(\MET,\ELET\right)$ ($\pm 0.05$)  &   0.001 & 0.008\\
+		\MET & ($\pm \SI{3}{\giga\electronvolt}$) & 0.026 & 0.003 \\
+		\ELET & ($\pm \SI{5}{\giga\electronvolt}$) & 0.025 & 0.058 \\
+		Electron Iso  & ($\pm 0.01$) & 0.072 & 0.091\\
+		$\Delta \phi\left(\MET,\ELET\right)$ & ($\pm 0.15$) &  0.013 & 0.023\\ 
+		$\Delta z\left(\MET,\ELET\right)$ & ($\pm 0.05$)  &   0.001 & 0.008\\
+		Total &  & 0.082 & 0.111 \\
 		\bottomrule
 	\end{tabular}
 	\caption{ {$\Delta \MW$ / \SI{}{\giga\electronvolt}} showing the impact of different applied cuts on the determined \PW Boson mass from template fits.}
@@ -403,13 +407,15 @@ A third source of systematic uncertainties is the selection of cuts. Some of the
 		Cut Selection & 0.082 & 0.111  \\
 		\bottomrule
 		\end{tabular}
-	\caption{ {$\Delta \MW$ / \SI{}{\giga\electronvolt}} showing the summarized impact of systematic effects on the determined \PW Boson mass from template fits.}
+	\caption{ {$\Delta \MW$ / \SI{}{\giga\electronvolt}}: impact of systematic effects on the measured \PW boson mass.}
 	\label{tbl:systematics}
 \end{table}
 
+One important source of systematic uncertainties is not considered yet: The measurement of the missing transverse energy. Since it is also based on the hadronic calorimeter, the fluctuations in the shower development and the lack of accurate hadronization models leads to a much larger uncertainty for \MET than for all measurements based on the electromagnetic calorimeter. However, to estimate this impact, precise information about the hadronic calorimeter and the coverage of the detector would be required. Therefore, this factor remains unknown in this analysis. 
 
-\section{Discussion of Results}
+\section{Results of the \PW Boson Mass Determination}
 
+After combining the discussed uncertainties, the two template fits yield the following results: 
 \begin{table}[htbp]
 	\centering
 	\begin{tabular}{ 
@@ -421,16 +427,17 @@ A third source of systematic uncertainties is the selection of cuts. Some of the
 		\toprule
 		{Investigated Quantity} & {\MW / \SI{}{\giga\electronvolt}} \\ 
 		\midrule
-		Transverse Mass \MT & BICHES \\
-		Transverse Electron Energy \ELET & More Bitches\\
-		\midrule
-		Literature Value & 80.385 +- 0.015 \\   
+		Transverse Mass \MT & $(80.195 \pm 0.049_\mathrm{stat} \pm 0.084_\mathrm{sys})$ \\
+		Transverse Electron Energy \ELET & $(80.477 \pm 0.058_\mathrm{stat} \pm 0.120_\mathrm{sys})$\\
 		\bottomrule
 	\end{tabular}
-	\caption{Determined \PW Boson mass from different fitted quantities. The systematic uncertainties are added in quadrature.}
+	\caption{Determined \PW Boson mass from different template fits. The systematic uncertainties are added in quadrature.}
 	\label{tbl:m_results}
 \end{table}
 
+\section{title}
+
+Literature Value & 80.385 +- 0.015 \\   
 
 
 \chapter{Sequential Calculations}

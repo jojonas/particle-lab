@@ -50,7 +50,7 @@
 
 \chapter{Introduction}
 
-This analysis deals with \PW boson physics conducted at the \dnull experiment at the Tevatron accelerator (FERMILAB, Chicago). The data has been taken in proton-antiproton collisions at a center-of-mass energy of $\sqrt{s} = \SI{1960}{\giga\electronvolt}$.
+This analysis deals with \PW boson physics conducted at the \dnull experiment at the Tevatron accelerator (FERMILAB, Chicago). The data has been taken in proton-antiproton collisions at a center-of-mass energy of $\sqrt{s} = \SI{1960}{\giga\electronvolt}$\cite{HBK+2013Experiment}.
 
 \section{Units}
 In this report, a natural unit system of particle physics is used: first, the speed of light and Planck's constant are fixed:
@@ -68,7 +68,7 @@ Equivalently, there exists a oppositely charged process:
 \begin{equation}
 \Pproton\APproton \rightarrow \PWplus \rightarrow \Ppositron \Pnue
 \end{equation}
-With the assumption that the \PWplus and \PWminus have similar properties (except the electric charge), one does not expect any difference between the processes. Because of that, the analysis will not differentiate between them and treat positrons as electrons in the final state.
+With the assumption that the \PWplus and \PWminus have similar properties (except the electric charge), one does not expect any difference between the processes. Because of that, the presented analysis will not differentiate between them and treat positrons as electrons in the final state.
 
 Both processes combined have an expected cross section\cite{HBK+2013Experiment} of 
 \begin{equation}
@@ -94,7 +94,7 @@ Another important definition is the missing transverse energy \MET which is calc
 \label{ch:mc_samples}
 
 \section{Reweighting}
-The final goal of this experiment is to perform a template fit between distributions of Monte Carlo (MC) simulated events and measured data, in order to find the \PW-Boson mass $m_{\PW}$. For the template fit, multiple MC distributions are necessary, one for each hypothetical \PW boson mass. Since MC simulations are computation intensive, an alternative approach is used: the actual simulation has only been performed once, but each MC event additionally contains a set of \num{19} weights, which correspond to different hypothetical \PW masses in the range of \SIrange{79.9446}{80.8446}{\giga\electronvolt} (for a complete reference, see the appendix of \cite{HBK+2013Experiment}). When aggregating distributions, each event has to be counted with the weight of the \PW mass of interest.
+The final goal of this experiment is to perform a template fit between distributions of simulated Monte Carlo (MC) events and measured data, in order to find the \PW-Boson mass $m_{\PW}$. For the template fit, multiple MC distributions are necessary, one for each hypothetical \PW boson mass. Since MC simulations are computation intensive, an alternative approach is used: the actual simulation has only been performed once, but each MC event additionally contains a set of \num{19} weights, which correspond to different hypothetical \PW masses in the range of \SIrange{79.9446}{80.8446}{\giga\electronvolt} (for a complete reference, see the appendix of \cite{HBK+2013Experiment}). When aggregating distributions, each event has to be counted with the weight of the \PW mass of interest.
 
 \begin{figure}
 	\centering
@@ -103,7 +103,7 @@ The final goal of this experiment is to perform a template fit between distribut
 	\label{fig:mc_examples}
 \end{figure}
 
-Figure \ref{fig:mc_examples} shows the result of reweighting for example values. For this plot, the "true" \PW mass has been obtained from the Monte Carlo generator data. The histogram has been filled with the generator mass and the weighs corresponding to the \PW masses \SI{79.9446}{\giga\electronvolt}, \SI{80.3946}{\giga\electronvolt} and \SI{80.8446}{\giga\electronvolt}. The illustration shows that the reweighting approach is valid, although the weights only change the plot along the vertical axis, the overall Breit-Wigner curve has shifted to different masses.
+Figure \ref{fig:mc_examples} shows the result of reweighting for example values. For this plot, the "true" \PW mass has been obtained from the Monte Carlo generator data. The histogram has been filled with the generator mass and the weights corresponding to the \PW masses \SI{79.9446}{\giga\electronvolt}, \SI{80.3946}{\giga\electronvolt} and \SI{80.8446}{\giga\electronvolt}. The illustration shows that the reweighting approach is valid, although the weights only change the plot along the vertical axis, the overall Breit-Wigner curve has shifted to different masses.
 
 \section{Scaling}
 Only a limited amount of measured data is available. The integrated luminosity of the dataset sample\cite{HBK+2013Experiment} is:

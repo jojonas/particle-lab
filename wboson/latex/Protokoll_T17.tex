@@ -28,6 +28,10 @@
 \newcommand{\ELPT}{\ensuremath{{p_\mathrm{T}^\mathrm{el}}}\xspace}
 \newcommand{\MT}{\ensuremath{{m_\mathrm{T}}}\xspace}
 \newcommand{\MW}{\ensuremath{{m_\mathrm{\PW}}}\xspace}
+\newcommand{\NC}{\ensuremath{N_\mathrm{C}}\xspace}
+\newcommand{\weinberg}{\ensuremath{\theta_\mathrm{W}}\xspace}
+\newcommand{\Gammaff}{\ensuremath{\Gamma_\mathrm{\Pfermion \Pfermion}}\xspace}
+\newcommand{\GammaW}{\ensuremath{\Gamma_\mathrm{\PW}}\xspace}
 
 \newcommand{\thirdwidth}{0.32\textwidth}
 \newcommand{\halfwidth}{0.48\textwidth}
@@ -335,10 +339,51 @@ As a first contribution to the systematic uncertainty of the presented measureme
 \frac{\sigma_E}{E} = 0.015 + \frac{0.13}{\sqrt{E}} + \frac{0.4}{E}
 \label{eq:E_res}
 \end{equation}
-To estimate the impact of the limited resolution, the template fits are repeated 10 times but each event is smeared randomly following a gaussian distribution with $\sigma$ from equation \ref{eq:E_res}. This procedure results in 10 fitted \PW boson masses. The variance of this set is then taken as an estimator for the systematic uncertainty due to the energy resolution. The result is stated in table \ref{tbl:systematics}.
+To estimate the impact of the limited resolution, the template fits are repeated 10 times but for each event the electron energy is smeared randomly following a gaussian distribution with $\sigma$ taken from equation \ref{eq:E_res}. This procedure results in 10 fitted \PW boson masses. The variance of this set is then taken as an estimator for the systematic uncertainty due to the energy resolution. The result is stated in table \ref{tbl:systematics}.
+
 \subsection{Energy Scale Uncertainty of the EM Calorimeter}
+The energy scale of the electromagnetic calorimeter has been determined and parametrized by the \dnull collaboration \cite{PhysRevLett.77.3309} in decays of well-known particles of the standard model (e.g. $\pi^0$):
+\begin{equation}
+E_{\mathrm{meas}}= \alpha E + \delta
+\end{equation}
+However, this correction, which is applied to each event, contains uncertainties again. To investigate the impact of this systematic uncertainty, all measured electron energies are shifted once up and once down (no random process). The uncertainties on the parameter $\alpha$ and $\delta$ are $\approx 0.2 \%$ and $\approx 0.015$. This yields in the correction of $E_{\mathrm{meas}}$ a shift of:
+\begin{equation}
+E_{\mathrm{meas}'} = E_{\mathrm{meas}} \pm ( 0.2 \% E_{\mathrm{meas}} + 0.015)
+\end{equation}
+The template fits are repeated and the impact of this fixed shift on the final result of \MW is investigated. Since this process is not stochastic, an estimator for the impact can be obtained as half of the width between the two shifted results:
+\begin{equation}
+\Delta \MW = (\MW(\mathrm{shift up}) - \MW(\mathrm{shift down})) / 2
+\label{eq:sys_prop}
+\end{equation} 
+The determined uncertainties lie in the same order of magnitude as those from the energy resolution and can be found in table \ref{tbl:systematics}.
 
 \subsection{Impact of the Cut Selection}
+A third source of systematic uncertainties is the selection of cuts. Some of the cuts are motivated physically, some just to find a region of good agreement between MC and Data. However, another choice of cuts would have been possible as well. To estimate the impact of this ambiguity on \MW, the cuts are shifted separately in a reasonable range and the template fits are repeated. As explained above, the uncertainty on the final result can then be estimated from equation \ref{eq:sys_prop}. The result of this procedure is shown in table \ref{tbl:sys_cuts}. Afterwards, the uncertainties are summed in quadrature (no correlation assumed).
+
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{ 
+			l 
+			l
+			l
+			l
+			}
+		\toprule
+		Changed Cut (Shifted Range) & Fitted Quantity \\
+		\midrule
+		& \MT & \ELET \\ 
+		\midrule
+		\MET ($\pm \SI{3}{\giga\electronvolt}$) & 0.026 & 0.003 \\
+		\ELET ($\pm \SI{5}{\giga\electronvolt}$) & 0.025 & 0.058 \\
+		Electron Iso ($\pm 0.01$) & 0.072 & 0.091\\
+		$\Delta \phi\left(\MET,\ELET\right)$ ($\pm 0.15$) &  0.013 & 0.023\\ 
+		$\Delta z\left(\MET,\ELET\right)$ ($\pm 0.05$)  &   0.001 & 0.008\\
+		\bottomrule
+	\end{tabular}
+	\caption{ {$\Delta \MW$ / \SI{}{\giga\electronvolt}} showing the impact of different applied cuts on the determined \PW Boson mass from template fits.}
+	\label{tbl:sys_cuts}
+\end{table}
 
 \begin{table}[htbp]
 	\centering
@@ -349,16 +394,18 @@ To estimate the impact of the limited resolution, the template fits are repeated
 			l
 		}
 		\toprule
-		Fitted Quantity $\backslash$ Systematic & Energy Resolution & Energy Scale & Cut Selection \\
+		Systematic & Fitted Quantity \\
 		\midrule
-		Transverse Mass \MT & 0.018 &   \\
-		Transverse Electron Energy & 0.045 &  \\
+		  &\MT & \ELET \\ 
+		\midrule
+		Energy Resolution &  0.018 & 0.045 \\
+		Energy Scale & 0.009 & 0.010  \\
+		Cut Selection & 0.082 & 0.111  \\
 		\bottomrule
-	\end{tabular}
-	\caption{ {$\Delta \MW$ / \SI{}{\giga\electronvolt}} showing the impact of systematic effects on the determined \PW Boson mass from template fits.}
+		\end{tabular}
+	\caption{ {$\Delta \MW$ / \SI{}{\giga\electronvolt}} showing the summarized impact of systematic effects on the determined \PW Boson mass from template fits.}
 	\label{tbl:systematics}
 \end{table}
-
 
 
 \section{Discussion of Results}
@@ -375,7 +422,7 @@ To estimate the impact of the limited resolution, the template fits are repeated
 		{Investigated Quantity} & {\MW / \SI{}{\giga\electronvolt}} \\ 
 		\midrule
 		Transverse Mass \MT & BICHES \\
-		Transverse Electron Energy & More Bitches\\
+		Transverse Electron Energy \ELET & More Bitches\\
 		\midrule
 		Literature Value & 80.385 +- 0.015 \\   
 		\bottomrule
@@ -386,12 +433,50 @@ To estimate the impact of the limited resolution, the template fits are repeated
 
 
 
+\chapter{Sequential Calculations}
 
+\section{Determination of the Color Factor}
+The lab manual proposes a Standard Model equation describing the decay width of the \PW boson into fermions. Quark mixing, which is introduced by the CKM (Cabbibo-Kobayashi-Maskawa) matrix is neglected, thus a purely diagonal CKM matrix is assumed:
+\begin{equation}
+	\Gammaff = \frac{\NC}{12} \cdot \frac{\alpha}{\sin^2 \weinberg} \cdot \MW
+	\label{eq:color_factor}
+\end{equation}
+The total decay width of the \PW boson is assumed to be equally distributed between fermions, with the exception of the top and bottom quarks, which cannot be produced in the decay due to their higher mass. The decay width to quarks is additionally \NC times more because of the strong color charge:
+\begin{equation}
+	\GammaW = 3 \cdot \Gamma_\mathrm{\Plepton \Pnu} + 2 \cdot \Gamma_\mathrm{\Pquark \Pquark} = 3 \cdot \Gammaff + 2 \cdot \NC \cdot \Gammaff = \left( 3 + 2 \NC \right) \cdot \Gammaff
+\end{equation}
+Assuming that $\GammaW$ stays constant, one can calculate a fermion decay width which is also valid for a Standard Model variation with $\NC \neq 3$ colors:
+\begin{equation}
+	\Gammaff(\NC) = \frac{\GammaW(\NC = 3)}{3 + 2 \cdot \NC}
+\end{equation}
+Going back to equation \ref{eq:color_factor}, this can be solved for the measured color factor $N_\mathrm{C}^\mathrm{meas}$ now to find the number of colors, assuming a Standard Model with $N_\mathrm{C}^\mathrm{SM}$ strong colors:
+\begin{equation}
+	N_\mathrm{C}^\mathrm{meas} = \frac{12 \cdot \Gammaff\left(N_\mathrm{C}^\mathrm{SM}\right) \cdot \sin^2 \weinberg}{\alpha \cdot \MW}
+\end{equation}
 
+For the Standard Model decay width for \num{3} colors, the value of the Particle Data Group\cite{Oo2014Review} is used:
+\begin{equation}
+	\GammaW = \SI{2.085 +- 0.042}{\giga\electronvolt}
+\end{equation}
 
-
-
-
+\begin{table}
+	\centering
+	\begin{tabular}{ 
+			S[table-format=1] 
+			S[table-format=1.4(4)] 
+			S[table-format=1.1(1)] 
+		}
+		\toprule
+		{$N_\mathrm{C}^\mathrm{SM}$} & {$\Gammaff\left(N_\mathrm{C}^\mathrm{SM}\right)$ / \si{\giga\electronvolt}} & {$N_\mathrm{C}^\mathrm{meas}$} \\
+		\midrule
+		2 & 0.2979 +- 0.0060 & XXX \\
+		3 & 0.2317 +- 0.0047 & XXX \\		
+		4 & 0.1895 +- 0.0038 & XXX \\
+		\bottomrule
+	\end{tabular}
+	\caption{Comparison of the measured color factor for Standard Model variations with $N_\mathrm{C}^\mathrm{SM}$ colors.}
+\end{table}
+	
 \cleardoublepage
 
 \bibliographystyle{utphys}

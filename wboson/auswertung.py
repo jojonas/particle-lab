@@ -10,7 +10,10 @@ import ROOT
 import numpy as np
 import matplotlib.pyplot as plt
 from uncertainties import ufloat, umath, correlated_values_norm
+
 from mpl_toolkits.axes_grid.anchored_artists import AnchoredText
+from mpl_toolkits.axes_grid1.inset_locator import inset_axes
+from mpl_toolkits.axes_grid1.inset_locator import mark_inset
 
 try:
     from scipy.optimize import curve_fit
@@ -63,9 +66,11 @@ plot_linestyles = [
             "-.",
         ]
 
-def annotate(text, loc=1, frameon=True, **kwargs):
+def annotate(text, loc=1, ax=None, frameon=True, **kwargs):
+    if not ax:
+        ax = plt.gca()
     at = AnchoredText(text, loc=loc, frameon=frameon, prop=kwargs)
-    plt.gca().add_artist(at)
+    ax.add_artist(at)
     return at
 
 class MyEvent(object):
@@ -153,12 +158,8 @@ def task_1():
         plt.xlabel("Generated W Mass / GeV")
         plt.ylabel("Number of Events")
         plt.legend()
-<<<<<<< HEAD
         plt.ylim(0, hists[0].histogram.max()*1.4)
         plt.savefig("images/mc_examples.pdf")
-=======
-        plt.savefig("mc_examples.pdf")
->>>>>>> 64f9299f89b05289651b82f9cf7f488d0ff91206
 
 def task_2():    
     with contextlib.nested(root_open("data/mc_all.root"), root_open("data/d0.root")) as (mc_file, data_file):
@@ -311,7 +312,9 @@ def task_2():
                 
 def task_3():
     # CACHE
-    mc_allcuts = 74072. 
+    lumi_scale = ufloat(0.3951, 0.06010)
+    mc_raw = 187647
+    mc_allcuts = mc_raw * lumi_scale
     data = 67329.
 
     process_xsec = ufloat(2.58e3, 0.09e3)
@@ -330,7 +333,7 @@ def task_4():
         for name, tree in zip(("mc", "data"), (mc_file.MCTree, data_file.MessTree)):
             N_events = tree.GetEntries()
             for event_number, root_event in enumerate(tree):
-                #if event_number % 50 != 0:
+                #if event_number % 500 != 0:
                 #    continue
                     
                 if event_number % 1000 == 0:
@@ -392,6 +395,10 @@ def task_4():
 
         plt.clf()
         plt.plot(X,Y, 's', color="black")
+        plt.xlim(X.min()-0.1, X.max()+0.1)
+        plt.ylim(Y.min()-0.2, Y.max()+0.2)
+        plt.xlabel("W Boson Mass / GeV")
+        plt.ylabel(r"$\chi^2$")
         
         try:
             parabel = lambda x, w_mass, minimum, sigma: np.power((x-w_mass)/sigma, 2) + minimum
@@ -403,30 +410,60 @@ def task_4():
                 popt, pcov = curve_fit(parabel, X[f], Y[f], p0=((max_mass+min_mass)/2, data_hist.nbins, 0.05))
                 min_mass = max(popt[0] - window, weight_to_mass(0))
                 max_mass = min(popt[0] + window, weight_to_mass(18))
-                
+        
             w_mass, minimum, sigma = popt
             sigma = abs(sigma)
+            
+        except Exception as e:
+            print("Fitting error:", e)
 
+        else:
+            plt.clf()
+            
+            plot_axes = plt.gca()
+            
             xnew = np.linspace(X.min(), X.max(), 1000)
             ynew = parabel(xnew, *popt)
             
-            plt.axvline(w_mass, ls="-", color="black")
-            plt.axhline(minimum+1, ls="--", color="grey")
-            plt.axvline(w_mass-sigma, ls="--", color="grey")
-            plt.axvline(w_mass+sigma, ls="--", color="grey")
-            plt.plot(xnew,ynew, '-', color="grey")
             print("W mass:", w_mass, "GeV")
-            u_w_mass = ufloat(w_mass, sigma)
-            annotate("Fitted W Mass: ${m:L}$ GeV".format(m=u_w_mass))
-            plt.ylim(minimum-1, minimum+10)
+            print("Chi2:", minimum)
+    
+            annotate(
+                u"Fitted W Mass: %.3f \u00B1 %.3f GeV" % (w_mass, sigma),
+                ax=plot_axes,
+                loc=3
+            )
+
+
+            plot_axes.axvline(w_mass, ls="-", color="black")
+            plot_axes.axhline(minimum+1, ls="--", color="grey")
+            plot_axes.axvline(w_mass-sigma, ls="--", color="grey")
+            plot_axes.axvline(w_mass+sigma, ls="--", color="grey")
+            plot_axes.plot(X,Y, 's', color="black")
+            plot_axes.plot(xnew,ynew, '-', color="grey")
             
-        except Exception as e:
-            print("Error:", e)
-        
-        plt.xlabel("W Boson Mass / GeV")
-        plt.ylabel(r"$\chi^2$")
-        #plt.grid()
-        plt.savefig("chisquare_%s.pdf" % name)
+            zoomed_axes = inset_axes(plot_axes, height="40%", width="50%", loc=1)
+            zoomed_axes.axvline(w_mass, ls="-", color="black")
+            zoomed_axes.axhline(minimum+1, ls="--", color="grey")
+            zoomed_axes.axvline(w_mass-sigma, ls="--", color="grey")
+            zoomed_axes.axvline(w_mass+sigma, ls="--", color="grey")
+            zoomed_axes.plot(X,Y, 's', color="black")
+            zoomed_axes.plot(xnew,ynew, '-', color="grey")
+                
+            zoomed_axes.set_xlim(X.min()-0.1, X.max()+0.1)
+            zoomed_axes.set_ylim(Y.min()-0.2, Y.max()+0.2)
+            zoomed_axes.set_xticklabels([])
+            zoomed_axes.set_yticklabels([])
+            
+            plot_axes.set_xlim(w_mass - 2*sigma, w_mass + 2*sigma)
+            plot_axes.set_ylim(minimum - 0.5, minimum + 3)
+
+            plot_axes.set_xlabel("W Boson Mass / GeV")
+            plot_axes.set_ylabel(r"$\chi^2$")
+            #mark_inset(zoomed_axes, plot_axes, loc1=3, loc2=4, fc="none", ec="0.5")
+
+        plt.savefig("images/chisquare_%s.pdf" % name)
+        plt.show()
 
 def task_5():
     with root_open("data/d0.root") as data_file:
@@ -475,4 +512,4 @@ def task_6():
     
                 
 if __name__=="__main__":
-    task_2()
+    task_4()

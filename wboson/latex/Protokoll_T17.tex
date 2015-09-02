@@ -108,7 +108,7 @@ The final goal of this experiment is to perform a template fit between distribut
 \begin{figure}
 	\centering
 	\includegraphics{mc_examples}
-	\caption{Histogram of \PW masses. Shown is the generator W mass, which is stored inside the MC events, reweighted for three different example masses. One can observe the expected Breit-Wigner distribution, with the centers shifted.}
+	\caption{Histogram of \PW masses. Shown is the generator \PW mass, which is stored inside the MC events, reweighted for three different example masses. One can observe the expected Breit-Wigner distribution, with the centers shifted.}
 	\label{fig:mc_examples}
 \end{figure}
 
@@ -137,7 +137,7 @@ From this, all MC events counts can be reweighted:
 
 \chapter{Selection of Events}
 In this chapter, the measured variables are presented and the selection of events is explained. \\
-The distributions of the measured and simulated quantities are shown in figures \ref{fig:no_cuts_Et},\ref{fig:no_cuts_met}, \ref{fig:no_cuts_eta}, \ref{fig:no_cuts_dphi}, \ref{fig:no_cuts_dz} and \ref{fig:no_cuts_iso}. The histogram labeled "MC (all)" contains all simulated events for the weight $\MW = \SI{80.3946}{\giga\electronvolt}$. The small component of \Ptau leptons is plotted separately as "MC (tau only)" to point out its contribution. It becomes clear that the MC-generator did not simulate all processes which occur in the detector, see for example the double-bump structure in the distribution of transverse electron energy. To perform the analysis as sketched above, it is important to select only those events which fall in regions where data and MC are in good agreement. Otherwise, a discrepancy coming from background processes or missing simulation would be interpreted as a mismatch to the simulated W-mass. Among others, occurring background processes are: 
+The distributions of the measured and simulated quantities are shown in figures \ref{fig:no_cuts_Et},\ref{fig:no_cuts_met}, \ref{fig:no_cuts_eta}, \ref{fig:no_cuts_dphi}, \ref{fig:no_cuts_dz} and \ref{fig:no_cuts_iso}. The histogram labeled "MC (all)" contains all simulated events for the weight $\MW = \SI{80.3946}{\giga\electronvolt}$. The small component of \Ptau leptons is plotted separately as "MC (tau only)" to point out its contribution. It becomes clear that the MC-generator did not simulate all processes which occur in the detector, see for example the double-bump structure in the distribution of transverse electron energy. To perform the analysis as sketched above, it is important to select only those events which fall in regions where data and MC are in good agreement. Otherwise, a discrepancy coming from background processes or missing simulation would be interpreted as a mismatch to the simulated \PW mass. Among others, occurring background processes are: 
 \begin{itemize}
 	\item $\Ppizero \rightarrow 2 \Pphoton$ decays which could account for the lower electron energies if the $\gamma$ is misidentified.
 	\item Jets which are misidentified as electrons. The electron isolation variable becomes smaller in this case.
@@ -271,37 +271,138 @@ Although this results is slightly lower than the theoretical expectation, the me
 
 The largest error sources on this method are the determination of the measured luminosity $\mathcal{L}_\mathrm{data}$ and the odd correction factor $\mathrm{corr}$, both contribute a relative uncertainty of \SI{10}{\percent} each. The error on the theoretical value and the statistical uncertainty on $N_\mathrm{data}$ are negligible.
 
-\chapter{Determination of the W-Boson Mass}
-The central analysis of this experiment is the determination of the \PW boson mass in a template fit. The idea is to extract the correct \PW mass from the distribution of measured quantities like the transverse mass by comparing it to the generated MC-datasets. Since the information of the \PW mass is fully contained in the shape, the MC-datasets are rescaled again in this part of the analysis. By normalizing them to the total number of measured events, the unpleasant correction factor is not used anymore and the absolute height matches much better between Data and MC.  
+\chapter{Determination of the \PW Boson Mass}
+The central analysis of this experiment is the determination of the \PW boson mass in a template fit. The idea is to extract the correct \PW mass from the distribution of measured quantities like the transverse mass by comparing it to the generated MC-datasets. 
 
 
+\section{Renormalization of the MC dataset}
+Since the information of the \PW mass is fully contained in the shape, the MC-datasets are rescaled again in this part of the analysis. By normalizing them to the total number of measured events, the unpleasant correction factor is not needed anymore and the absolute height matches much better between Data and MC. The rescaling is done by the modified factor, which is applied to the MC events:
+\begin{equation}
+w_{\mathrm{normalize}}=\frac{N_{\mathrm{Data}}}{N_{\mathrm{MC}}}
+\end{equation}
 
 \section{$\chi^2$-Minimization}
-As a measure for the agreement between the data points and the MC-dataset for one given W-mass, $\chi^2$ is calculated. For each bin, the number of datapoints is used to calculate the error estimate $\sigma_\mathrm{bin}=\sqrt{N_\mathrm{data}}$. Since $N_\mathrm{data} \gg 1$ holds for all bins in the investigated region, the estimate is well justified (Poissonian statistics). Furthermore, by convention, the uncertainty on the data measurement is used, instead of the expected uncertainty on the model, as it would be required for a proper  $\chi^2$: 
+As a measure for the agreement between the data points and the MC dataset for one given \PW mass, $\chi^2$ is calculated. For each bin, the number of datapoints is used to calculate the error estimate $\sigma_\mathrm{bin}=\sqrt{N_\mathrm{data}}$. Since $N_\mathrm{data} \gg 1$ holds for all bins in the investigated region, the estimate is well justified (Poissonian statistics). Furthermore, by convention, the uncertainty on the data measurement is used, instead of the expected uncertainty on the model, as it would be required for the definition of $\chi^2$. 
 \begin{equation}
 \chi^2=\sum_i^{\mathrm{bins}} \frac{\left(N^i_\mathrm{data}-N^i_\mathrm{MC}\right)^2}{\sigma_i^2}
 \label{eq:Chi2}
 \end{equation}
 
-In some cases, the discrepancy between the distributions can even be identified by eye. As can be seen in figure \ref{fig:comparison_m_t}, the generated distribution for the lowest W-mass ($\approx\SI{79.95}{\giga\electronvolt}$) tends to be shifted slightly to lower values in \MT and vice versa for the highest generated W-mass($\approx\SI{80.85}{\giga\electronvolt}$). 
+\subsection{Template Fit to the Transverse Mass}
+As a first comparison, the distribution of the transverse mass \MT is investigated for the dataset and the MC events.\\
+In some cases, the discrepancy between the distributions can even be identified by eye. As can be seen in figure \ref{fig:comparison_m_t}, the generated distribution for the lowest \PW mass ($\approx\SI{79.95}{\giga\electronvolt}$) tends to be shifted slightly to lower values in \MT and vice versa for the highest generated \PW mass($\approx\SI{80.85}{\giga\electronvolt}$). 
 \begin{figure}
 	\centering
 	\includegraphics{comparison_m_t}
-	\caption{Comparison of the transverse mass between data and MC with different input W-boson masses.}
+	\caption{Comparison of the transverse mass between data and MC with different input \PW boson masses.}
 	\label{fig:comparison_m_t}
 \end{figure}
 
-The calculated $\chi^2$-values for each MC-set are presented in figure \ref{fig:chisquare_m_t}. The expected shape of a quadratic function can be confirmed and a fit has been performed to find the best matching W-mass. The fit range extends over the region where the minimum lies because a quadratic structure can be expected there. The statistical error on this fit-result can be obtained by intersecting the $\chi^2$-function with the horizontal line at $y=\chi^2_{\mathrm{min}}+1$. The final result is stated in table \ref{tbl:m_results}.
+The calculated $\chi^2$-values for each MC-set are presented in figure \ref{fig:chisquare_m_t}. In the minimum of the expected quadratic function, a $\chi^2 $ value of $\approx 60$ is found. Together with the number of bins, this confirms the agreement between data and the MC set for this specific mass:
+\begin{equation}
+\frac{\chi^2}{n_{\mathrm{DoF}}} = \frac{\chi^2}{n_{\mathrm{bins}-1}} \approx JIPSIE 
+\end{equation}
+
+A fit of a quadratic function has been performed to find the best matching \PW mass. The fit range is chosen to the region around the minimum. The statistical error on the complete template method can then be obtained by intersecting the $\chi^2$-function with the horizontal line at $y=\chi^2_{\mathrm{min}}+1$. The final result of the minimization is stated in table \ref{tbl:m_results}.
 
 
 \begin{figure}
 	\centering
 	\includegraphics{chisquare_m_t}
-	\caption{Result of the $\chi^2$ calculation for the 19 different input W-boson masses.}
+	\caption{Result of the $\chi^2$ calculation for the 19 different \MT distributions compared to the dataset.}
 	\label{fig:chisquare_m_t}
 \end{figure}
 
 
+\subsection{Template Fit to the Transverse Electron Energy}
+In almost the same manner as the distribution of \MT contains information on the \PW boson mass, it is also possible to investigate the distribution of the electron energy \ELET. The methods described above can be applied in the same way and the results are similar, see figures \ref{fig:comparison_el_et} and \ref{fig:chisquare_el_et}. However, the minimization of $\chi^2$ yields a different \PW mass. This discrepancy will be discussed in the following sections.
+
+\begin{figure}
+	\centering
+	\includegraphics{comparison_m_t}
+	\caption{Comparison of the transverse electron energy between data and MC with different input \PW boson masses.}
+	\label{fig:comparison_el_et}
+\end{figure}
+
+
+\begin{figure}
+	\centering
+	\includegraphics{chisquare_m_t}
+	\caption{Result of the $\chi^2$ calculation for the 19 different \ELET distributions compared to the dataset.}
+	\label{fig:chisquare_el_et}
+\end{figure}
+
+\section{Systematic Uncertainties}
+\subsection{Energy Resolution of the EM Calorimeter}
+As a first contribution to the systematic uncertainty of the presented measurement, the energy resolution of the electromagnetic calorimeter is investigated. Since the method is highly depending on the measured transverse electron energy, it's precision is very important. The energy resolution can be parametrized as follows \cite{PhysRevLett.77.3309}, where $E$ is given in $\SI{}{\giga\electronvolt}$:
+\begin{equation}
+\frac{\sigma_E}{E} = 0.015 + \frac{0.13}{\sqrt{E}} + \frac{0.4}{E}
+\label{eq:E_res}
+\end{equation}
+To estimate the impact of the limited resolution, the template fits are repeated 10 times but for each event the electron energy is smeared randomly following a gaussian distribution with $\sigma$ taken from equation \ref{eq:E_res}. This procedure results in 10 fitted \PW boson masses. The variance of this set is then taken as an estimator for the systematic uncertainty due to the energy resolution. The result is stated in table \ref{tbl:systematics}.
+
+\subsection{Energy Scale Uncertainty of the EM Calorimeter}
+The energy scale of the electromagnetic calorimeter has been determined and parametrized by the \dnull collaboration \cite{PhysRevLett.77.3309} in decays of well-known particles of the standard model (e.g. $\pi^0$):
+\begin{equation}
+E_{\mathrm{meas}}= \alpha E + \delta
+\end{equation}
+However, this correction, which is applied to each event, contains uncertainties again. To investigate the impact of this systematic uncertainty, all measured electron energies are shifted once up and once down (no random process). The uncertainties on the parameter $\alpha$ and $\delta$ are $\approx 0.2 \%$ and $\approx 0.015$. This yields in the correction of $E_{\mathrm{meas}}$ a shift of:
+\begin{equation}
+E_{\mathrm{meas}'} = E_{\mathrm{meas}} \pm ( 0.2 \% E_{\mathrm{meas}} + 0.015)
+\end{equation}
+The template fits are repeated and the impact of this fixed shift on the final result of \MW is investigated. Since this process is not stochastic, an estimator for the impact can be obtained as half of the width between the two shifted results:
+\begin{equation}
+\Delta \MW = (\MW(\mathrm{shift up}) - \MW(\mathrm{shift down})) / 2
+\label{eq:sys_prop}
+\end{equation} 
+The determined uncertainties lie in the same order of magnitude as those from the energy resolution and can be found in table \ref{tbl:systematics}.
+
+\subsection{Impact of the Cut Selection}
+A third source of systematic uncertainties is the selection of cuts. Some of the cuts are motivated physically, some just to find a region of good agreement between MC and Data. However, another choice of cuts would have been possible as well. To estimate the impact of this ambiguity on \MW, the cuts are shifted separately in a reasonable range and the template fits are repeated. As explained above, the uncertainty on the final result can then be estimated from equation \ref{eq:sys_prop}. The result of this procedure is shown in table \ref{tbl:sys_cuts}. Afterwards, the uncertainties are summed in quadrature (no correlation assumed).
+
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{ 
+			l 
+			l
+			l
+			}
+		\toprule
+		Changed Cut (range)$\backslash$Template Fit & \MT & \ELET \\ 
+		\midrule
+		\MET ($\pm \SI{3}{\giga\electronvolt}$) & asd & asd \\
+		\ELET ($\pm \SI{5}{\giga\electronvolt}$) & asd & asd \\
+		Electron Iso ($\pm 0.01$) & asd & asd\\
+		$\Delta \phi\left(\MET,\ELET\right)$ $(\pm 0.15)$ &  asd & asd\\ 
+		$\Delta z\left(\MET,\ELET\right)$ $(\pm 0.05)$  &   asd & asd\\
+		\bottomrule
+	\end{tabular}
+	\caption{ {$\Delta \MW$ / \SI{}{\giga\electronvolt}} showing the impact of different applied cuts on the determined \PW Boson mass from template fits.}
+	\label{tbl:sys_cuts}
+\end{table}
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{ 
+			l 
+			l
+			l
+		}
+		\toprule
+		Systematic Uncertainty $\backslash$ Template Fit & \MT & \ELET \\ 
+		\midrule
+		Energy Resolution &  0.018 & 0.045 \\
+		Energy Scale & 0.009 & 0.010  \\
+		Cut Selection & xxx & xxx  \\
+		\bottomrule
+		\end{tabular}
+	\caption{ {$\Delta \MW$ / \SI{}{\giga\electronvolt}} showing the summarized impact of systematic effects on the determined \PW Boson mass from template fits.}
+	\label{tbl:systematics}
+\end{table}
+
+
+\section{Discussion of Results}
 
 \begin{table}[htbp]
 	\centering
@@ -312,12 +413,15 @@ The calculated $\chi^2$-values for each MC-set are presented in figure \ref{fig:
 			l
 		}
 		\toprule
-		{Investigated Quantity} & {Result \MW} \\ 
+		{Investigated Quantity} & {\MW / \SI{}{\giga\electronvolt}} \\ 
 		\midrule
 		Transverse Mass \MT & BICHES \\
+		Transverse Electron Energy \ELET & More Bitches\\
+		\midrule
+		Literature Value & 80.385 +- 0.015 \\   
 		\bottomrule
 	\end{tabular}
-	\caption{Determined W-Boson mass from different fitted quantities.}
+	\caption{Determined \PW Boson mass from different fitted quantities. The systematic uncertainties are added in quadrature.}
 	\label{tbl:m_results}
 \end{table}
 

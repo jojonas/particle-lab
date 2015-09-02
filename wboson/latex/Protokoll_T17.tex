@@ -339,7 +339,7 @@ In almost the same manner as the distribution of \MT contains information on the
 \subsection{Energy Resolution of the EM Calorimeter}
 As a first contribution to the systematic uncertainty of the presented measurement, the energy resolution of the electromagnetic calorimeter is investigated. Since the method is highly depending on the measured transverse electron energy, it's precision is very important. The energy resolution can be parametrized as follows \cite{PhysRevLett.77.3309}, where $E$ is given in $\SI{}{\giga\electronvolt}$:
 \begin{equation}
-\frac{\sigma_E}{E} = 0.015 + \frac{0.13}{\sqrt{E}} + \frac{0.4}{E}
+\frac{\sigma_E}{E} = \num{0.015} + \frac{\num{0.13}}{\sqrt{E}} + \frac{\num{0.4}}{E}
 \label{eq:E_res}
 \end{equation}
 To estimate the impact of the limited resolution, the template fits are repeated 10 times but for each event the electron energy is smeared randomly following a gaussian distribution with $\sigma$ taken from equation \ref{eq:E_res}. This procedure results in 10 fitted \PW boson masses. The variance of this set is then taken as an estimator for the systematic uncertainty due to the energy resolution. The result is stated in table \ref{tbl:systematics}.
@@ -347,15 +347,15 @@ To estimate the impact of the limited resolution, the template fits are repeated
 \subsection{Energy Scale Uncertainty of the EM Calorimeter}
 The energy scale of the electromagnetic calorimeter has been determined and parametrized by the \dnull collaboration \cite{PhysRevLett.77.3309} in decays of well-known particles of the standard model (e.g. $\pi^0$):
 \begin{equation}
-E_{\mathrm{meas}}= \alpha E + \delta
+E_\mathrm{meas}= \alpha E + \delta
 \end{equation}
 However, this correction, which is applied to each event, contains uncertainties again. To investigate the impact of this systematic uncertainty, all measured electron energies are shifted once up and once down (no random process). The uncertainties on the parameter $\alpha$ and $\delta$ are $\approx 0.2 \%$ and $\approx 0.015$. This yields in the correction of $E_{\mathrm{meas}}$ a shift of:
 \begin{equation}
-E_{\mathrm{meas}'} = E_{\mathrm{meas}} \pm ( 0.2 \% E_{\mathrm{meas}} + 0.015)
+E_\mathrm{meas}^\pm = E_\mathrm{meas} \pm ( \SI{0.2}{\percent} \cdot E_\mathrm{meas} + \num{0.015})
 \end{equation}
 The template fits are repeated and the impact of this fixed shift on the final result of \MW is investigated. Since this process is not stochastic, an estimator for the impact can be obtained as half of the width between the two shifted results:
 \begin{equation}
-\Delta \MW = (\MW(\mathrm{shift up}) - \MW(\mathrm{shift down})) / 2
+\Delta \MW = \frac{\left|\MW\left(E_\mathrm{meas}^+\right) - \MW\left(E_\mathrm{meas}^-\right)\right|}{2}
 \label{eq:sys_prop}
 \end{equation} 
 The determined uncertainties lie in the same order of magnitude as those from the energy resolution and can be found in table \ref{tbl:systematics}.
@@ -369,20 +369,19 @@ A third source of systematic uncertainties is the selection of cuts. Some of the
 	\begin{tabular}{ 
 			l 
 			l
-			l
-			l
+			S[table-format=3]
+			S[table-format=3]
 			}
 		\toprule
-		Changed Cut & Shifted Range & Fitted Quantity \\
+		{Changed Cut} & {Shifted Range} & {$\Delta \MW(\MT)$ / \si{\mega\electronvolt}} & {$\Delta \MW(\ELET)$ / \si{\mega\electronvolt}} \\ 
 		\midrule
-		&	& \MT & \ELET \\ 
+		\MET & $\pm \SI{3}{\giga\electronvolt}$ & 26 & 3 \\
+		\ELET & $\pm \SI{5}{\giga\electronvolt}$ & 25 & 58 \\
+		Electron Isolation  & $\pm \num{0.01}$ & 72 & 91\\
+		$\Delta \phi\left(\MET,\ELET\right)$ & $\pm \num{0.15}$ & 13 & 23\\ 
+		$\Delta z\left(\MET,\ELET\right)$ & $\pm \num{0.05}$  &  1 & 8\\
 		\midrule
-		\MET & ($\pm \SI{3}{\giga\electronvolt}$) & 0.026 & 0.003 \\
-		\ELET & ($\pm \SI{5}{\giga\electronvolt}$) & 0.025 & 0.058 \\
-		Electron Iso  & ($\pm 0.01$) & 0.072 & 0.091\\
-		$\Delta \phi\left(\MET,\ELET\right)$ & ($\pm 0.15$) &  0.013 & 0.023\\ 
-		$\Delta z\left(\MET,\ELET\right)$ & ($\pm 0.05$)  &   0.001 & 0.008\\
-		Total &  & 0.082 & 0.111 \\
+		Total &  & 82 & 111 \\
 		\bottomrule
 	\end{tabular}
 	\caption{ {$\Delta \MW$ / \SI{}{\giga\electronvolt}} showing the impact of different applied cuts on the determined \PW Boson mass from template fits.}
@@ -392,19 +391,16 @@ A third source of systematic uncertainties is the selection of cuts. Some of the
 \begin{table}[htbp]
 	\centering
 	\begin{tabular}{ 
-			l 
 			l
-			l
-			l
+			S[table-format=3]
+			S[table-format=3]
 		}
 		\toprule
-		Systematic & Fitted Quantity \\
+		{Changed Cut} & {$\Delta \MW(\MT)$ / \si{\mega\electronvolt}} & {$\Delta \MW(\ELET)$ / \si{\mega\electronvolt}} \\ 
 		\midrule
-		  &\MT & \ELET \\ 
-		\midrule
-		Energy Resolution &  0.018 & 0.045 \\
-		Energy Scale & 0.009 & 0.010  \\
-		Cut Selection & 0.082 & 0.111  \\
+		Energy Resolution &  18 & 45 \\
+		Energy Scale & 9 & 10  \\
+		Cut Selection & 82 & 111  \\
 		\bottomrule
 		\end{tabular}
 	\caption{ {$\Delta \MW$ / \SI{}{\giga\electronvolt}}: impact of systematic effects on the measured \PW boson mass.}
@@ -447,7 +443,7 @@ Although the determined results are compatible within their uncertainties, a com
 \end{figure}
 
 
-Literature Value & 80.385 +- 0.015 \\   
+Literature Value: 80.385 +- 0.015 \\   
 
 
 \chapter{Sequential Calculations}

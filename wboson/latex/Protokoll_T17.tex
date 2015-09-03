@@ -312,7 +312,7 @@ A fit of a quadratic function has been performed to find the best matching \PW m
 \begin{figure}
 	\centering
 	\includegraphics{chisquare_m_t}
-	\caption{Result of the $\chi^2$ calculation for the 19 different \MT distributions compared to the dataset.}
+	\caption{Result of the $\chi^2$ calculation for the 19 different \MT distributions compared to the dataset. The plot shows a zoom to the minimum while all calculated points are presented in the small plot in the upper right corner. The dashed line illustrates the estimation of the statistical error.}
 	\label{fig:chisquare_m_t}
 \end{figure}
 
@@ -433,8 +433,8 @@ After combining the discussed uncertainties, the two template fits yield the fol
 	\label{tbl:m_results}
 \end{table}
 
-\section{Combining the Determined Results - Correlation}
-Although the determined results are compatible within their uncertainties, a combination is not trivial. As shown in figure \ref{fig:corr}, the transverse mass and the transverse electron energy are highly correlated. This was of course expected, since \MT depends linearly on \ELET, see equation \ref{eq:m_t}. Quantitively, the correlation of the Data events can be expressed in the correlation coefficient which is:
+\subsection{Combining the Determined Results - Correlation}
+Although the determined results are compatible within their uncertainties, a combination is not trivial. As shown in figure \ref{fig:corr}, the transverse mass and the transverse electron energy are highly correlated. This was of course expected, since \MT depends linearly on \ELET, see equation \ref{eq:m_t}. Furthermore, the hard cut on the transverse electron energy becomes visible at $\ELET=30$. Quantitively, the correlation of the events in the dataset can be expressed in the correlation coefficient which is:
 \begin{equation}
 \rho=0.886
 \end{equation}
@@ -444,10 +444,28 @@ Although the determined results are compatible within their uncertainties, a com
 	\caption{Scatter plot of \MT vs. \ELET to illustrate the correlation between these quantities.}
 	\label{fig:corr}
 \end{figure}
-The 
-\section{title}
-Literature Value: 80.385 +- 0.015 \\   
+For the following analysis steps, the \PW mass determined in the template fit of the transverse electron energy is used. The reason lies in the unknown systematic uncertainty of the missing energy: Although the result from the fit of the transverse mass has slightly smaller uncertainties, the result from the fit of the electron energy is expected to be more precise if the uncertainty on the missing energy would be included. 
 
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{ 
+			l 
+			l
+			l
+			l
+		}
+		\toprule
+			 & {\MW / \SI{}{\giga\electronvolt}} \\ 
+		\midrule
+		This Analysis & $\num{80.477} \pm \num{0.058}_\mathrm{stat} \pm \num{0.120}_\mathrm{sys}$ \\
+		World Average \cite{Oo2014Review} & $\num{80.385} \pm  \number{0.015}$ \\
+		\bottomrule
+	\end{tabular}
+	\caption{Final result of the determined \PW boson mass.}
+	\label{tbl:m_final}
+\end{table}
+
+Table \ref{tbl:m_final} shows the final result of this analysis in comparison with the World Average presented by the Particle Data Group. Within the estimated uncertainties, the two values are in good agreement.
 
 \chapter{Sequential Calculations}
 

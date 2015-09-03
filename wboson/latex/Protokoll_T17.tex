@@ -58,7 +58,7 @@
 
 \chapter{Introduction}
 
-This analysis deals with \PW boson physics conducted at the \dnull experiment at the Tevatron accelerator (FERMILAB, Chicago). The data has been taken in proton-antiproton collisions at a center-of-mass energy of $\sqrt{s} = \SI{1960}{\giga\electronvolt}$\cite{HBK+2013Experiment}.
+This analysis deals with \PW boson physics conducted at the \dnull experiment at the Tevatron accelerator (FERMILAB, Chicago). The dataset has been taken in proton-antiproton collisions at a center-of-mass energy of $\sqrt{s} = \SI{1960}{\giga\electronvolt}$\cite{HBK+2013Experiment}.
 
 \section{Units}
 In this report, a natural unit system of particle physics is used: first, the speed of light and Planck's constant are fixed:
@@ -76,7 +76,7 @@ Equivalently, there exists a oppositely charged process:
 \begin{equation}
 \Pproton\APproton \rightarrow \PWplus \rightarrow \Ppositron \Pnue
 \end{equation}
-With the assumption that the \PWplus and \PWminus have similar properties (except the electric charge), one does not expect any difference between the processes. Because of that, the presented analysis will not differentiate between them and treat positrons as electrons in the final state.
+With the assumption that the \PWplus and \PWminus have the same properties (except the electric charge), one does not expect any difference between the processes. Because of that, the presented analysis will not differentiate between them and treat positrons as electrons in the final state.
 
 Both processes combined have an expected cross section\cite{HBK+2013Experiment} of 
 \begin{equation}
@@ -96,7 +96,7 @@ Inside the detector, a Cartesian coordinate system and a cylindrical coordinate 
 
 Because the colliding protons are composite particles, the longitudinal momentum of the interacting quarks is unknown. The transversal components, however, are zero in the initial state. From momentum conservation it follows that the sum of all transversal momenta in the final state is also zero. 
 To represent this conservation in the transversal plane, energies and momenta are projected onto it. This introduces the transverse electron energy \ELET.
-Another important definition is the missing transverse energy \MET which is calculated as negative sum of all particles momenta, projected onto the transverse plane.
+Another important quantity is the missing transverse energy \MET which is calculated as negative sum of all particles momenta, projected onto the transverse plane.
 
 
 \chapter{Monte-Carlo Samples}
@@ -112,18 +112,18 @@ The final goal of this experiment is to perform a template fit between distribut
 	\label{fig:mc_examples}
 \end{figure}
 
-Figure \ref{fig:mc_examples} shows the result of reweighting for example values. For this plot, the "true" \PW mass has been obtained from the Monte Carlo generator data. The histogram has been filled with the generator mass and the weights corresponding to the \PW masses \SI{79.9446}{\giga\electronvolt}, \SI{80.3946}{\giga\electronvolt} and \SI{80.8446}{\giga\electronvolt}. The illustration shows that the reweighting approach is valid, although the weights only change the plot along the vertical axis, the overall Breit-Wigner curve has shifted to different masses.
+Figure \ref{fig:mc_examples} shows the result of the reweighting: For this plot, the "true" \PW mass has been obtained from the Monte Carlo generator data. The histogram has been filled with the generator mass and the weights corresponding to the \PW masses \SI{79.9446}{\giga\electronvolt}, \SI{80.3946}{\giga\electronvolt} and \SI{80.8446}{\giga\electronvolt}. The illustration shows that the reweighting approach is valid, although the weights only change the plot along the vertical axis, the overall Breit-Wigner curve has shifted to different masses.
 
 \section{Scaling}
-Only a limited amount of measured data is available. The integrated luminosity of the dataset sample\cite{HBK+2013Experiment} is:
+Of course, only a limited amount of measured data is available. The integrated luminosity of the dataset sample\cite{HBK+2013Experiment} is:
 \begin{equation}
 	\mathcal{L_\mathrm{data}} = \SI{198 +- 20}{\per\pico\barn}
 \end{equation}
-Opposed to this, $N_\mathrm{gen} = \num{1164699}$ Monte Carlo events have been generated. An intuitive way to compare the number of MC events to the number of data events is to construct a "MC luminosity". For this, the theoretical cross section from equation \ref{eq:theoretical_cross_section} is used to predict the luminosity at $N_\mathrm{gen}$ events. Here and in the following equations (if not stated otherwise), Gaussian error propagation is used:
+Opposed to this, $N_\mathrm{gen} = \num{1164699}$ Monte Carlo events have been generated. An intuitive way to compare the number of MC events to the number of data events is to construct a "MC luminosity". For this, the theoretical cross section from equation \ref{eq:theoretical_cross_section} is used to predict the luminosity corresponding to $N_\mathrm{gen}$ events. Here and in the following equations (if not stated otherwise), Gaussian error propagation is used:
 \begin{equation}
 	\mathcal{L}_\mathrm{MC} = \frac{N_\mathrm{gen}}{\sigma_\mathrm{theo}} = \SI{451 +- 16}{\per\pico\barn}
 \end{equation}
-This shows that the number of MC events has to be scaled down by a factor of about \num{2.3}. Curiously enough, the lab manual suggests an additional correction factor of $\mathrm{corr} = \num{0.90 +- 0.10}$ of unknown origin.
+This shows that for a comparison between data and MC, the number of MC events has to be scaled down by a factor of $\approx \num{2.3}$. Curiously enough, the lab manual suggests an additional correction factor of $\mathrm{corr} = \num{0.90 +- 0.10}$ of unknown origin.
 Combined, the weight for each MC event (not including the shape-reweighting) is:
 \begin{equation}
 	w = \frac{\mathcal{L}_\mathrm{data}}{\mathcal{L}_\mathrm{MC}} \cdot \mathrm{corr} = \mathcal{L}_\mathrm{data} \cdot \frac{\sigma_\mathrm{theo}}{N_\mathrm{gen}} \cdot \mathrm{corr} = \num{0.395 +- 0.061}
@@ -137,7 +137,7 @@ From this, all MC events counts can be reweighted:
 
 \chapter{Selection of Events}
 In this chapter, the measured variables are presented and the selection of events is explained. \\
-The distributions of the measured and simulated quantities are shown in figures \ref{fig:no_cuts_Et},\ref{fig:no_cuts_met}, \ref{fig:no_cuts_eta}, \ref{fig:no_cuts_dphi}, \ref{fig:no_cuts_dz} and \ref{fig:no_cuts_iso}. The histogram labeled "MC (all)" contains all simulated events for the weight $\MW = \SI{80.3946}{\giga\electronvolt}$. The small component of \Ptau leptons is plotted separately as "MC (tau only)" to point out its contribution. It becomes clear that the MC-generator did not simulate all processes which occur in the detector, see for example the double-bump structure in the distribution of transverse electron energy. To perform the analysis as sketched above, it is important to select only those events which fall in regions where data and MC are in good agreement. Otherwise, a discrepancy coming from background processes or missing simulation would be interpreted as a mismatch to the simulated \PW mass. Among others, occurring background processes are: 
+The distributions of the measured and simulated quantities are shown in figures \ref{fig:no_cuts_Et},\ref{fig:no_cuts_met}, \ref{fig:no_cuts_eta}, \ref{fig:no_cuts_dphi}, \ref{fig:no_cuts_dz} and \ref{fig:no_cuts_iso}. The histogram labeled "MC (all)" contains all simulated events for the weight $\MW = \SI{80.3946}{\giga\electronvolt}$. The small component of \Ptau leptons is plotted separately as "MC (tau only)" to point out its contribution. It becomes clear that the MC-generator did not simulate all processes which occur in the detector, see for example the double-bump structure in the distribution of transverse electron energy. To perform the analysis which is based on a template fit, it is important to select only those events which fall in regions where data and MC are in good agreement. Otherwise, a discrepancy coming from background processes or missing simulation would be interpreted as a mismatch to the simulated \PW mass. Among others, occurring background processes are: 
 \begin{itemize}
 	\item $\Ppizero \rightarrow 2 \Pphoton$ decays which could account for the lower electron energies if the $\gamma$ is misidentified.
 	\item Jets which are misidentified as electrons. The electron isolation variable becomes smaller in this case.
@@ -160,12 +160,12 @@ To constrain the analysis to regions of good agreement between MC and data, the 
 		\MET & $>\SI{20}{\giga\electronvolt}$ & Beginning of background-dominated region \\
 		\ELET & $>\SI{30}{\giga\electronvolt}$ & No low energy electrons (e.g. \Ppizero) \\
 		Electron Isolation & $< \num{0.03}$ & Reject misidentified Jets \\
-		$\Delta \phi\left(\MET,\ELET\right)$ & $> \num{2.85}$ & Expected to be back-to-back \\
+		$\Delta \phi\left(\MET,\ELET\right)$ & $> \num{2.85}$ & Expected back-to-back events, $\Delta \phi \approx \pi$ \\
 		$\Delta z\left(\MET,\ELET\right)$ & $<\SI{0.2}{\milli\meter}$ & Short lifetime of the \PW boson, no offset expected \\
 		
 		\bottomrule
 	\end{tabular}
-	\caption{Applied cuts and short justification.}
+	\caption{Applied cuts and short Motivation.}
 	\label{tbl:cuts_summary}
 \end{table}
 
@@ -179,35 +179,35 @@ To constrain the analysis to regions of good agreement between MC and data, the 
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.9\textwidth]{nocuts/E_T_miss}
-	\caption{Missing Transverse Energy, calculated using the constraint of momentum conservation in the transveral plane.}
+	\caption{Missing Transverse Energy, calculated using the constraint of momentum conservation in the transversal plane.}
 	\label{fig:no_cuts_met}
 \end{figure}
 
 \begin{figure}[htbp]
 	\centering
+	\includegraphics[width=0.9\textwidth]{nocuts/delta_z}
+	\caption{Distribution of the distance between the intersection point of \MET and the electron track and the collision point.}
+	\label{fig:no_cuts_dz}
+\end{figure}
+\begin{figure}[htbp]
+	\centering
 	\includegraphics[width=0.9\textwidth]{nocuts/eta_el}
-	\caption{Pseudorapidity of the Electron.}
+	\caption{Distribution of the Pseudorapidity of the Electron showing discrepancies between the measured data and MC.}
 	\label{fig:no_cuts_eta}
 \end{figure}
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.9\textwidth]{nocuts/delta_phi}
-	\caption{Difference in Polar Angle $\phi$ between the directions of MET and the electron.}
+	\caption{Distribution of the difference in Polar Angle $\phi$ between the directions of MET and the electron.}
 	\label{fig:no_cuts_dphi}
-\end{figure}
-
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=0.9\textwidth]{nocuts/delta_z}
-	\caption{Distance of the intersection point between MET and electron track to the collision point.}
-	\label{fig:no_cuts_dz}
 \end{figure}
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.9\textwidth]{nocuts/el_iso}
-	\caption{Isolation variable describing the tidiness in the vicinity of the electron's impact in the EM calorimeter}
+	\caption{Distribution of the isolation variable describing the tidiness in the vicinity of the electron's impact in the EM calorimeter}
 	\label{fig:no_cuts_iso}
 \end{figure}
+
 
 After applying these cuts, the agreement between data and MC becomes much better as can be seen in the distribution of the transverse electron energy (see figure \ref{fig:cuts_Et}). Since the reconstruction of the neutrino is only possible in the transverse plane of the detector, the invariant mass of the \PW boson can not be calculated directly. The following analysis is therefore based on the transverse mass, which is calculated from the transverse momentum of the electron $p_T^\mathrm{el}$ and the missing transverse momentum $\slashed{p}_T$ for each event:
 \begin{equation}
@@ -235,7 +235,7 @@ To determine the process cross section $\sigma_\mathrm{data}$ from the data, the
 	N_\mathrm{data} = \mathrm{eff} \cdot \mathrm{corr} \cdot \sigma_\mathrm{data} \cdot \mathcal{L}_\mathrm{data}
 	\label{eq:data_xsec}
 \end{equation}
-Here, the efficiency $\mathrm{eff}$ contains detector efficiency as well as analysis (e.g. cut) efficiency and is the only unknown factor in this equation. The correction factor $\mathrm{corr}$ and data luminosity $\mathcal{L}_\mathrm{data}$ are defined according to chapter \ref{ch:mc_samples}, $N_\mathrm{data}$ is the number of event after the application of all cuts.
+Here, the efficiency $\mathrm{eff}$ contains detector efficiency and acceptance as well as analysis efficiency (e.g. cuts) and is the only unknown factor in this equation. The correction factor $\mathrm{corr}$ and data luminosity $\mathcal{L}_\mathrm{data}$ are defined according to chapter \ref{ch:mc_samples}, $N_\mathrm{data}$ is the number of event after the application of all cuts.
 
 The efficiency can be determined by executing the analysis on the entire Monte Carlo dataset and comparing this to the initial number of generated events, $N_\mathrm{gen}$:
 \begin{equation}
@@ -259,7 +259,7 @@ The measurement can be read off from figure \ref{fig:cuts_Mt}:
 	N_\mathrm{data} = \num{67329 +- 259} 
 \end{equation}
 Here, the conventional Poission error of $\sigma_N = \sqrt{N}$ is used for the data, which is valid for $N \gg 1$ (fulfilled in this case).
-The total cross section is:
+The total cross section is then:
 \begin{equation}
 	\sigma_\mathrm{data} = \frac{\num{67329 +- 259}}{\num{187647} \cdot (\num{0.395 +- 0.061})} \cdot \SI{2.58 +- 0.09}{\nano\barn} = \SI{2.35 +- 0.35}{\nano\barn}
 \end{equation}
@@ -276,13 +276,13 @@ The central analysis of this experiment is the determination of the \PW boson ma
 
 
 \section{Renormalization of the MC dataset}
-Since the information of the \PW mass is fully contained in the shape, the MC-datasets are rescaled again in this part of the analysis. By normalizing them to the total number of measured events, the unpleasant correction factor is not needed anymore and the absolute height matches much better between Data and MC. The rescaling is done by the modified factor, which is applied to the MC events:
+Since the information of the \PW mass is fully contained in the shape, the MC-datasets are rescaled again in this part of the analysis. By normalizing them to the total number of data events, the unpleasant correction factor is not needed anymore and the absolute height matches much better between Data and MC. The rescaling is done by the modified weighting factor, which is applied to the MC events:
 \begin{equation}
 w_{\mathrm{normalize}}=\frac{N_{\mathrm{data}}}{N_{\mathrm{MC}}}
 \end{equation}
 
 \section{Binning}
-The bin width is chosen by visual inspection. There are multiple criteria that have to be fulfilled for a reasonable bin width: each bin has to contain a large number of events ($N^i_\mathrm{data} \gg 1$), in order to satisfy the Poissonian approach of $\sigma_N = \sqrt{N}$. Additionally, bins should not be smaller than the detector resolution, otherwise bin migration artifact occur. On the other hand, the binning should be fine enough to represent all features in the distribution. By trying different values, \num{50} is determined to be a suitable number of bins and will be used in the template fit.
+The bin width is chosen by visual inspection. There are multiple criteria that have to be fulfilled for a reasonable bin width: each bin has to contain a large number of events ($N^i_\mathrm{data} \gg 1$), in order to satisfy the Poissonian approach of $\sigma_N = \sqrt{N}$. Additionally, bins should not be smaller than the detector resolution, otherwise bin migration artifact occur. On the other hand, the binning should be fine enough to represent all features in the distribution. By testing different values, $n_\mathrm{bins}=\num{50}$ is determined to be a suitable number of bins and will be used in the template fits.
 
 \section{$\chi^2$-Minimization}
 As a measure for the agreement between the data points and the MC dataset for one given \PW mass, $\chi^2$ is calculated. For each bin, the number of data points is used to calculate the error estimate $\sigma_\mathrm{bin}=\sqrt{N_\mathrm{data}}$. $N_\mathrm{data} \gg 1$ has been ensured by choosing the correct bin width. By convention, the uncertainty on the data measurement is used, instead of the expected uncertainty on the model, as it would be required for the definition of $\chi^2$. 
@@ -301,12 +301,12 @@ In some cases, the discrepancy between the distributions can even be identified 
 	\label{fig:comparison_m_t}
 \end{figure}
 
-The calculated $\chi^2$-values for each MC-set are presented in figure \ref{fig:chisquare_m_t}. In the minimum of the expected quadratic function, a $\chi^2 $ value of \num{68.0} is found. Together with the number of bins, this confirms the agreement between data and the MC set for this specific mass:
+The calculated $\chi^2$-values for each MC-set are presented in figure \ref{fig:chisquare_m_t}. In the minimum of the expected parabola, a $\chi^2 $ value of \num{68.0} is found. Together with the number of bins, this confirms the agreement between data and the MC set for this specific mass:
 \begin{equation}
 \frac{\chi^2}{n_{\mathrm{DoF}}} = \frac{\chi^2}{n_{\mathrm{bins}-1}} =  \frac{\num{68.0}}{\num{50} - \num{1}} \approx \num{1.39} 
 \end{equation}
 
-A fit of a quadratic function has been performed to find the best matching \PW mass. The fit range is chosen to the region around the minimum. The statistical error on the complete template method can then be obtained by intersecting the $\chi^2$-function with the horizontal line at $y=\chi^2_{\mathrm{min}}+1$. The final result of the minimization is stated in table \ref{tbl:m_results}.
+A fit of a parabolic function has been performed to find the best matching \PW mass. The fit range is chosen to the region around the minimum. The statistical error on the complete template method can then be obtained by intersecting the $\chi^2$-function with the horizontal line at $y=\chi^2_{\mathrm{min}}+1$. The final result of the minimization is stated in table \ref{tbl:m_results}.
 
 
 \begin{figure}
@@ -519,5 +519,7 @@ In this protocol, a measurement of the \PW boson mass has been presented. Based 
 
 \bibliographystyle{utphys}
 \bibliography{T17_bib}{}
+
+
 
 \end{document}

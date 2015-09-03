@@ -94,7 +94,7 @@
 
 % pretty ToC
 \RequirePackage[titles]{tocloft}
-\renewcommand\cftchapfont{\Large \fontfamily{qhv}\selectfont}
+\renewcommand\cftchapfont{\fontfamily{qhv}\selectfont\small\bfseries}
 
 % nagging about obsolete commands
 \RequirePackage[l2tabu, orthodox]{nag}
@@ -129,9 +129,9 @@
 \RequirePackage{lmodern}
 \RequirePackage{charter}
 
-\setkomafont{title}{\Huge \fontfamily{qhv}\selectfont}
+\setkomafont{title}{\Huge \fontfamily{qhv}\fontseries{b}\selectfont}
 \setkomafont{part}{\huge \fontfamily{qhv}\selectfont}
-\setkomafont{chapter}{\huge \fontfamily{phv}\selectfont}
+\setkomafont{chapter}{\huge \fontfamily{qhv}\selectfont}
 \setkomafont{section}{\LARGE \fontfamily{qhv}\selectfont}
 \setkomafont{subsection}{\Large \fontfamily{qhv}\selectfont}
 \setkomafont{paragraph}{\fontfamily{qhv}\selectfont\small\bfseries}

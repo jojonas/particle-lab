@@ -19,7 +19,7 @@
 
 \graphicspath {{../images/}}
 
-\heads{RWTH Aachen \\ Particlephyics Lab}{T17 \\ W-Boson}{Lieb | Stettner \\ \today} 
+\heads{RWTH Aachen \\ Particle Phyics Lab}{T17 \\ W-Boson}{Lieb | Stettner \\ \today} 
 \date{\today}
 
 \newcommand{\MET}{\ensuremath{{\slashed{E}_\mathrm{T}}}\xspace}
@@ -28,6 +28,7 @@
 \newcommand{\ELPT}{\ensuremath{{p_\mathrm{T}^\mathrm{el}}}\xspace}
 \newcommand{\MT}{\ensuremath{{m_\mathrm{T}}}\xspace}
 \newcommand{\MW}{\ensuremath{{m_\mathrm{\PW}}}\xspace}
+\newcommand{\MZ}{\ensuremath{{m_\mathrm{\PZ}}}\xspace}
 \newcommand{\NC}{\ensuremath{N_\mathrm{C}}\xspace}
 \newcommand{\weinberg}{\ensuremath{\theta_\mathrm{W}}\xspace}
 \newcommand{\Gammaff}{\ensuremath{\Gamma_\mathrm{\Pfermion \Pfermion}}\xspace}
@@ -70,11 +71,11 @@ From this convention, many quantities arise in units of energy. Additionally, th
 \section{\PW Boson Production and Decay}
 The process of interest is the \PW boson production from the valence quarks of the protons and antiprotons, and the decay into an electron and an electron neutrino.
 \begin{equation}
-	\Pproton\APproton \rightarrow \PWminus \rightarrow \Pelectron \APnue
+	\Pproton\APproton \rightarrow \PWminus \rightarrow \Pelectron + \APnue
 \end{equation}
 Equivalently, there exists a oppositely charged process:
 \begin{equation}
-\Pproton\APproton \rightarrow \PWplus \rightarrow \Ppositron \Pnue
+\Pproton\APproton \rightarrow \PWplus \rightarrow \Ppositron + \Pnue
 \end{equation}
 With the assumption that the \PWplus and \PWminus have the same properties (except the electric charge), one does not expect any difference between the processes. Because of that, the presented analysis will not differentiate between them and treat positrons as electrons in the final state.
 
@@ -469,51 +470,64 @@ Table \ref{tbl:m_final} shows the final result of this analysis in comparison wi
 
 \chapter{Sequential Calculations}
 
-\section{Determination of the Color Factor}
-The lab manual poses a Standard Model equation describing the decay width of the \PW boson into fermions. Quark mixing, which is introduced by the CKM (Cabbibo-Kobayashi-Maskawa) matrix is neglected, thus a purely diagonal CKM matrix is assumed:
+\section{Calculation of the Weak Mixing Angle}
+The weak mixing angle, often also called Weinberg angle, describes a relation between the gauge boson masses in the Standard Model:
 \begin{equation}
-	\Gammaff = \frac{\NC}{12} \cdot \frac{\alpha}{\sin^2 \weinberg} \cdot \MW
-	\label{eq:color_factor}
+	\frac{\MW}{\MZ} = \cos \weinberg
 \end{equation}
+
+Combining the Particle Data Group's published mass of the \PZ boson\cite{Oo2014Review} with the measurement from this analysis, the mixing angle can be calculated
+\begin{equation}
+	\weinberg = \arccos \left( \frac{\MW}{\MZ} \right) = \arccos \left( \frac{\SI{80.477 +- 0.133}{\giga\electronvolt}}{\SI{91.1876 +- 0.0021}{\giga\electronvolt}} \right) = \SI{28.05 +- 0.18}{\degree}
+\end{equation}
+Here, the statistic and systematic uncertainties of this analysis' measurement have been combined by addition in quadrature, since they are assumed to be uncorrelated. Furthermore, Gaussian error propagation has been applied.
+
+In the literature often mentioned is $\sin^2 \weinberg$, which consequently is
+\begin{equation}
+	\sin^2 \weinberg = 1 - \left( \frac{\MW}{\MZ} \right)^2 = \num{0.2211 +- 0.0026}
+\end{equation}
+This result is compatible with the literature value of $\sin^2 \weinberg = \num{0.22333}$\cite{Oo2014Review}, which also has been obtained by analyzing the \PW on-shell production. There are several other ways to measure the mixing angle, most results are a little larger (between \numrange{0.23126}{0.23864}) and not compatible with this measurement.
+
+\section{Calculation of the Partial Decay Width}
+The lab manual proposes a Standard Model equation describing the partial decay width of the \PW boson into fermions. Quark mixing, which is introduced by the CKM (Cabbibo-Kobayashi-Maskawa) matrix is neglected, thus a purely diagonal CKM matrix is assumed:
+\begin{equation}
+	\Gammaff = \frac{\alpha \cdot \MW}{12 \cdot \sin^2 \weinberg} = \SI{221.3 +- 2.9}{\giga\electronvolt}
+\end{equation}
+
+From this result, two subsequent calculations can be performed: one can either assume the Standard Model color factor of $\NC = \num{3}$ and calculate the total \PW decay width, or alternatively use literature decay width to calculate the color factor. Both approaches will be discussed in the following sections.
+
+\section{Calculation of the Total Decay Width}
 The total decay width of the \PW boson is assumed to contain equal contribution from all fermions, with the exception of the top and bottom quarks, which cannot be produced in the decay due to their higher mass. The partial decay width to quarks is additionally \NC times larger because they exist in \NC different colored versions.
 \begin{equation}
 	\GammaW = 3 \cdot \Gamma_\mathrm{\Plepton \Pnu} + 2 \cdot \Gamma_\mathrm{\Pquark \Pquark} = 3 \cdot \Gammaff + 2 \cdot \NC \cdot \Gammaff = \left( 3 + 2 \NC \right) \cdot \Gammaff
-\end{equation}
-Assuming that $\GammaW$ stays constant, one can calculate a fermion decay width which is also valid for a Standard Model variation with $\NC \neq 3$ colors:
-\begin{equation}
-	\Gammaff(\NC) = \frac{\GammaW(\NC = 3)}{3 + 2 \cdot \NC}
-\end{equation}
-Going back to equation \ref{eq:color_factor}, this can be solved for the measured color factor $N_\mathrm{C}^\mathrm{meas}$ now to find the number of colors, assuming a Standard Model with $N_\mathrm{C}^\mathrm{SM}$ strong colors:
-\begin{equation}
-	N_\mathrm{C}^\mathrm{meas} = \frac{12 \cdot \Gammaff\left(N_\mathrm{C}^\mathrm{SM}\right) \cdot \sin^2 \weinberg}{\alpha \cdot \MW}
+	\label{eq:total_decay_width}
 \end{equation}
 
-For the Standard Model decay width assuming $N_\mathrm{C} = \num{3}$, the value from the Particle Data Group\cite{Oo2014Review} is used:
+Using the Standard Model color factor of $\NC = \num{3}$, the total decay width is thus
 \begin{equation}
-	\GammaW = \SI{2.085 +- 0.042}{\giga\electronvolt}
+	\GammaW = (3 + 2 \cdot 3) \Gammaff = \SI{1.991 +- 0.026}{\giga\electronvolt}
 \end{equation}
+This result is not compatible with the literature value of $\SI{2.085 +- 0.042}{\giga\electronvolt}$, and additionally has a smaller uncertainty. This is probably due to neglecting the quark mixing, which would allow additional decays, such as $\PW \rightarrow \Pup + \APstrange$.
 
-\begin{table}
-	\centering
-	\begin{tabular}{ 
-			S[table-format=1] 
-			S[table-format=1.4(4)] 
-			S[table-format=1.1(1)] 
-		}
-		\toprule
-		{$N_\mathrm{C}^\mathrm{SM}$} & {$\Gammaff\left(N_\mathrm{C}^\mathrm{SM}\right)$ / \si{\giga\electronvolt}} & {$N_\mathrm{C}^\mathrm{meas}$} \\
-		\midrule
-		2 & 0.2979 +- 0.0060 & XXX \\
-		3 & 0.2317 +- 0.0047 & XXX \\		
-		4 & 0.1895 +- 0.0038 & XXX \\
-		\bottomrule
-	\end{tabular}
-	\caption{Comparison of the measured color factor for Standard Model variations with $N_\mathrm{C}^\mathrm{SM}$ colors.}
-\end{table}
+\section{Calculation of the Strong Color Factor}
+Now the literature value for the total decay width is used and the number of colors is determined from it. This is basically using \ref{eq:total_decay_width}, solved for \NC:
+\begin{equation}
+	\NC = \frac{1}{2} \left( \frac{\GammaW}{\Gammaff} - 3 \right) = \num{3.21 +- 0.11}
+\end{equation}
+The Standard Model expectation $\NC = \num{3}$ has a distance of $2 \sigma$ to this measurement. But since the distance to $\NC = \num{2}$ or $\NC = \num{4}$ is larger, the Standard Model is still the favored hypothesis from this result.
 
 \chapter{Conclusions}
-In this protocol, a measurement of the \PW boson mass has been presented together with the determination of the production and decay cross-section in electrons. Based on preselected data taken by the \dnull detector at the \Pproton\APproton -collider Tevatron, a template fit has been performed to extract \MW from the transverse electron energy measured in the electromagnetic calorimeter. The final result is $\MW = \num{80.477} \pm \num{0.058}_\mathrm{stat} \pm \num{0.120}_\mathrm{sys}$. The statistical uncertainty coming from the $\chi^2$-minimization is much smaller than the systematic uncertainty which arises from the uncertainty in energy resolution and energy scale of the electromagnetic calorimeter as well as from the choice of cuts. An improvement on the precision of the analysis could be achieved by a more sophisticated Monte Carlo simulation: If for example the background processes was included in the simulated events, the analysis would be much less sensitive to the choice of cuts. The same holds for the uncertainties of the calorimeter measurement where the uncertainties could be included in the MC. Overall, the measurement of \MW stands in good agreement with the World Average presented by the PDG and further quantities of the Standard Model can be computed sequentially.
+In this report, a measurement of the \PW boson mass has been presented together with the determination of the production and decay cross-section in electrons. Based on preselected data taken by the \dnull detector at the \Pproton\APproton -collider Tevatron, a template fit has been performed to extract \MW from the transverse electron energy measured in the electromagnetic calorimeter. The final result is 
+\begin{equation}
+	\MW = \num{80.477} \pm \num{0.058}_\mathrm{stat} \pm \num{0.120}_\mathrm{sys}
+\end{equation}
+The statistical uncertainty coming from the $\chi^2$-minimization is much smaller than the systematic uncertainty which arises from the uncertainty in energy resolution and energy scale of the electromagnetic calorimeter as well as from the choice of cuts. An improvement on the precision of the analysis could be achieved by a more sophisticated Monte Carlo simulation: If for example the background processes was included in the simulated events, the analysis would be much less sensitive to the choice of cuts. The same holds for the uncertainties of the calorimeter measurement where the uncertainties could be included in the MC. Overall, the measurement of \MW stands in good agreement with the world average presented by the Particle Data Group and further quantities of the Standard Model could be computed sequentially.
+
 \section{Advantages and Disadvantages of the Presented Analysis}
+Proton-antiproton collisions e.g. at \dnull are well suited for the measurement of the \PW boson pole. \PW production and decay is a tree level process, and as such more probable than the \PW boson production at the Large Electron Positron collider (LEP) via the process $\Pelectron + \Pproton \rightarrow \PZ \rightarrow \PW + \PW \rightarrow ...$.
+Thus, the event yield at \dnull is much larger than at the LEP experiments. A disadvantage is that due to protons being composite particles, the center of mass energy of the collision is unknown and all measurements have to be performed in the two-dimensional transversal plane. In an experiment which collides elementary particles, such as electrons and positrons, the full three-dimensional information can be used to reconstruct the \PW mass. 
+
+Concluding, one could say that LEP has less data than \dnull, but of a much higher quality.
 
 \cleardoublepage
 

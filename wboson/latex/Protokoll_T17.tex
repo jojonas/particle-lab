@@ -312,13 +312,13 @@ A fit of a parabolic function has been performed to find the best matching \PW m
 \begin{figure}
 	\centering
 	\includegraphics{chisquare_m_t}
-	\caption{Result of the $\chi^2$ calculation for the 19 different \MT distributions compared to the dataset. The plot shows a zoom to the minimum while all calculated points are presented in the small plot in the upper right corner. The dashed line illustrates the estimation of the statistical error.}
+	\caption{Result of the $\chi^2$ calculation for the 19 different \MT distributions compared to the dataset. The plot shows a zoom to the region around the minimum while all calculated points are presented in the small plot in the upper right corner. The dashed lines illustrate the estimation of the statistical error.}
 	\label{fig:chisquare_m_t}
 \end{figure}
 
 
 \subsection{Template Fit to the Transverse Electron Energy}
-In almost the same manner as the distribution of \MT contains information on the \PW boson mass, it is also possible to investigate the distribution of the electron energy \ELET. The methods described above can be applied in the same way and the results are similar, see figures \ref{fig:comparison_el_et} and \ref{fig:chisquare_el_et}. However, the minimization of $\chi^2$ yields a different \PW mass. This discrepancy will be discussed in the following sections.
+In almost the same manner as the distribution of \MT contains information on the \PW boson mass, it is also possible to investigate the distribution of the electron energy \ELET. The methods described above can be applied in the same way and the results are similar, see figures \ref{fig:comparison_el_et} and \ref{fig:chisquare_el_et}. However, the minimization of $\chi^2$ yields a slightly different value for \MW. This discrepancy will be discussed in the following sections.
 
 \begin{figure}
 	\centering
@@ -345,11 +345,12 @@ As a first contribution to the systematic uncertainty of the presented measureme
 To estimate the impact of the limited resolution, the template fits are repeated 10 times but for each event the electron energy is smeared randomly following a gaussian distribution with $\sigma$ taken from equation \ref{eq:E_res}. This procedure results in 10 fitted \PW boson masses. The variance of this set is then taken as an estimator for the systematic uncertainty due to the energy resolution. The result is stated in table \ref{tbl:systematics}.
 
 \subsection{Energy Scale Uncertainty of the EM Calorimeter}
+\label{sec:sys_scale}
 The energy scale of the electromagnetic calorimeter has been determined and parametrized by the \dnull collaboration \cite{PhysRevLett.77.3309} in decays of well-known particles of the standard model (e.g. $\pi^0$):
 \begin{equation}
 E_\mathrm{meas}= \alpha E + \delta
 \end{equation}
-However, this correction, which is applied to each event, contains uncertainties again. To investigate the impact of this systematic uncertainty, all measured electron energies are shifted once up and once down (no random process). The uncertainties on the parameter $\alpha$ and $\delta$ are $\approx 0.2 \%$ and $\approx 0.015$. This yields in the correction of $E_{\mathrm{meas}}$ a shift of:
+However, this correction, which is applied to each event, contains uncertainties again. To investigate the impact of this systematic uncertainty, all measured electron energies are shifted once up and once down (no random process). The uncertainties on the two parameters are $\sigma_{\alpha} \approx 0.2 \%$ and $\sigma_{\delta} \approx 0.015$. This yields in the correction of $E_{\mathrm{meas}}$ a shift of:
 \begin{equation}
 E_\mathrm{meas}^\pm = E_\mathrm{meas} \pm ( \SI{0.2}{\percent} \cdot E_\mathrm{meas} + \num{0.015})
 \end{equation}
@@ -361,7 +362,7 @@ The template fits are repeated and the impact of this fixed shift on the final r
 The determined uncertainties lie in the same order of magnitude as those from the energy resolution and can be found in table \ref{tbl:systematics}.
 
 \subsection{Impact of the Cut Selection}
-A third source of systematic uncertainties is the selection of cuts. Some of the cuts are motivated physically, some just to find a region of good agreement between MC and Data. However, another choice of cuts would have been possible as well. To estimate the impact of this ambiguity on \MW, the cuts are shifted separately in a reasonable range and the template fits are repeated. As explained above, the uncertainty on the final result can then be estimated from equation \ref{eq:sys_prop}. The result of this procedure is shown in table \ref{tbl:sys_cuts}. Afterwards, the uncertainties are summed in quadrature (no correlation assumed).
+A third source of systematic uncertainties is the selection of cuts. Some of the cuts are motivated physically, some just to find a region of good agreement between MC and Data. However, another choice of cuts would have been possible as well. To estimate the impact of this ambiguity on \MW, the cuts are shifted separately in a reasonable range and the template fits are repeated. Similar to the explanation in section \ref{sec:sys_scale}, the uncertainty on the final result can then be estimated from equation \ref{eq:sys_prop}. The result of this procedure is shown in table \ref{tbl:sys_cuts}. Afterwards, the uncertainties are summed in quadrature (no correlation assumed).
 
 
 \begin{table}[htbp]
@@ -429,14 +430,14 @@ After combining the discussed uncertainties, the two template fits yield the fol
 		Transverse Electron Energy \ELET & $\num{80.477} \pm \num{0.058}_\mathrm{stat} \pm \num{0.120}_\mathrm{sys}$\\
 		\bottomrule
 	\end{tabular}
-	\caption{Determined \PW Boson mass from different template fits. The statistical error is solely taken from the $\chi^2$-fit, the systematic uncertainties are listed in tables \ref{tbl:sys_cuts}, \ref{tbl:systematics}.}
+	\caption{Determined \PW Boson mass from different template fits. The statistical error is solely taken from the $\chi^2$-fit, the systematic uncertainties are listed in tables \ref{tbl:sys_cuts} and \ref{tbl:systematics}.}
 	\label{tbl:m_results}
 \end{table}
 
 \subsection{Combining the Determined Results - Correlation}
-Although the determined results are compatible within their uncertainties, a combination is not trivial. As shown in figure \ref{fig:corr}, the transverse mass and the transverse electron energy are highly correlated. This was of course expected, since \MT depends linearly on \ELET, see equation \ref{eq:m_t}. Furthermore, the hard cut on the transverse electron energy becomes visible at $\ELET=30$. Quantitively, the correlation of the events in the dataset can be expressed in the correlation coefficient which is:
+Although the determined results are compatible within their uncertainties, a combination is not trivial. As shown in figure \ref{fig:corr}, the transverse mass and the transverse electron energy are highly correlated. This was of course expected, since \MT depends linearly on \ELET, see equation \ref{eq:m_t}. Furthermore, the hard cut on the transverse electron energy becomes visible at $\ELET=\SI{30}{\giga\electronvolt}$. Quantitively, the correlation of the events in the dataset can be expressed in the correlation coefficient which is:
 \begin{equation}
-\rho=0.886
+\rho (\MT,\ELET)=0.886
 \end{equation}
 \begin{figure}
 	\centering
@@ -470,12 +471,12 @@ Table \ref{tbl:m_final} shows the final result of this analysis in comparison wi
 \chapter{Sequential Calculations}
 
 \section{Determination of the Color Factor}
-The lab manual proposes a Standard Model equation describing the decay width of the \PW boson into fermions. Quark mixing, which is introduced by the CKM (Cabbibo-Kobayashi-Maskawa) matrix is neglected, thus a purely diagonal CKM matrix is assumed:
+The lab manual poses a Standard Model equation describing the decay width of the \PW boson into fermions. Quark mixing, which is introduced by the CKM (Cabbibo-Kobayashi-Maskawa) matrix is neglected, thus a purely diagonal CKM matrix is assumed:
 \begin{equation}
 	\Gammaff = \frac{\NC}{12} \cdot \frac{\alpha}{\sin^2 \weinberg} \cdot \MW
 	\label{eq:color_factor}
 \end{equation}
-The total decay width of the \PW boson is assumed to be equally distributed between fermions, with the exception of the top and bottom quarks, which cannot be produced in the decay due to their higher mass. The decay width to quarks is additionally \NC times more because of the strong color charge:
+The total decay width of the \PW boson is assumed to contain equal contribution from all fermions, with the exception of the top and bottom quarks, which cannot be produced in the decay due to their higher mass. The partial decay width to quarks is additionally \NC times larger because they exist in \NC different colored versions.
 \begin{equation}
 	\GammaW = 3 \cdot \Gamma_\mathrm{\Plepton \Pnu} + 2 \cdot \Gamma_\mathrm{\Pquark \Pquark} = 3 \cdot \Gammaff + 2 \cdot \NC \cdot \Gammaff = \left( 3 + 2 \NC \right) \cdot \Gammaff
 \end{equation}
@@ -488,7 +489,7 @@ Going back to equation \ref{eq:color_factor}, this can be solved for the measure
 	N_\mathrm{C}^\mathrm{meas} = \frac{12 \cdot \Gammaff\left(N_\mathrm{C}^\mathrm{SM}\right) \cdot \sin^2 \weinberg}{\alpha \cdot \MW}
 \end{equation}
 
-For the Standard Model decay width for \num{3} colors, the value of the Particle Data Group\cite{Oo2014Review} is used:
+For the Standard Model decay width assuming $N_\mathrm{C} = \num{3}$, the value from the Particle Data Group\cite{Oo2014Review} is used:
 \begin{equation}
 	\GammaW = \SI{2.085 +- 0.042}{\giga\electronvolt}
 \end{equation}
@@ -512,7 +513,7 @@ For the Standard Model decay width for \num{3} colors, the value of the Particle
 \end{table}
 
 \chapter{Conclusions}
-In this protocol, a measurement of the \PW boson mass has been presented. Based on preselected data taken by the \dnull detector at the \Pproton\APproton -collider Tevatron, a template fit has been performed to extract \MW from the transverse electron energy measured in the electromagnetic calorimeter. The final result is $\MW = \num{80.477} \pm \num{0.058}_\mathrm{stat} \pm \num{0.120}_\mathrm{sys}$. The statistical uncertainty coming from the $\chi^2$-minimization is dominated by the systematic uncertainty which arises from the uncertainty in energy resolution and energy scale of the electromagnetic calorimeter as well as from the choice of cuts. An improvement on the precision of the analysis could be achieved by a more sophisticated Monte Carlo simulation: If for example the background processes was included in the simulated events, the analysis would be much less sensitive to the choice of cuts. The same holds for the uncertainties of the calorimeter measurement where the uncertainties could be included in the MC. Overall, the measurement of \MW stands in good agreement with the World Average presented by the PDG and further quantities of the Standard Model can be computed sequentially.
+In this protocol, a measurement of the \PW boson mass has been presented together with the determination of the production and decay cross-section in electrons. Based on preselected data taken by the \dnull detector at the \Pproton\APproton -collider Tevatron, a template fit has been performed to extract \MW from the transverse electron energy measured in the electromagnetic calorimeter. The final result is $\MW = \num{80.477} \pm \num{0.058}_\mathrm{stat} \pm \num{0.120}_\mathrm{sys}$. The statistical uncertainty coming from the $\chi^2$-minimization is much smaller than the systematic uncertainty which arises from the uncertainty in energy resolution and energy scale of the electromagnetic calorimeter as well as from the choice of cuts. An improvement on the precision of the analysis could be achieved by a more sophisticated Monte Carlo simulation: If for example the background processes was included in the simulated events, the analysis would be much less sensitive to the choice of cuts. The same holds for the uncertainties of the calorimeter measurement where the uncertainties could be included in the MC. Overall, the measurement of \MW stands in good agreement with the World Average presented by the PDG and further quantities of the Standard Model can be computed sequentially.
 \section{Advantages and Disadvantages of the Presented Analysis}
 
 \cleardoublepage

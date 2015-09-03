@@ -396,7 +396,7 @@ A third source of systematic uncertainties is the selection of cuts. Some of the
 			S[table-format=3]
 		}
 		\toprule
-		{Changed Cut} & {$\Delta \MW(\MT)$ / \si{\mega\electronvolt}} & {$\Delta \MW(\ELET)$ / \si{\mega\electronvolt}} \\ 
+		Systematic & {$\Delta \MW(\MT)$ / \si{\mega\electronvolt}} & {$\Delta \MW(\ELET)$ / \si{\mega\electronvolt}} \\ 
 		\midrule
 		Energy Resolution &  18 & 45 \\
 		Energy Scale & 9 & 10  \\
@@ -405,7 +405,7 @@ A third source of systematic uncertainties is the selection of cuts. Some of the
 		Total & 84 & 120 \\
 		\bottomrule
 		\end{tabular}
-	\caption{Impact of the resolution smearing and rescaling within the energy scale uncertainty on the \PW boson mass from the template fit. The combined error in the last row contains the values added in quadrature, since the choice of cuts, the energy scale and resolution are independent of each other.}
+	\caption{Impact of the resolution smearing, rescaling within the energy scale uncertainty and variation of applied cuts on the \PW boson mass from the template fit. The combined error in the last row contains the values added in quadrature, since the choice of cuts, the energy scale and resolution are independent of each other.}
 	\label{tbl:systematics}
 \end{table}
 
@@ -510,7 +510,11 @@ For the Standard Model decay width for \num{3} colors, the value of the Particle
 	\end{tabular}
 	\caption{Comparison of the measured color factor for Standard Model variations with $N_\mathrm{C}^\mathrm{SM}$ colors.}
 \end{table}
-	
+
+\chapter{Conclusions}
+In this protocol, a measurement of the \PW boson mass has been presented. Based on preselected data taken by the \dnull detector at the \Pproton\APproton -collider Tevatron, a template fit has been performed to extract \MW from the transverse electron energy measured in the electromagnetic calorimeter. The final result is $\MW = \num{80.477} \pm \num{0.058}_\mathrm{stat} \pm \num{0.120}_\mathrm{sys}$. The statistical uncertainty coming from the $\chi^2$-minimization is dominated by the systematic uncertainty which arises from the uncertainty in energy resolution and energy scale of the electromagnetic calorimeter as well as from the choice of cuts. An improvement on the precision of the analysis could be achieved by a more sophisticated Monte Carlo simulation: If for example the background processes was included in the simulated events, the analysis would be much less sensitive to the choice of cuts. The same holds for the uncertainties of the calorimeter measurement where the uncertainties could be included in the MC. Overall, the measurement of \MW stands in good agreement with the World Average presented by the PDG and further quantities of the Standard Model can be computed sequentially.
+\section{Advantages and Disadvantages of the Presented Analysis}
+
 \cleardoublepage
 
 \bibliographystyle{utphys}

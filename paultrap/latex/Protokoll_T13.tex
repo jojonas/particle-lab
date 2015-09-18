@@ -1,0 +1,83 @@
+% !TeX encoding = UTF-8
+% !TeX spellcheck = en_US
+
+\documentclass[
+	paper=A4,
+	parskip=full,
+	chapterprefix=true,
+	11pt,
+	headings=normal,
+	bibliography=totoc,
+	listof=totoc,
+	titlepage=on,
+]{scrreprt}
+
+\usepackage{../../lieb}
+
+\usepackage{feynmp}
+\DeclareGraphicsRule{.1}{mps}{*}{}
+
+\graphicspath {{../images/}}
+
+\heads{RWTH Aachen \\ Particlephyics Lab}{T13 \\ Paul Trap}{Lieb | Stettner \\ \today} 
+\date{\today}
+
+%\newcommand{\MET}{\ensuremath{{\slashed{E}_\mathrm{T}}}\xspace}
+
+\newcommand{\thirdwidth}{0.32\textwidth}
+\newcommand{\halfwidth}{0.48\textwidth}
+\newcommand{\fullwidth}{1.0\textwidth}
+
+\setlength\parindent{0pt}
+\setlength{\parskip}\medskipamount
+
+\title{Particle Physics Laboratory Class \\ \quad \\ Experiment T13 | Paul Trap }
+\author{Jonas Lieb (312136) \\ Jöran Stettner (312169) \\ \\  RWTH Aachen}
+
+
+
+\begin{document}
+
+\maketitle
+
+\cleardoublepage
+
+\setcounter{tocdepth}{2}
+\tableofcontents
+
+\cleardoublepage
+
+\chapter{Introduction and Theory}
+
+In this laboratory report, the storage of charged particles and a measurement of their specific charge is presented. The experiment consists of a Paul trap, named after its creator Wolfgang Paul, which constrains the movement of a charged particle to stable trajectories by applying three alternating electrical fields. 
+
+\section{Trapping Particles in Electrical Fields}
+
+Beside the storage of charged particles by B-fields, it is possible to trap particles in electrical fields as well. In a static electrical field of arbitrary shape, the particle will follow the field lines and finally hit the source of the field (e.g. the condensator plate) or diverge (e.g. field of charged sphere). However, by alternating fields it is possible to create on average a minimum of the electrical potential in space. If the frequency of these fields is larger than the movement of the particle, a stable trajectory exists and the particle gets trapped. \\
+
+In a cubic geometry (6 plates, opposing plates at same potential), the following Mathieu equation of motion holds for all three dimensions where $\xi = \frac{1}{2} \Omega t$ is the normalized time and $a_i, q_i$ are constants depending on the applied voltages and properties of the particle:
+\begin{equation}
+\label{eq:mathieu}
+\left(a_i+q_i \cos(2 \xi)\right) x_i + \frac{d^2x_i}{d\xi^2} = 0  
+\end{equation}
+
+The full solution of this equation is discussed elsewhere (e.g. in the lab manual\cite{Lab_manual}), the following aspects are important for the conducted experiment.
+\subsection{Stability of the Particle Trajectories}
+
+
+
+\subsection{Influence of an Additional Force in z-Direction}
+\subsection{Resonance under Additional Field in x-Direction}
+
+
+
+
+\chapter{Experimental Setup}
+The trap consists basically of 6 
+
+
+Quak Quak
+
+\end{document}
+
+

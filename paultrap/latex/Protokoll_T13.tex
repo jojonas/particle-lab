@@ -58,12 +58,25 @@ Beside the storage of charged particles by B-fields, it is possible to trap part
 In a cubic geometry (6 plates, opposing plates at same potential), the following Mathieu equation of motion holds for all three dimensions where $\xi = \frac{1}{2} \Omega t$ is the normalized time and $a_i, q_i$ are constants depending on the applied voltages and properties of the particle:
 \begin{equation}
 \label{eq:mathieu}
-\left(a_i+q_i \cos(2 \xi)\right) x_i + \frac{d^2x_i}{d\xi^2} = 0  
+\left(a_i+q_i \cos(2 \xi)\right) x_i + \frac{d^2x_i}{d\xi^2} = 0
 \end{equation}
 
 The full solution of this equation is discussed elsewhere (e.g. in the lab manual\cite{Lab_manual}), the following aspects are important for the conducted experiment.
-\subsection{Stability of the Particle Trajectories}
 
+\subsection{Stability of the Particle Trajectories}
+The exact solution for the particle trajectories can be expressed in an infinite series. However, the tracks are only finite under certain conditions. Depending on the applied alternating field $U_x$ and the constant field $U_{G,x}$ (same potential on both plates), the constants $a_x$ and $q_x$ change. The stability criterion is \cite{Lab_manual}:
+\begin{equation}
+\sqrt{a+\frac{q^2}{2}} \in (0,1)
+\end{equation}
+The constants in x-direction are given in equation \ref{eq:a} and \ref{eq:q}, where $K$ is a geometry factor of the plates, $m$ the mass of the particle, $q$ the charge of the particle and $r_0$ the distance of the plates to the center.
+\begin{equation}
+\label{eq:a}
+a_x=\frac{16 K q}{3 \Omega^2 m r_0^2} U_{G,x}
+\end{equation}
+\begin{equation}
+\label{eq:q}
+q_x= \frac{-4 K q}{ \Omega^2 m r_0^2} U_{x}
+\end{equation}
 
 
 \subsection{Influence of an Additional Force in z-Direction}

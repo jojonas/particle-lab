@@ -55,7 +55,7 @@ In this laboratory report, the storage of charged particles and a measurement of
 
 Beside the storage of charged particles by B-fields, it is possible to trap particles in electrical fields as well. In a static electrical field of arbitrary shape, the particle will follow the field lines and finally hit the source of the field (e.g. the condensator plate) or diverge (e.g. field of charged sphere). However, by alternating fields it is possible to create on average a minimum of the electrical potential in space. If the frequency of these fields is larger than the movement of the particle, a stable trajectory exists and the particle gets trapped. \\
 
-In a cubic geometry (6 plates, opposing plates at same potential), the following Mathieu equation of motion holds for all three dimensions where $\xi = \frac{1}{2} \Omega t$ is the normalized time and $a_i, q_i$ are constants depending on the applied voltages and properties of the particle:
+In a cubic geometry (6 plates, opposing plates at same potential), the following equation of motion holds for all three dimensions. In this so called Mathieu equation, the index $i$ stands for the three spatial components, $\Omega$ is the frequency of the alternating fields, $\xi = \frac{1}{2} \Omega t$ is the normalized time and $a_i, q_i$ are constants depending on the applied voltages and properties of the particle.
 \begin{equation}
 \label{eq:mathieu}
 \left(a_i+q_i \cos(2 \xi)\right) x_i + \frac{d^2x_i}{d\xi^2} = 0
@@ -64,24 +64,31 @@ In a cubic geometry (6 plates, opposing plates at same potential), the following
 The full solution of this equation is discussed elsewhere (e.g. in the lab manual\cite{Lab_manual}), the following aspects are important for the conducted experiment.
 
 \subsection{Stability of the Particle Trajectories}
-The exact solution for the particle trajectories can be expressed in an infinite series. However, the tracks are only finite under certain conditions. Depending on the applied alternating field $U_x$ and the constant field $U_{G,x}$ (same potential on both plates), the constants $a_x$ and $q_x$ change. The stability criterion is \cite{Lab_manual}:
+The exact solution for the particle trajectories can be expressed in an infinite series. However, the tracks are only finite under certain conditions. Depending on the applied alternating field $U_i$ and the constant field $U_{G}$ (same potential on both plates), the constants $a$ and $q$ change. The constants in x-direction are given in equation \ref{eq:a} and \ref{eq:q}, where $K$ is a geometry factor of the plates, $m$ the mass of the particle, $q$ the charge of the particle and $r_0$ the distance of the plates to the center.
 \begin{equation}
-\sqrt{a+\frac{q^2}{2}} \in (0,1)
-\end{equation}
-The constants in x-direction are given in equation \ref{eq:a} and \ref{eq:q}, where $K$ is a geometry factor of the plates, $m$ the mass of the particle, $q$ the charge of the particle and $r_0$ the distance of the plates to the center.
-\begin{equation}
-\label{eq:a}
-a_x=\frac{16 K q}{3 \Omega^2 m r_0^2} U_{G,x}
+	\label{eq:a}
+	a_x=\frac{16 K q}{3 \Omega^2 m r_0^2} U_{G,x}
 \end{equation}
 \begin{equation}
-\label{eq:q}
-q_x= \frac{-4 K q}{ \Omega^2 m r_0^2} U_{x}
+	\label{eq:q}
+	q_x= \frac{-4 K q}{ \Omega^2 m r_0^2} U_{x}
 \end{equation}
 
+For stable trajectories, the voltages have to be adjusted such that the following equation holds\cite{Lab_manual}:
+\begin{equation}
+ \beta_x  = \sqrt{a_x+\frac{q_x^2}{2}}  \in (0,1)
+\end{equation}
+Additionally, air friction helps to stabilize the particle tracks since it damps the motion (Stoke's term in the Mathieu equations leads to weaker conditions). 
 
 \subsection{Influence of an Additional Force in z-Direction}
-\subsection{Resonance under Additional Field in x-Direction}
+Instead of applying an additional potential to both x-plates, it is also possible to apply an additional static electrical field in z-direction (homogeneous, pointing upwards, different potential on the plates). The idea is to compensate the gravitational force which acts on the particle. If considered in the Mathieu equations, a net force in z-direction does not change the shape of the particle tracks but shifts the center of the trajectories. However, if the applied field compensates the gravitational force, there is no shift of the particles and the particle tracks becomes independent of the applied alternating voltage $U_z$ \cite{Lab_manual}.
 
+\subsection{Influence of an Additional Alternating Field in x-Direction}
+
+As a third option, the influence of an additional alternating field in x-direction is discussed. While the alternating fields $U_i$ have same potential on opposing plates, the field $U_W$ acts homogeneously in x-direction (different potential on opposing plates). The additional term in the Mathieu equation leads to modified trajectories: The particle shakes back and forth and by changing the driving frequency of the field $U_W$ also resonances can be observed (forced,damped harmonic oscillator with damping constant $k_L$ from the Stoke's term describing air friction):
+\begin{equation}
+\omega_W^{res} = \frac{\Omega}{2} \sqrt{\beta_x^2 - 2 k_L^2}
+\end{equation}
 
 
 
@@ -90,6 +97,11 @@ The trap consists basically of 6
 
 
 Quak Quak
+
+\cleardoublepage
+
+\bibliographystyle{utphys}
+\bibliography{T13_bib}{}
 
 \end{document}
 

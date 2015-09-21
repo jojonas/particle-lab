@@ -115,10 +115,10 @@ Furthermore, three additional voltages can be applied to some rings of the trap:
 
 
 \chapter{Conduction and Analysis}
-
+\label{ch:analysis}
 In the following chapter, the conducted experiments and their results are reported. Each measurement is repeated in a low pressure environment to investigate the influence of air friction on the trapped particles. Since the particle trajectories are much more instable without air friction, the low pressure cylinder is not evacuated to the lowest limit of the vacuum pump ($p \approx \SI{5}{\micro \bar}$), but operated once at $p = \SI{300}{\milli \bar}$ and once at $p = \SI{150}{\milli \bar}$. \\
 Each conducted measurements yields a value of the specific charge $\frac{q}{m}$ which is different for the aluminum particles because their size and their aquired charge differ. To compare the different methods, the measurements are conducted in a series with the same trapped particle.\\
-AS discussed in chapter \ref{ch:systematics}, the output of the high voltage source does not match its adjusted values. The following correction factors are therefore applied and will be justified later:
+AS discussed in chapter \ref{ch:systematics}, the output of the high voltage source does not match its adjusted values. The following correction factors are therefore applied to all adjusted voltages and will be justified later:
 
 \begin{table}[htbp]
 	\centering
@@ -129,16 +129,15 @@ AS discussed in chapter \ref{ch:systematics}, the output of the high voltage sou
 		\toprule
 		Voltage & Correction Factor \\ 
 		\midrule
-		$U_x$ & xxx \\
-		$U_y$ & xxx \\
-		$U_z$ & xxx \\
-		$U_K$ & xxx \\
-		$U'$ & xxx \\
-		$U_W$ & xxx \\
+		$U_x$ & $0.78 \pm 0.02$  \\
+		$U_y$ & $0.76 \pm 0.03$ \\
+		$U_z$ & $0.81 \pm 0.03$ \\
+		$U_K$ and $U'$ & $0.61 \pm 0.01$ \\
+		$U_W$ & $0.17 \pm 0.03$ \\
 		
 		\bottomrule
 	\end{tabular}
-	\caption{Correction factors to compensate for the wrong mismatching output of the voltage supply.}
+	\caption{Correction factors to compensate for the wrong mismatching output of the voltage supply. The determination of these factors is described in chapter \ref{ch:systematics}.}
 	\label{tbl:corr_factors}
 \end{table}
 
@@ -150,7 +149,12 @@ AS discussed in chapter \ref{ch:systematics}, the output of the high voltage sou
 \chapter{Systematic Uncertainties}
 \label{ch:systematics}
 \section{High Voltage Source}
+\subsection{Mismatch of the Internal Voltage Measurement}
+The high voltage source displays the adjusted voltage, see figure \ref{fig:voltagesource}. However, a cross-check measurement with a multimeter shows discrepancies for all voltages of the source. To account for this, correction factors have been introduced in chapter \ref{ch:analysis}. They were determined by measuring four values and comparing them to the displayed values. The ratio of these values is averaged and the standard deviation is propagated through all analysis steps as a systematic uncertainty. TODO: Wirklich? Oder negligible ? 
+\subsection{Fluctuations of the Voltage Source}
+
 \chapter{Comparison of Results}
+
 
 \cleardoublepage
 

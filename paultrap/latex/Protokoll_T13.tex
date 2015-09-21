@@ -96,15 +96,23 @@ As a third option, the influence of an additional alternating field in x-directi
 The trap consists basically of 6 copper rings and a high voltage source, see figure \ref{fig:trap}. The rings are arranged in a cubic geometry: Each two rings facing each other lie on the same potential. The amplitude of the focusing voltages $U_x$, $U_y$ and $U_z$ can be adjusted individually, but the phase between them remains $\SI{120}{\degree}$. Additionally, a lamp and a camera are used to illuminate and observe the trapped particles inside the trap (not visible on the picture). To inject a few particles of aluminum powder, a syringe is installed below the trap. By pressing it, the particles are pushed upwards and become charged by the friction with the surrounding material of the syringe or air. 
 \begin{figure}
 	\centering
-	\includegraphics[width=\halfwidth]{capture_20150916_124003_cut}
-	\caption{Picture of the Paul Trap during installation. The 6 copper rings are connected to a three phase high voltage supply.}
-	\label{fig:trap}
+	\begin{subfigure}[t]{0.4\textwidth}
+		\includegraphics[width=0.9\textwidth]{capture_20150916_124003_cut}
+		\caption{Picture of the Paul Trap during installation. The 6 copper rings are connected to a three phase high voltage supply.}
+		\label{fig:trap}
+	\end{subfigure}	
+	\begin{subfigure}[t]{0.4\textwidth}
+		\includegraphics[width=0.9\textwidth]{Circuits}
+		\caption{Sketches of the electrical circuits for the additional applied voltages, taken from \cite{Lab_manual}.}
+		\label{fig:circuits}
+	\end{subfigure}
+\caption{The experimental setup.}
 \end{figure}
 
-Furthermore, three additional voltages can be applied to some rings of the trap:
+Furthermore, three additional voltages can be applied to some rings of the trap (electrical circuits are shown in figure \ref{fig:circuits}) : 
 \begin{itemize}
 	\item An additional direct voltage to the two rings in x-direction: $U'$ (same potential on both x-rings)
-	\item A direct voltage in z-direction creating a constant electrical field in upwards in z-direction (different potential on the two z-rings): $U_K$
+	\item A direct voltage in z-direction creating a constant electrical field upwards in z-direction (different potential on the two z-rings): $U_K$
 	\item An overlayed alternating voltage on both x-rings (different potential) creating an alternating field in x-direction: $U_W$
 \end{itemize}
 
@@ -144,12 +152,38 @@ AS discussed in chapter \ref{ch:systematics}, the output of the high voltage sou
 \section{Measurement II - Application of an Additional Field in z-Direction}
 \section{Measurement III - Resonance Study}
 
-\chapter{Systematic Uncertainties}
+\chapter{Uncertainties}
 \label{ch:systematics}
 \section{High Voltage Source}
 \subsection{Mismatch of the Internal Voltage Measurement}
-The high voltage source displays the adjusted voltage, see figure \ref{fig:voltagesource}. However, a cross-check measurement with a multimeter shows discrepancies for all voltages of the source. To account for this, correction factors have been introduced in chapter \ref{ch:analysis}. They were determined by measuring four values and comparing them to the displayed values. The ratio of these values is averaged and the standard deviation is propagated through all analysis steps as a systematic uncertainty. TODO: Wirklich? Oder negligible ? 
+The high voltage source displays the adjusted voltage. However, a cross-check measurement with a multimeter shows discrepancies for all voltages of the source. To account for this, correction factors have been introduced in chapter \ref{ch:analysis}. They were determined by measuring four values and comparing them to the displayed values. The ratio of these values is averaged and the standard deviation is computed. The results are shown in table \ref{tbl:corr_factors}. The systematic uncertainty which arises from the uncertainty on these correction factors is negligible compared to other uncertainties which are discussed in the following.
+
 \subsection{Fluctuations of the Voltage Source}
+The displayed voltage values on the voltage source fluctuate strongly. To read-off a voltage value, approximately four subsequent values are averaged live during the adjustment. The uncertainties arising from this can be estimated as follows: A longer set of voltage values is recorded ($N\approx20$) and the difference of the mean in subsamples of four is investigated. The standard deviation of these subsample means gives an estimator for the fluctuaion. This simulates the read-off process and yields the following uncertainties on the voltage values:
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{ 
+			l
+			l
+		}
+		\toprule
+		Voltage & Uncertainty [$\si{\volt}$] \\ 
+		\midrule
+		$U_x$ & $\pm 11$  \\
+		$U_y$ & $\pm 12$ \\
+		$U_z$ & $\pm  6$ \\
+		$U_K$ and $U'$ & $\pm 16$ \\
+		$U_W$ & $\pm 8$ \\
+		
+		\bottomrule
+	\end{tabular}
+	\caption{Uncertainties on the adjusted voltage values arising from the fluctuating display of the voltage source.}
+	\label{tbl:unc_fluctuation}
+\end{table}
+
+ 
+
 
 \chapter{Comparison of Results}
 

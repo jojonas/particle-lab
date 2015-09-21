@@ -103,7 +103,7 @@ The trap consists basically of 6 copper rings and a high voltage source, see fig
 	\end{subfigure}	
 	\begin{subfigure}[t]{0.4\textwidth}
 		\includegraphics[width=0.9\textwidth]{Circuits}
-		\caption{Sketches of the electrical circuits for the additional applied voltages, taken from \cite{Lab_manual}.}
+		\caption{Sketches of the electrical circuits for the additional applied voltages, taken from \cite{Lab_manual}.From top to bottom: The circuits of the alternating fields with phase difference $\SI{120}{\degree}$, the constant field in upwards z-direction and the constant potential which can be applied to the x-rings.}
 		\label{fig:circuits}
 	\end{subfigure}
 \caption{The experimental setup.}
@@ -112,19 +112,18 @@ The trap consists basically of 6 copper rings and a high voltage source, see fig
 Furthermore, three additional voltages can be applied to some rings of the trap (electrical circuits are shown in figure \ref{fig:circuits}) : 
 \begin{itemize}
 	\item An additional direct voltage to the two rings in x-direction: $U'$ (same potential on both x-rings)
-	\item A direct voltage in z-direction creating a constant electrical field upwards in z-direction (different potential on the two z-rings): $U_K$
+	\item A direct voltage in between the two z-rings creating a constant electrical field upwards in z-direction (different potential on the two z-rings): $U_K$
 	\item An overlayed alternating voltage on both x-rings (different potential) creating an alternating field in x-direction: $U_W$
 \end{itemize}
 
 
-
-
+The second stage of the experimental setup consists of a similar trap and the same electrical circuits, but enclosed in a cylinder. A two-stage vacuum pump is connected to the cylinder and creates a low-pressure environment down to ($p \approx \SI{5}{\micro \bar}$). The vacuum is monitored by a pressure sensor.
 
 \chapter{Conduction and Analysis}
 \label{ch:analysis}
-In the following chapter, the conducted experiments and their results are reported. Each measurement is repeated in a low pressure environment to investigate the influence of air friction on the trapped particles. Since the particle trajectories are much more instable without air friction, the low pressure cylinder is not evacuated to the lowest limit of the vacuum pump ($p \approx \SI{5}{\micro \bar}$), but operated once at $p = \SI{300}{\milli \bar}$ and once at $p = \SI{150}{\milli \bar}$. \\
-Each conducted measurements yields a value of the specific charge $\frac{q}{m}$ which is different for the aluminum particles because their size and their aquired charge differ. To compare the different methods, the measurements are conducted in a series with the same trapped particle.\\
-AS discussed in chapter \ref{ch:systematics}, the output of the high voltage source does not match its adjusted values. The following correction factors are therefore applied to all adjusted voltages and will be justified later:
+In the following chapter, the conducted experiments and their results are reported. Each measurement is repeated in a low pressure environment to investigate the influence of air friction on the trapped particles. Since the particle trajectories are much more instable without air friction, the low pressure cylinder is not evacuated to the lowest limit of the vacuum pump, but operated once at $p = \SI{300}{\milli \bar}$ and once at $p = \SI{150}{\milli \bar}$. \\
+Each conducted measurements yields a value of the specific charge $\frac{q}{m}$ which is different for the aluminum particles because their size and their acquired charge differ. To compare the different methods, the measurements are conducted in a series with the same trapped particle.\\
+As discussed in chapter \ref{ch:systematics}, the output of the high voltage source does not match its adjusted values. The following correction factors are therefore applied to all adjusted voltages and will be justified later:
 
 \begin{table}[htbp]
 	\centering
@@ -156,10 +155,10 @@ AS discussed in chapter \ref{ch:systematics}, the output of the high voltage sou
 \label{ch:systematics}
 \section{High Voltage Source}
 \subsection{Mismatch of the Internal Voltage Measurement}
-The high voltage source displays the adjusted voltage. However, a cross-check measurement with a multimeter shows discrepancies for all voltages of the source. To account for this, correction factors have been introduced in chapter \ref{ch:analysis}. They were determined by measuring four values and comparing them to the displayed values. The ratio of these values is averaged and the standard deviation is computed. The results are shown in table \ref{tbl:corr_factors}. The systematic uncertainty which arises from the uncertainty on these correction factors is negligible compared to other uncertainties which are discussed in the following.
+The high voltage source displays the adjusted voltage. However, a cross-check measurement with a multimeter shows discrepancies for all voltages of the source. To account for this, correction factors have been introduced in chapter \ref{ch:analysis}. They were determined by adjusting four different voltages, measuring them with the multimeter and comparing them to the displayed values. The ratio of the measured and determined values is averaged and the standard deviation is computed. The results are shown in table \ref{tbl:corr_factors} and are used in the analysis as correction factors. The systematic uncertainty which arises from the uncertainty on these correction factors is negligible compared to other uncertainties which are discussed in the following.
 
 \subsection{Fluctuations of the Voltage Source}
-The displayed voltage values on the voltage source fluctuate strongly. To read-off a voltage value, approximately four subsequent values are averaged live during the adjustment. The uncertainties arising from this can be estimated as follows: A longer set of voltage values is recorded ($N\approx20$) and the difference of the mean in subsamples of four is investigated. The standard deviation of these subsample means gives an estimator for the fluctuaion. This simulates the read-off process and yields the following uncertainties on the voltage values:
+The displayed voltage values on the voltage source fluctuate strongly. To read-off a voltage value, approximately four subsequent values are averaged live during the adjustment. The uncertainties arising from this can be estimated as follows: A longer set of voltage values is recorded ($N\approx20$) and the difference of the mean in subsamples of four is investigated. The standard deviation of the means from the subsamples gives an estimator for the fluctuation. This simulates the read-off process and yields the following uncertainties on the voltage values:
 
 \begin{table}[htbp]
 	\centering

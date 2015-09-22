@@ -51,7 +51,9 @@ In this laboratory report, the storage of charged particles and a measurement of
 
 \section{Trapping Particles in Electrical Fields}
 
-Beside the storage of charged particles by B-fields, it is possible to trap particles in electrical fields. In a static electrical field of arbitrary shape, the particle will follow the field lines and finally hit the source of the field (e.g. the capacitor plate) or diverge (e.g. field of charged sphere). However, with time dependent fields it is possible to create an electrical potential having a minimum when averaged over time. If the frequency of these fields is larger than the movement of the particle, a stable trajectory exists and the particle gets trapped. \\
+Beside the storage of charged particles by B-fields, it is possible to trap particles in electrical fields. In a static electrical field of arbitrary shape, the particle will follow the field lines and finally hit the source of the field (e.g. the capacitor plate) or diverge (e.g. field of charged sphere). However, with time dependent fields it is possible to create an electrical potential which has a minimum when averaged over time. If the period of these fields is smaller than the typical timespan of the particles' movement inside the trap, a stable trajectory exists and the particle gets trapped. 
+
+In this setup, the magnetic fields created by changing electric fields can be neglected. This is due to the factor of $1 / c^2$ in the Maxwell equation $\curl{\va{B}} = \frac{1}{c^2} \pdv{\va{E}}{t}$. 
 
 In a cubic geometry (6 plates, opposing plates at same potential), the following equation of motion holds for all three dimensions. In this so called Mathieu equation, the index $i$ stands for the three spatial components, $\Omega$ is the frequency of the alternating fields, $\xi = \frac{1}{2} \Omega t$ is the normalized time and $a_i, q_i$ are constants depending on the applied voltages and the particle's properties.
 \begin{equation}
@@ -93,15 +95,17 @@ As a third option, the influence of an additional alternating field in x-directi
 
 \chapter{Experimental Setup}
 
-The trap consists basically of 6 copper rings and a high voltage source, see figure \ref{fig:trap}. The rings are arranged in a cubic geometry: Each two rings facing each other lie on the same potential. The amplitude of the focusing voltages $U_x$, $U_y$ and $U_z$ can be adjusted individually, but the phase between them remains $\SI{120}{\degree}$. Additionally, a lamp and a camera are used to illuminate and observe the trapped particles inside the trap (not visible on the picture). To inject a few particles of aluminum powder, a syringe is installed below the trap. By pressing it, the particles are pushed upwards and become charged by the friction with the surrounding material of the syringe or air. 
+The trap consists basically of 6 copper rings and a high voltage source, see figure \ref{fig:trap}. The rings are arranged in a cubic geometry: Each two rings facing each other lie on the same potential. The amplitude of the focusing voltages $U_x$, $U_y$ and $U_z$ can be adjusted individually, but the phase between them remains $\SI{120}{\degree}$. Additionally, a lamp and a camera are used to illuminate and observe the trapped particles inside (not visible on the picture). To inject a few particles of aluminum powder, a syringe is installed below the trap. By pressing it, the particles are pushed upwards and become charged by the friction with the surrounding material of the syringe or air. 
 \begin{figure}
 	\centering
 	\begin{subfigure}[t]{0.4\textwidth}
+		\centering
 		\includegraphics[width=0.9\textwidth]{capture_20150916_124003_cut}
 		\caption{Picture of the Paul Trap during installation. The 6 copper rings are connected to a three phase high voltage supply.}
 		\label{fig:trap}
-	\end{subfigure}	
+	\end{subfigure}\quad
 	\begin{subfigure}[t]{0.4\textwidth}
+		\centering
 		\includegraphics[width=0.9\textwidth]{Circuits}
 		\caption{Sketches of the electrical circuits for the additional applied voltages, taken from \cite{Lab_manual}.From top to bottom: The circuits of the alternating fields with phase difference $\SI{120}{\degree}$, the constant field in upwards z-direction and the constant potential which can be applied to the x-rings.}
 		\label{fig:circuits}
@@ -117,11 +121,11 @@ Furthermore, three additional voltages can be applied to some rings of the trap 
 \end{itemize}
 
 
-The second stage of the experimental setup consists of a similar trap and the same electrical circuits, but enclosed in a cylinder. A two-stage vacuum pump is connected to the cylinder and creates a low-pressure environment down to ($p \approx \SI{5}{\micro \bar}$). The vacuum is monitored by a pressure sensor.
+The second stage of the experimental setup consists of a similar trap and the same electrical circuits, but enclosed in a cylinder. A two-stage vacuum pump is connected to the cylinder and creates a low-pressure environment down to $p \approx \SI{5}{\micro \bar}$. The vacuum is monitored by a pressure sensor.
 
 \chapter{Conduction and Analysis}
 \label{ch:analysis}
-In the following chapter, the conducted experiments and their results are reported. Each measurement is repeated in a low pressure environment to investigate the influence of air friction on the trapped particles. Since the particle trajectories are much more instable without air friction, the low pressure cylinder is not evacuated to the lowest limit of the vacuum pump, but operated once at $p = \SI{300}{\milli \bar}$ and once at $p = \SI{180}{\milli \bar}$. 
+In the following chapter, the conducted experiments and their results are reported. Each measurement is repeated in the low pressure environment to investigate the influence of air friction on the trapped particles. Since the particle trajectories are much more unstable without air friction, the low pressure cylinder is not evacuated to the lowest limit of the vacuum pump, but operated once at $p = \SI{300}{\milli \bar}$ and once at $p = \SI{180}{\milli \bar}$. 
 
 Each conducted measurements yields a value of the specific charge $\frac{q}{m}$ which is different for the aluminum particles because their size and their acquired charge differ. To compare the different methods, the measurements are conducted in a series with the same trapped particle. In the following sections, only those particles are presented where all measurements were successful. The particles trapped in air are called A1, A2, A3 and A4, the ones in vacuum V1 and V2. They are shown in figure \ref{fig:particle_photos}.
 
@@ -160,7 +164,7 @@ As discussed in chapter \ref{ch:systematics}, the output of the high voltage sou
 
 
 \section{Measurement I - Stability of the Trajectories}
-In this measurement, the charge-mass ratio $\frac{q}{m}$ is determined using the stability boundaries $\beta = 0$ from equation \ref{eq:beta}.
+In this measurement, the charge-mass ratio $\frac{q}{m}$ is determined using the stability boundary $\beta = 0$ from equation \ref{eq:beta}. 
 
 The electric fields $U_i$ are adjusted to different values between \SIrange{500}{1000}{\volt}, setting the displayed voltages equal on each step $U_x = U_y = U_z$. Starting at $U' = 0$, the additional direct voltage on the rings in x-direction is increased until the observed particle track appears unstable.
 
@@ -194,7 +198,7 @@ The linear regression is performed as a $\chi^2$-minimization on the function $f
 The results for the linear regressions are shown in figure \ref{fig:stability_linregs}. The first measurement which contains the observation of particles A1, A2 and A3 can only be fitted with a total $\chi^2/\mathrm{ndof} \approx 11$. In this case the linear function does not adequately model the measurement. The fit quality of the other measurements seems better, even though $\chi^2/\mathrm{ndof} < 1$ states that the errors have been overestimated.
 
 For the final $q/m$ value the regression slope is combined with $r_0$, $\Omega$ and $K$. Using a sliding caliper the width of the trap has been determined to be $2 r_0 = \SI{3.050 +- 0.005}{\centi\meter}$. The geometry factor $K$ is given in the lab manual as $K = 8$, its uncertainty is assumed to be negligible. 
-$\Omega / 2 \pi$ is read off the voltage source for each trial run. From fluctuations, the uncertainty is estimated. 
+$\Omega / 2 \pi$ is read off the voltage source for each trial run. Its uncertainty is estimated from fluctuations. 
 
 \begin{table}
 	\centering
@@ -208,9 +212,9 @@ $\Omega / 2 \pi$ is read off the voltage source for each trial run. From fluctua
 		\toprule
 		{Particle} & {$\Omega / 2 \pi$ [\si{\hertz}]} & {lin. reg. slope [\si{\per\kilo\volt}]} & {$|\frac{q}{m}|$ [\si{\micro\coulomb\per\kilogram}]} & {Comment} \\
 		\midrule
-		A1 & 28 +- 1 & 0.26 +- 0.02 & 158 +- 17 & bad fit quality \\
-		A2 & 28 +- 1 & 0.24 +- 0.02 & 143 +- 16 & bad fit quality \\
-		A3 & 28 +- 1 & 0.30 +- 0.02 & 179 +- 19 & bad fit quality \\
+		A1 & 28 +- 1 & 0.26 +- 0.02 & 158 +- 17 & low fit quality \\
+		A2 & 28 +- 1 & 0.24 +- 0.02 & 143 +- 16 & low fit quality \\
+		A3 & 28 +- 1 & 0.30 +- 0.02 & 179 +- 19 & low fit quality \\
 		A4 & 32 +- 1 & 0.15 +- 0.02 & 117 +- 18 & \\
 		\midrule
 		V1 & 48 +- 1 & 0.15 +- 0.03 & 262 +- 46 & \SI{300}{\milli\bar} \\
@@ -221,45 +225,47 @@ $\Omega / 2 \pi$ is read off the voltage source for each trial run. From fluctua
 	\label{tbl:stability_results}
 \end{table}
 
-Table \ref{tbl:stability_results} shows the final result including uncertainties combined by Gaussian error propagation. All measured particles incidentally have similar charge-mass ratio of $\order{\SI{100}{\micro\coulomb\per\kilogram}}$.
+In this and all subsequent calculations, uncertainties are combined using Gaussian error propagation. Table \ref{tbl:stability_results} shows the final result. All measured particles incidentally have similar charge-mass ratio of $\order{\SI{100}{\micro\coulomb\per\kilogram}}$.
 
 
 \section{Measurement II - Application of an Additional Field in z-Direction}
-The second conducted measurement is the compensation of the gravitational force: By increasing the voltage $U_K$ between the two z-rings, a static electrical field pointing upwards is created. For each particle with its specific charge, at some point the net force in z-direction becomes zero and the trajectory of the particle becomes independent of $U_z$. \\
+The second conducted measurement is the compensation of the gravitational force: By increasing the voltage $U_K$ between the two z-rings, a static electric field pointing upwards is created. For each particle with its specific charge, at some point the net force in z-direction becomes zero and the trajectory of the particle becomes independent of $U_z$. \\
 In equilibrium, the following equation must hold and the specific charge can be determined:
 \begin{equation}
-\vec{F}_G+\vec{F}_{el,z} = 0 \rightarrow \frac{q}{m} = \frac{g\cdot 2r_0}{U_K}
+\vec{F}_G+\vec{F}_{el,z} = 0 \Rightarrow \frac{q}{m} = \frac{g\cdot 2r_0}{U_K}
 \end{equation}
 
-For each particle, the recorded value for $U_K$ is shown in table \ref{tbl:Gcomp} together with the determined specific charge using the gravitational accelertation\cite{G_pres} $g=\SI{9.8149}{\meter\per\second^2}$ and $r_0$. The uncertainties on $U_K$ and $r_0$ are estimated in chapter \ref{ch:systematics} and propagated here.
+For each particle, the recorded and corrected value for $U_K$ is shown in table \ref{tbl:Gcomp} together with the determined specific charge using the gravitational acceleration\cite{G_pres} $g=\SI{9.81}{\meter\per\second^2}$ and $r_0$. The uncertainties on $U_K$ and $r_0$ are estimated in chapter \ref{ch:systematics} and propagated here.
 
 \begin{table}[htbp]
 	\centering
 	\begin{tabular}{
 			l
-			l
-			l
+			S[table-format=2(2)]
+			S[table-format=2(1)]
 		}
 		\toprule
-		Particle & $U_K^{\textrm{compensate}}$ & $\frac{q}{m} [\si{\milli\coulomb\per\kilogram}]$  \\ 
+		Particle & {$U_K^{\textrm{compensate}}$ [\si{\volt}]} & {$\frac{q}{m}$ [\si{\milli\coulomb\per\kilogram}]}  \\ 
 		\midrule
-		A1 & $26 \pm 15$ & $ 12 \pm 7 $\\
-		A2 & $26 \pm 15$ & $ 12 \pm 7 $\\
-		V1 & $43 \pm 15$ & $ 7 \pm 3  $\\
-		V2 & $40 \pm 15$ & $ 8 \pm 3  $\\
-		
+		A1 & 26 +- 15 & 12 +- 7 \\
+		A2 & 26 +- 15 & 12 +- 7 \\
+		\midrule
+		V1 & 43 +- 15 & 7 +- 3 \\
+		V2 & 40 +- 15 & 8 +- 3 \\
 		\bottomrule
 	\end{tabular}
 	\caption{Results from the z-compensation measurement: $U_K$ and the resulting specific charge.}
 	\label{tbl:Gcomp}
 \end{table}
 
+\FloatBarrier
+
 \section{Measurement III - Resonance Study}
 In this last measurement, an additional alternating voltage is applied between the two rings in x-direction. The frequency $\omega$ is adjusted independently of $\Omega$, between \SIrange{6}{50}{\hertz}.
 
 By observing the oscillations on the camera image, the resonance frequency $\omega_\mathrm{res}$ is obtained, manifesting itself as Lissajous figure.
 
-The mass-charge ratio $q/m$ is then calculated from equation \ref{eq:resonance}, neglecting air friction ($k_L = 0$) and without the presence of $U'$ ($a_x = 0$):
+The mass-charge ratio $q/m$ is then calculated from equation \ref{eq:resonance}, setting $k_L = 0$ and using $U' = 0$ ($a_x = 0$):
 \begin{equation}
 	\frac{q}{m} = \frac{\Omega r_0^2}{\sqrt{2} K U_x} \omega_\mathrm{res}
 \end{equation}
@@ -284,9 +290,36 @@ The mass-charge ratio $q/m$ is then calculated from equation \ref{eq:resonance},
 		V2 & 546 +- 18 & 44 +- 1 & 22 +- 1 & 1439 +- 99 & \SI{180}{\milli\bar}\\
 		\bottomrule
 	\end{tabular}
-	\caption{Results from the resonance study. One can see that the resonances occurred at about half the focusing frequency. In case of A1, A2 and A3, the resonance seemed to be at the same frequency.}
+	\caption{Results from the resonance study. One can see that the resonances occur at about half the focusing frequency. In case of A1, A2 and A3, the resonance seems to happen at the same frequency.}
 \end{table}
 
+\begin{table}
+	\centering
+	\begin{tabular}{
+			S[table-format=2]
+			S[table-format=1.1]
+			l
+		}
+		\toprule
+		{$\omega / 2 \pi$ [\si{\hertz}]} & {Amplitude on screen [\si{\milli\meter}]} & {Comment} \\
+		\midrule
+		6 & 5 & \\
+		10 & 3 & \\
+		15 & 3.5 & Lissajous figure observed \\
+		21 & 3.5 &\\
+		24 & 3 & \\
+		31 & 3 & Beat \\
+		39 & 2.5 & \\
+		51 & 3 & \\
+		\bottomrule
+	\end{tabular}
+	\caption{Example resonance measurement for particle V1 at $\Omega = \SI{28}{\hertz}$. The frequency $\omega$ is varied and the oscillation is read off the computer screen in \si{\milli\meter}.}
+	\label{tbl:resonance_amplitude_example}
+\end{table}
+
+Here the air friction has been neglected. Because no amplitude difference is visible on the resonances (see table \ref{tbl:resonance_amplitude_example}), obtaining the air friction coefficient is impossible from this measurement.
+
+Due to the observation of all resonance very close to half of the respective focusing frequencies, it seems that the outcome of this measurement does not primarily depend on $q/m$, but that the Lissajous figures appear exactly at $\Omega/2$. Consequently, it would be only a coincidence that the obtained charge-mass ratio has the right order of magnitude.
 
 \chapter{Uncertainties}
 \label{ch:systematics}
@@ -295,7 +328,7 @@ The mass-charge ratio $q/m$ is then calculated from equation \ref{eq:resonance},
 The high voltage source displays the adjusted voltage. However, a cross-check measurement with a multimeter shows discrepancies for all voltages of the source. To account for this, correction factors have been introduced in chapter \ref{ch:analysis}. They were determined by adjusting four different voltages, measuring them with the multimeter and comparing them to the displayed values. The ratio of the measured and adjusted values is averaged and the standard deviation is computed. The results are shown in table \ref{tbl:corr_factors} and are used in the analysis as correction factors. The systematic uncertainty which arises from the uncertainty on these correction factors is negligible compared to other uncertainties which are discussed in the following.
 
 \subsection{Fluctuations of the Voltage Source}
-The displayed voltage values on the voltage source fluctuate strongly. To read-off a voltage value, approximately four subsequent values are averaged live during the adjustment. The uncertainties arising from this can be estimated as follows: A longer set of voltage values is recorded ($N\approx20$) and the difference of the mean in subsamples of four is investigated. The standard deviation of the means from the subsamples gives an estimator for the fluctuation. This simulates the read-off process and yields the following uncertainties on the voltage values:
+The displayed voltage values on the voltage source fluctuate strongly. To read-off a voltage value, approximately four subsequent values are averaged live during the adjustment. The uncertainties arising from this can be estimated as follows: A longer set of voltage values is recorded ($N\approx20$), subsampled in sets of four and the mean of each set is determined. The standard deviation of the mean values obtained this way is calculated. It is used as an estimator for the fluctuation. The subsampling simulates the read-off process and yields the following uncertainties on the voltage values:
 
 \begin{table}[htbp]
 	\centering
@@ -319,25 +352,58 @@ The displayed voltage values on the voltage source fluctuate strongly. To read-o
 \end{table}
 
 \section{Evaluation of the Track Stability}
-During Measurement II, the constant voltage $U'$ is increased until the particle trajectory becomes instable. However, the point of instability can be determined only to a precision of roughly \SI{10}{\percent}: The trajectory could as well be called instable if $U'$ is increased or decreased in this range. 
+During measurement II, the constant voltage $U'$ is increased until the particle trajectory becomes instable. However, the point of instability can be determined only to a precision of roughly \SI{10}{\percent}: The trajectory could as well be called instable if $U'$ is increased or decreased in this range. 
  
 \section{Frequency of the Alternating Fields}
 The frequency of the alternating fields which is displayed on the voltage source can not be cross-checked in this setup. However, there is still a fluctuation which can be taken into account: The adjusted frequency is instable in the range of $\pm \SI{1}{\hertz}$. This uncertainty is treated in all analysis steps as statistical error. 
 
 \section{Distance Measurements}
-The distance $r_0$ from the rings to the center of the trap is used in all analysis steps. It is determined with a sliding caliper between opposing rings. The uncertainty (difference between $r_0$ in x,y or z-direction) is estimated to $\sigma_{r_0} \approx \SI{0.5}{\milli \meter}$. The influence of this uncertainty is negligible compared to other discussed uncertainties. The same holds for the measurements of the ring diameter which is used to find the scale for the oscillation amplitude in measurement III.
+The distance $r_0$ from the rings to the center of the trap is used in all analysis steps. It is determined with a sliding caliper between opposing rings. The uncertainty (difference between $r_0$ in x,y or z-direction) is estimated to $\sigma_{r_0} \approx \SI{0.25}{\milli \meter}$. The influence of this uncertainty is negligible compared to other discussed uncertainties. The same holds for the measurements of the ring diameter which is used to find the scale for the oscillation amplitude in measurement III.
 
-\chapter{Conclusion and Comparison of Results}
+\chapter{Conclusion}
 
-In this report, three measurements of the specific charge of aluminum particles in a Paul Trap are reported. The results are presented in figure \ref{fig:comp_results} and show strong discrepancies. Therefore, averaging the result from different methods for one particle is not possible. \\
-Especially measurement III which looks for resonances under the influence of an additional alternating field is not very trustful. This and all other measurement could be more successful with a more accurate voltage source which delivers more stable voltages and finer tuning of the frequencies.
+\section{Methods and Results}
+In this report, three measurements of the specific charge of aluminum particles in a Paul Trap are presented. The results are plotted in figure \ref{fig:comp_results} and show strong discrepancies. Therefore, averaging the result from different methods for one particle is not possible. 
 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.8\textwidth]{paul_compareresults}
 	\caption{Overview of the measured specific charge. Comparison between different measurement methods for each particle.}
 	\label{fig:comp_results}
-\end{figure}	
+\end{figure}
+
+Since none of the methods is intrinsically better than the others, this report cannot state one single answer about the charge-mass ratio.
+One can only state that the measurement III (resonance study) under the influence of an additional alternating field does not seem very trustworthy. 
+
+\section{Outlook}
+The entire experiment could yield much better results if a more accurate voltage source would be provided, which delivers more stable voltages and finer tuning of the frequencies.
+
+One notable subsequent calculation that can be done from this report's results is the determination of the particles absolute charge. The manufacturer of the aluminum powder states a diameter of $d = \SI{30}{\micro\meter}$. Assuming spherical particles and the density of aluminum $\rho = \SI{2.7}{\gram\per\cubic\centi\meter}$, the charge can be calculated as 
+\begin{equation}
+	Q = \frac{q}{m} \cdot \rho \cdot \frac{4 \pi}{3} \left(\frac{d}{2}\right)^3
+\end{equation}
+The results are shown in table \ref{tbl:charge_estimation}. The number of electrons might seem large, but compared to Avogadros number $\approx 10^23$, the result sounds reasonable.
+
+\begin{table}
+	\centering
+	\begin{tabular}{
+			l 
+			l
+			l
+			l
+		}
+		\toprule
+		{Method} & { $q/m$ [\si{\micro\coulomb\per\kilogram}] } & { $Q$ } \\
+		\midrule
+		Stability & $\order{\num{e2}}$ & $\order{\num{e10} e}$ \\
+		z-Compensation & $\order{\num{e4}}$ & $\order{\num{e12} e}$ \\
+		Resonance & $\order{\num{e3}}$ & $\order{\num{e11} e}$ \\
+		\bottomrule
+	\end{tabular}
+	\caption{Estimation of the total charge of each particle. Divided by the elementary charge, this yields the number of electrons which have been transfered.}
+	\label{tbl:charge_estimation}
+\end{table}
+
 
 \cleardoublepage
 

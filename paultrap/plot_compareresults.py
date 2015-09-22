@@ -35,7 +35,7 @@ axes[0].set_xticklabels(air_ns)
 axes[0].set_xlim(air_ns[0]-0.5,air_ns[-1]+0.5,)
 #axes[0].set_ylim(min(air_m1[0],air_m2[0],air_m3[0])-30,max(air_m1[-1],air_m2[-1],air_m3[-1])+50)
 axes[0].set_yscale('log')
-axes[0].grid(True)
+axes[0].grid(axis="y")
 
 
 axes[1].errorbar(vac_ns,vac_m1,yerr=err_vac_m1,fmt='^',label="Stability Study")
@@ -48,8 +48,7 @@ axes[1].set_xticklabels(vac_ns)
 axes[1].set_xlim(vac_ns[0]-0.5,vac_ns[-1]+0.5,)
 #axes[1].set_ylim(min(vac_m1[0],vac_m2[0],vac_m3[0])-10,max(vac_m1[-1],vac_m2[-1],vac_m3[-1])+50)
 axes[1].set_yscale('log')
-axes[1].grid(True)
-
+axes[1].grid(axis="y")
 
 plt.legend()
 plt.show()

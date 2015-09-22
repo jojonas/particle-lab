@@ -22,8 +22,6 @@
 \heads{RWTH Aachen \\ Particlephyics Lab}{T13 \\ Paul Trap}{Lieb | Stettner \\ \today} 
 \date{\today}
 
-%\newcommand{\MET}{\ensuremath{{\slashed{E}_\mathrm{T}}}\xspace}
-
 \newcommand{\thirdwidth}{0.32\textwidth}
 \newcommand{\halfwidth}{0.48\textwidth}
 \newcommand{\fullwidth}{1.0\textwidth}
@@ -142,7 +140,7 @@ As discussed in chapter \ref{ch:systematics}, the output of the high voltage sou
 		
 		\bottomrule
 	\end{tabular}
-	\caption{Correction factors to compensate for the wrong mismatching output of the voltage supply. The determination of these factors is described in chapter \ref{ch:systematics}.}
+	\caption{Correction factors to compensate for the mismatching output of the voltage source. The determination of these factors is described in chapter \ref{ch:systematics}.}
 	\label{tbl:corr_factors}
 \end{table}
 
@@ -155,7 +153,7 @@ As discussed in chapter \ref{ch:systematics}, the output of the high voltage sou
 \label{ch:systematics}
 \section{High Voltage Source}
 \subsection{Mismatch of the Internal Voltage Measurement}
-The high voltage source displays the adjusted voltage. However, a cross-check measurement with a multimeter shows discrepancies for all voltages of the source. To account for this, correction factors have been introduced in chapter \ref{ch:analysis}. They were determined by adjusting four different voltages, measuring them with the multimeter and comparing them to the displayed values. The ratio of the measured and determined values is averaged and the standard deviation is computed. The results are shown in table \ref{tbl:corr_factors} and are used in the analysis as correction factors. The systematic uncertainty which arises from the uncertainty on these correction factors is negligible compared to other uncertainties which are discussed in the following.
+The high voltage source displays the adjusted voltage. However, a cross-check measurement with a multimeter shows discrepancies for all voltages of the source. To account for this, correction factors have been introduced in chapter \ref{ch:analysis}. They were determined by adjusting four different voltages, measuring them with the multimeter and comparing them to the displayed values. The ratio of the measured and adjusted values is averaged and the standard deviation is computed. The results are shown in table \ref{tbl:corr_factors} and are used in the analysis as correction factors. The systematic uncertainty which arises from the uncertainty on these correction factors is negligible compared to other uncertainties which are discussed in the following.
 
 \subsection{Fluctuations of the Voltage Source}
 The displayed voltage values on the voltage source fluctuate strongly. To read-off a voltage value, approximately four subsequent values are averaged live during the adjustment. The uncertainties arising from this can be estimated as follows: A longer set of voltage values is recorded ($N\approx20$) and the difference of the mean in subsamples of four is investigated. The standard deviation of the means from the subsamples gives an estimator for the fluctuation. This simulates the read-off process and yields the following uncertainties on the voltage values:
@@ -181,6 +179,8 @@ The displayed voltage values on the voltage source fluctuate strongly. To read-o
 	\label{tbl:unc_fluctuation}
 \end{table}
 
+\section{Evauluation of the Track Stability}
+During Measurement II, the constant voltage $U'$ is increased until the particle trajectory becomes instable. However, the point of instability can be determined only to a precision of roughly $10\%$. Increasing or decreasing $U'$ in this range, the 
  
 
 

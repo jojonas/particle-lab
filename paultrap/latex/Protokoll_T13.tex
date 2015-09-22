@@ -86,7 +86,8 @@ Instead of applying an additional potential to both x-plates, it is also possibl
 
 As a third option, the influence of an additional alternating field in x-direction is discussed. While the alternating fields $U_i$ have same potential on opposing plates, the field $U_W$ acts homogeneously in x-direction (different potential on opposing plates). The additional term in the Mathieu equation leads to modified trajectories: The particle shakes back and forth. By changing the driving frequency of the field $U_W$ resonances can be observed (forced, damped harmonic oscillator with damping constant $k_L$ from the Stokes' term describing air friction):
 \begin{equation}
-\omega_W^{res} = \frac{\Omega}{2} \sqrt{\beta_x^2 - 2 k_L^2}
+	\omega_W^{res} = \frac{\Omega}{2} \sqrt{\beta_x^2 - 2 k_L^2}
+	\label{eq:resonance}
 \end{equation}
 
 
@@ -193,7 +194,7 @@ The linear regression is performed as a $\chi^2$-minimization on the function $f
 The results for the linear regressions are shown in figure \ref{fig:stability_linregs}. The first measurement which contains the observation of particles A1, A2 and A3 can only be fitted with a total $\chi^2/\mathrm{ndof} \approx 11$. In this case the linear function does not adequately model the measurement. The fit quality of the other measurements seems better, even though $\chi^2/\mathrm{ndof} < 1$ states that the errors have been overestimated.
 
 For the final $q/m$ value the regression slope is combined with $r_0$, $\Omega$ and $K$. Using a sliding caliper the width of the trap has been determined to be $2 r_0 = \SI{3.050 +- 0.005}{\centi\meter}$. The geometry factor $K$ is given in the lab manual as $K = 8$, its uncertainty is assumed to be negligible. 
-$\Omega$ is read off the voltage source for each trial run. From fluctuations, the uncertainty is estimated. 
+$\Omega / 2 \pi$ is read off the voltage source for each trial run. From fluctuations, the uncertainty is estimated. 
 
 \begin{table}
 	\centering
@@ -205,7 +206,7 @@ $\Omega$ is read off the voltage source for each trial run. From fluctuations, t
 			l
 		}
 		\toprule
-		{Particle ID} & {$\Omega$} & {lin. reg. slope [\si{\per\kilo\volt}]} & {$|\frac{q}{m}|$ [\si{\micro\coulomb\per\kilogram}]} & {Comment} \\
+		{Particle} & {$\Omega / 2 \pi$ [\si{\hertz}]} & {lin. reg. slope [\si{\per\kilo\volt}]} & {$|\frac{q}{m}|$ [\si{\micro\coulomb\per\kilogram}]} & {Comment} \\
 		\midrule
 		A1 & 28 +- 1 & 0.26 +- 0.02 & 158 +- 17 & bad fit quality \\
 		A2 & 28 +- 1 & 0.24 +- 0.02 & 143 +- 16 & bad fit quality \\
@@ -253,8 +254,39 @@ For each particle, the recorded value for $U_K$ is shown in table
 	\label{tbl:Gcomp}
 \end{table}
 
-
 \section{Measurement III - Resonance Study}
+In this last measurement, an additional alternating voltage is applied between the two rings in x-direction. The frequency $\omega$ is adjusted independently of $\Omega$, between \SIrange{6}{50}{\hertz}.
+
+By observing the oscillations on the camera image, the resonance frequency $\omega_\mathrm{res}$ is obtained, manifesting itself as Lissajous figure.
+
+The mass-charge ratio $q/m$ is then calculated from equation \ref{eq:resonance}, neglecting air friction ($k_L = 0$) and without the presence of $U'$ ($a_x = 0$):
+\begin{equation}
+	\frac{q}{m} = \frac{\Omega r_0^2}{\sqrt{2} K U_x} \omega_\mathrm{res}
+\end{equation}
+
+\begin{table}
+	\centering
+	\begin{tabular}{
+			l 
+			S[table-format=3(2)]
+			S[table-format=2(1)]
+			S[table-format=2(1)]
+			S[table-format=3(2)]
+			l
+		}
+		\toprule
+		{Particle} & {$U_x$ [\si{\volt}]} & {$\Omega / 2 \pi$ [\si{\hertz}]} & {$\omega_\mathrm{res} / 2 \pi$ [\si{\hertz}]} & {$\frac{q}{m}$ [\si{\micro\coulomb\per\kilogram}]} & {Comment} \\
+		\midrule
+		A1, A2, A3 & 484 +- 17 & 28 +- 1 & 14 +-1 & 657 +- 61 & indistinguishable \\
+		A4 & 640 +- 20 & 31 +- 1 & 16 +- 1 & 610 +- 52 \\
+		\midrule
+		V1 & 764 +- 22 & 28 +- 1 & 14 +- 1 & 416 +- 38 & \SI{300}{\milli\bar} \\
+		V2 & 546 +- 18 & 44 +- 1 & 22 +- 1 & 1439 +- 99 & \SI{180}{\milli\bar}\\
+		\bottomrule
+	\end{tabular}
+	\caption{Results from the resonance study. One can see that the resonances occurred at about half the focusing frequency. In case of A1, A2 and A3, the resonance seemed to be at the same frequency.}
+\end{table}
+
 
 \chapter{Uncertainties}
 \label{ch:systematics}
@@ -286,7 +318,7 @@ The displayed voltage values on the voltage source fluctuate strongly. To read-o
 	\label{tbl:unc_fluctuation}
 \end{table}
 
-\section{Evauluation of the Track Stability}
+\section{Evaluation of the Track Stability}
 During Measurement II, the constant voltage $U'$ is increased until the particle trajectory becomes instable. However, the point of instability can be determined only to a precision of roughly \SI{10}{\percent}: The trajectory could as well be called instable if $U'$ is increased or decreased in this range. 
  
 \section{Frequency of the Alternating Fields}

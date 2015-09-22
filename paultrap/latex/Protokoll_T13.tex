@@ -120,8 +120,20 @@ The second stage of the experimental setup consists of a similar trap and the sa
 
 \chapter{Conduction and Analysis}
 \label{ch:analysis}
-In the following chapter, the conducted experiments and their results are reported. Each measurement is repeated in a low pressure environment to investigate the influence of air friction on the trapped particles. Since the particle trajectories are much more instable without air friction, the low pressure cylinder is not evacuated to the lowest limit of the vacuum pump, but operated once at $p = \SI{300}{\milli \bar}$ and once at $p = \SI{180}{\milli \bar}$. \\
-Each conducted measurements yields a value of the specific charge $\frac{q}{m}$ which is different for the aluminum particles because their size and their acquired charge differ. To compare the different methods, the measurements are conducted in a series with the same trapped particle. In the following sections, only those particles are presented where all measurements were successful.\\
+In the following chapter, the conducted experiments and their results are reported. Each measurement is repeated in a low pressure environment to investigate the influence of air friction on the trapped particles. Since the particle trajectories are much more instable without air friction, the low pressure cylinder is not evacuated to the lowest limit of the vacuum pump, but operated once at $p = \SI{300}{\milli \bar}$ and once at $p = \SI{180}{\milli \bar}$. 
+
+Each conducted measurements yields a value of the specific charge $\frac{q}{m}$ which is different for the aluminum particles because their size and their acquired charge differ. To compare the different methods, the measurements are conducted in a series with the same trapped particle. In the following sections, only those particles are presented where all measurements were successful. The particles trapped in air are called A1, A2, A3 and A4, the ones in vacuum V1 and V2. They are shown in figure \ref{fig:particle_photos}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.45\textwidth]{air_1}
+	\includegraphics[width=0.45\textwidth]{air_2} \\
+	\includegraphics[width=0.45\textwidth]{vacuum_1} 
+	\includegraphics[width=0.45\textwidth]{vacuum_2} \\
+	\caption{Photos of the trapped particles that are analyzed in this work. The images have been cropped and the colors inverted to increase readability.}
+	\label{fig:particle_photos}
+\end{figure}
+
 As discussed in chapter \ref{ch:systematics}, the output of the high voltage source does not match its adjusted values. The following correction factors are therefore applied to all adjusted voltages and will be justified later:
 
 \begin{table}[htbp]
@@ -161,18 +173,54 @@ Due to the fluctuation of $U'$ and the necessity to keep the particle inside the
 
 From the recorded values $U_x, U'_\mathrm{crit}$ and $\Omega$, the charge-mass ratio can be calculated as follows:
 \begin{equation}
-	\frac{q}{m} = -\frac{2}{3} \cdot \frac{r_0^2 \ \Omega^2}{K} \cdot \frac{U'_\mathrm{crit}}{U_x^2}
+	\abs{\frac{q}{m}} = \frac{2}{3} \cdot \frac{r_0^2 \ \Omega^2}{K} \cdot \frac{U'_\mathrm{crit}}{U_x^2}
 \end{equation}
 Defining the last term as $a \defeq U_\mathrm{crit}' / U_x^2$, the specific charge can be obtained from a linear regression of the recorded values for $U'$ and $U_x$ where the particle became unstable. \\
-The assumed errors are discussed in detail in chapter \ref{ch:systematics}, relevant for the linear regression are the statistical uncertainties on $U'$ and $U_x$.
+The assumed errors are discussed in detail in chapter \ref{ch:systematics}, relevant for the linear regression are the statistical uncertainties on $U'$ and $U_x$, and an uncertainty of \SI{10}{\percent} originating from the judgment of instability.
+
 The linear regression is performed as a $\chi^2$-minimization on the function $f(x) = a\ x$. To estimate the parameter error, the linear regression is repeated \num{1000} times. Each time, the values for $x'$ and $y'$ are chosen from a normal distribution of width $\sigma_x$ ($\sigma_y$) around $x$ ($y$). The standard deviation on all fit results is taken as final uncertainty on the parameter $a$.
 
-The error on the slope is obtained by simulating \num{100} experiment outcomes within the data points' uncertainties.
+\begin{figure}
+	\centering
+	\includegraphics[width=0.45\textwidth]{stability_air_1}
+	\includegraphics[width=0.45\textwidth]{stability_air_2} \\
+	\includegraphics[width=0.45\textwidth]{stability_vacuum_1} 
+	\includegraphics[width=0.45\textwidth]{stability_vacuum_2} \\
+	\caption{Linear regression results. The two upper plots show the results in air, the lower ones in vacuum. The fitted function is shown, with its $1 \sigma$ confidence band.}
+	\label{fig:stability_linregs}
+\end{figure}
 
+The results for the linear regressions are shown in figure \ref{fig:stability_linregs}. The first measurement which contains the observation of particles A1, A2 and A3 can only be fitted with a total $\chi^2/\mathrm{ndof} \approx 11$. In this case the linear function does not adequately model the measurement. The fit quality of the other measurements seems better, even though $\chi^2/\mathrm{ndof} < 1$ states that the errors have been overestimated.
 
+For the final $q/m$ value the regression slope is combined with $r_0$, $\Omega$ and $K$. Using a sliding caliper the width of the trap has been determined to be $2 r_0 = \SI{3.050 +- 0.005}{\centi\meter}$. The geometry factor $K$ is given in the lab manual as $K = 8$, its uncertainty is assumed to be negligible. 
+$\Omega$ is read off the voltage source for each trial run. From fluctuations, the uncertainty is estimated. 
 
+\begin{table}
+	\centering
+	\begin{tabular}{
+			l
+			S[table-format=2(1)]
+			S[table-format=1.2(2)]
+			S[table-format=3(2)]
+			l
+		}
+		\toprule
+		{Particle ID} & {$\Omega$} & {lin. reg. slope [\si{\per\kilo\volt}]} & {$|\frac{q}{m}|$ [\si{\micro\coulomb\per\kilogram}]} & {Comment} \\
+		\midrule
+		A1 & 28 +- 1 & 0.26 +- 0.02 & 158 +- 17 & bad fit quality \\
+		A2 & 28 +- 1 & 0.24 +- 0.02 & 143 +- 16 & bad fit quality \\
+		A3 & 28 +- 1 & 0.30 +- 0.02 & 179 +- 19 & bad fit quality \\
+		A4 & 32 +- 1 & 0.15 +- 0.02 & 117 +- 18 & \\
+		\midrule
+		V1 & 48 +- 1 & 0.15 +- 0.03 & 262 +- 46 & \SI{300}{\milli\bar} \\
+		V2 & 45 +- 1 & 0.21 +- 0.04 & 331 +- 62 & \SI{180}{\milli\bar} \\
+		\bottomrule
+	\end{tabular}
+	\caption{Final results on the charge-mass ratio of the observed aluminum particles, obtained with the stability measurement.}
+	\label{tbl:stability_results}
+\end{table}
 
-, as well as an uncertainty of \SI{1}{\hertz} on the frequency measurement. The error on $K$ is neglected.
+Table \ref{tbl:stability_results} shows the final result including uncertainties combined by Gaussian error propagation. All measured particles incidentally have similar charge-mass ratio of $\order{\SI{100}{\micro\coulomb\per\kilogram}}$.
 
 
 \section{Measurement II - Application of an Additional Field in z-Direction}
@@ -239,7 +287,7 @@ The displayed voltage values on the voltage source fluctuate strongly. To read-o
 \end{table}
 
 \section{Evauluation of the Track Stability}
-During Measurement II, the constant voltage $U'$ is increased until the particle trajectory becomes instable. However, the point of instability can be determined only to a precision of roughly $10\%$: The trajectory could as well be called instable if $U'$ is increased or decreased in this range. 
+During Measurement II, the constant voltage $U'$ is increased until the particle trajectory becomes instable. However, the point of instability can be determined only to a precision of roughly \SI{10}{\percent}: The trajectory could as well be called instable if $U'$ is increased or decreased in this range. 
  
 \section{Frequency of the Alternating Fields}
 The frequency of the alternating fields which is displayed on the voltage source can not be cross-checked in this setup. However, there is still a fluctuating which can be taken into account: The adjusted frequency fluctuates in the range of $\pm \SI{1}{\hertz}$. This uncertainty is treated in all analysis steps as statistical. 

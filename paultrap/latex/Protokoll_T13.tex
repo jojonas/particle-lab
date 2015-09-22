@@ -228,10 +228,10 @@ Table \ref{tbl:stability_results} shows the final result including uncertainties
 The second conducted measurement is the compensation of the gravitational force: By increasing the voltage $U_K$ between the two z-rings, a static electrical field pointing upwards is created. For each particle with its specific charge, at some point the net force in z-direction becomes zero and the trajectory of the particle becomes independent of $U_z$. \\
 In equilibrium, the following equation must hold and the specific charge can be determined:
 \begin{equation}
-\vec{F}_G+\vec{F}_{el,z} = 0 \rightarrow \frac{q}{m} = \frac{g\cdot U_K}{2r_0}
+\vec{F}_G+\vec{F}_{el,z} = 0 \rightarrow \frac{q}{m} = \frac{g\cdot 2r_0}{U_K}
 \end{equation}
 
-For each particle, the recorded value for $U_K$ is shown in table
+For each particle, the recorded value for $U_K$ is shown in table \ref{tbl:Gcomp} together with the determined specific charge using the gravitational accelertation\cite{G_pres} $g=\SI{9.8149}{\meter\per\second^2}$ and $r_0$. The uncertainties on $U_K$ and $r_0$ are estimated in chapter \ref{ch:systematics} and propagated here.
 
 \begin{table}[htbp]
 	\centering
@@ -241,16 +241,16 @@ For each particle, the recorded value for $U_K$ is shown in table
 			l
 		}
 		\toprule
-		Particle & $U_K^{\textrm{compensate}}$ &  \\ 
+		Particle & $U_K^{\textrm{compensate}}$ & $\frac{q}{m} [\si{\milli\coulomb\per\kilogram}]$  \\ 
 		\midrule
-		A1 & \\
-		A2 & \\
-		V1 & \\
-		V2 & \\
+		A1 & $26 \pm 15$ & $ 12 \pm 7 $\\
+		A2 & $26 \pm 15$ & $ 12 \pm 7 $\\
+		V1 & $43 \pm 15$ & $ 7 \pm 3  $\\
+		V2 & $40 \pm 15$ & $ 8 \pm 3  $\\
 		
 		\bottomrule
 	\end{tabular}
-	\caption{Recorded voltage values where the particle trajectory becomes independent of $U_z$.}
+	\caption{Results from the z-compensation measurement: $U_K$ and the resulting specific charge.}
 	\label{tbl:Gcomp}
 \end{table}
 
@@ -322,15 +322,17 @@ The displayed voltage values on the voltage source fluctuate strongly. To read-o
 During Measurement II, the constant voltage $U'$ is increased until the particle trajectory becomes instable. However, the point of instability can be determined only to a precision of roughly \SI{10}{\percent}: The trajectory could as well be called instable if $U'$ is increased or decreased in this range. 
  
 \section{Frequency of the Alternating Fields}
-The frequency of the alternating fields which is displayed on the voltage source can not be cross-checked in this setup. However, there is still a fluctuating which can be taken into account: The adjusted frequency fluctuates in the range of $\pm \SI{1}{\hertz}$. This uncertainty is treated in all analysis steps as statistical. 
+The frequency of the alternating fields which is displayed on the voltage source can not be cross-checked in this setup. However, there is still a fluctuation which can be taken into account: The adjusted frequency is instable in the range of $\pm \SI{1}{\hertz}$. This uncertainty is treated in all analysis steps as statistical error. 
 
 \section{Distance Measurements}
-The distance $r_0$ from the rings to the center of the trap is used in all analysis steps. It is determined with a sliding caliper between opposing rings. The uncertainty (difference between $r_0$ in x,y or z-direction) is $\sigma_{r_0} \approx \SI{0.5}{\milli \meter}$. The influence of this uncertainty is negligible compared to other discussed uncertainties. The same holds for the measurements of the ring diameter which is used to find the scale for the oscillation amplitude in measurement III.
+The distance $r_0$ from the rings to the center of the trap is used in all analysis steps. It is determined with a sliding caliper between opposing rings. The uncertainty (difference between $r_0$ in x,y or z-direction) is estimated to $\sigma_{r_0} \approx \SI{0.5}{\milli \meter}$. The influence of this uncertainty is negligible compared to other discussed uncertainties. The same holds for the measurements of the ring diameter which is used to find the scale for the oscillation amplitude in measurement III.
 
 \chapter{Conclusion and Comparison of Results}
 
+In this report, three measurements of the specific charge of aluminum particles in a Paul Trap are reported. The results are presented in figure \ref{fig:comp_results} and show strong discrepancies. Therefore, averaging the result from different methods for one particle is not possible. \\
+Especially measurement III which looks for resonances under the influence of an additional alternating field is not very trustful. This and all other measurement could be more successful with a more accurate voltage source which delivers more stable voltages and finer tuning of the frequencies.
 
-\begin{figure}[t]
+\begin{figure}
 	\centering
 	\includegraphics[width=0.8\textwidth]{paul_compareresults}
 	\caption{Overview of the measured specific charge. Comparison between different measurement methods for each particle.}

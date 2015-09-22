@@ -149,12 +149,12 @@ As discussed in chapter \ref{ch:systematics}, the output of the high voltage sou
 \section{Measurement I - Stability of the Trajectories}
 In this measurement, the charge-mass ratio $\frac{q}{m}$ is determined using the stability boundaries $\beta = 0$ from equation \ref{eq:beta}.
 
-The electric fields $U_i$ are adjusted to different values between \SIrange{500}{100}{\volt}, setting the displayed voltages equal on each step $U_x = U_y = U_z$. Starting at $U' = 0$, the additional direct voltage on the rings in x-direction is increased until the observed particle track appears unstable.
+The electric fields $U_i$ are adjusted to different values between \SIrange{500}{1000}{\volt}, setting the displayed voltages equal on each step $U_x = U_y = U_z$. Starting at $U' = 0$, the additional direct voltage on the rings in x-direction is increased until the observed particle track appears unstable.
 
 Due to the fluctuation of $U'$ and the necessity to keep the particle inside the trap for the two subsequent measurements, the instability criterion has been chosen conservatively: A track is classified as unstable if any part of the track leaves the observation area visible through the ring facing the camera (figure \ref{fig:stability_example}).
 \begin{figure}
 	\centering
-	\includegraphics[width=0.4\textwidth]{stability_example}
+	\includegraphics[width=0.4\textwidth]{stability_example}T
 	\caption{Example for the stability measurement. The highlighted particle track on the upper right side has shifted to the edge of the visible area and is thus classified as unstable. The image has been cropped and the colors inverted to increase readability.}
 	\label{fig:stability_example}
 \end{figure}
@@ -163,9 +163,9 @@ From the recorded values $U_x, U'_\mathrm{crit}$ and $\Omega$, the charge-mass r
 \begin{equation}
 	\frac{q}{m} = -\frac{2}{3} \cdot \frac{r_0^2 \ \Omega^2}{K} \cdot \frac{U'_\mathrm{crit}}{U_x^2}
 \end{equation}
-This measurement primarily yields the last term $a \defeq U_\mathrm{crit}' / U_x^2$. It is obtained by a linear regression over multiple values at various $U_x$. 
+Defining the last term as $a \defeq U_\mathrm{crit}' / U_x^2$, the specific charge can be obtained from a linear regression of the recorded values for $U'$ and $U_x$ where the particle became unstable. \\
 The assumed errors are discussed in detail in chapter \ref{ch:systematics}, relevant for the linear regression are the statistical uncertainties on $U'$ and $U_x$.
-The linear regression is performed as a $\chi^2$-minimization on the function $f(x) = a\ x$. To estimate the parameter error, the linear regression is repeated \num{1000} times. Each time, the values for $x'$ and $y'$ are chosen from a normal distribution of width $\sigma_x$ ($\sigma_y$) around $x$ ($y$). The standard deviation on all fit results is taken as final uncertainty on the parameter.
+The linear regression is performed as a $\chi^2$-minimization on the function $f(x) = a\ x$. To estimate the parameter error, the linear regression is repeated \num{1000} times. Each time, the values for $x'$ and $y'$ are chosen from a normal distribution of width $\sigma_x$ ($\sigma_y$) around $x$ ($y$). The standard deviation on all fit results is taken as final uncertainty on the parameter $a$.
 
 The error on the slope is obtained by simulating \num{100} experiment outcomes within the data points' uncertainties.
 

@@ -111,7 +111,7 @@ The trap consists basically of 6 copper rings and a high voltage source, see fig
 Furthermore, three additional voltages can be applied to some rings of the trap (electrical circuits are shown in figure \ref{fig:circuits}) : 
 \begin{itemize}
 	\item An additional direct voltage to the two rings in x-direction: $U'$ (same potential on both x-rings)
-	\item A direct voltage in between the two z-rings creating a constant electrical field upwards in z-direction (different potential on the two z-rings): $U_K$
+	\item A direct voltage between the two z-rings creating a constant electrical field upwards in z-direction (different potential on the two z-rings): $U_K$
 	\item An overlayed alternating voltage on both x-rings (different potential) creating an alternating field in x-direction: $U_W$
 \end{itemize}
 
@@ -120,8 +120,8 @@ The second stage of the experimental setup consists of a similar trap and the sa
 
 \chapter{Conduction and Analysis}
 \label{ch:analysis}
-In the following chapter, the conducted experiments and their results are reported. Each measurement is repeated in a low pressure environment to investigate the influence of air friction on the trapped particles. Since the particle trajectories are much more instable without air friction, the low pressure cylinder is not evacuated to the lowest limit of the vacuum pump, but operated once at $p = \SI{300}{\milli \bar}$ and once at $p = \SI{150}{\milli \bar}$. \\
-Each conducted measurements yields a value of the specific charge $\frac{q}{m}$ which is different for the aluminum particles because their size and their acquired charge differ. To compare the different methods, the measurements are conducted in a series with the same trapped particle.\\
+In the following chapter, the conducted experiments and their results are reported. Each measurement is repeated in a low pressure environment to investigate the influence of air friction on the trapped particles. Since the particle trajectories are much more instable without air friction, the low pressure cylinder is not evacuated to the lowest limit of the vacuum pump, but operated once at $p = \SI{300}{\milli \bar}$ and once at $p = \SI{180}{\milli \bar}$. \\
+Each conducted measurements yields a value of the specific charge $\frac{q}{m}$ which is different for the aluminum particles because their size and their acquired charge differ. To compare the different methods, the measurements are conducted in a series with the same trapped particle. In the following sections, only those particles are presented where all measurements were successful.\\
 As discussed in chapter \ref{ch:systematics}, the output of the high voltage source does not match its adjusted values. The following correction factors are therefore applied to all adjusted voltages and will be justified later:
 
 \begin{table}[htbp]
@@ -221,6 +221,36 @@ Table \ref{tbl:stability_results} shows the final result including uncertainties
 
 
 \section{Measurement II - Application of an Additional Field in z-Direction}
+The second conducted measurement is the compensation of the gravitational force: By increasing the voltage $U_K$ between the two z-rings, a static electrical field pointing upwards is created. For each particle with its specific charge, at some point the net force in z-direction becomes zero and the trajectory of the particle becomes independent of $U_z$. \\
+In equilibrium, the following equation must hold and the specific charge can be determined:
+\begin{equation}
+\vec{F}_G+\vec{F}_{el,z} = 0 \rightarrow \frac{q}{m} = \frac{g\cdot U_K}{2r_0}
+\end{equation}
+
+For each particle, the recorded value for $U_K$ is shown in table
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{
+			l
+			l
+			l
+		}
+		\toprule
+		Particle & $U_K^{\textrm{compensate}}$ &  \\ 
+		\midrule
+		A1 & \\
+		A2 & \\
+		V1 & \\
+		V2 & \\
+		
+		\bottomrule
+	\end{tabular}
+	\caption{Recorded voltage values where the particle trajectory becomes independent of $U_z$.}
+	\label{tbl:Gcomp}
+\end{table}
+
+
 \section{Measurement III - Resonance Study}
 
 \chapter{Uncertainties}
@@ -262,7 +292,7 @@ The frequency of the alternating fields which is displayed on the voltage source
 \section{Distance Measurements}
 The distance $r_0$ from the rings to the center of the trap is used in all analysis steps. It is determined with a sliding caliper between opposing rings. The uncertainty (difference between $r_0$ in x,y or z-direction) is $\sigma_{r_0} \approx \SI{0.5}{\milli \meter}$. The influence of this uncertainty is negligible compared to other discussed uncertainties. The same holds for the measurements of the ring diameter which is used to find the scale for the oscillation amplitude in measurement III.
 
-\chapter{Comparison of Results}
+\chapter{Conclusion and Comparison of Results}
 
 
 \begin{figure}[t]

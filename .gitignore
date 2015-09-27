@@ -57,7 +57,7 @@ docs/_build/
 target/
 
 # Praktikum
-data/
+wboson/data/
 
 # Latex
 *.aux

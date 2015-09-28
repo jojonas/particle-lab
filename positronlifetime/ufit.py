@@ -55,7 +55,7 @@ def curve_fit(func, x, y, x0, B=1000, **kwargs):
 	
 	
 def plot_fit(x, y, func, params, xlabel="", ylabel=""):
-	gs = gridspec.GridSpec(2, 1, height_ratios=[4,1])
+	gs = gridspec.GridSpec(2, 1, height_ratios=[3,1])
 	
 	xvalue = unp.nominal_values(x)
 	yvalue = unp.nominal_values(y)
@@ -77,7 +77,8 @@ def plot_fit(x, y, func, params, xlabel="", ylabel=""):
 	ax2 = plt.subplot(gs[1], sharex=ax1)
 	combined_error = np.sqrt(np.power(xerror*_derivative(func, xvalue, *unp.nominal_values(params)),2) + np.power(yerror, 2))
 	ax2.errorbar(xvalue, residual, yerr=combined_error, fmt='s', color="black")
-	ax2.axhline(0, color="red")
+	line = ax2.axhline(0, color="red")
+	ax2.fill_between(X, np.minimum(Y1, Y2) - Y, np.maximum(Y1, Y2) - Y, color=line.get_color(), alpha=0.1)
 	
 	ax2.set_xlabel(xlabel)
 	ax1.set_ylabel(ylabel)

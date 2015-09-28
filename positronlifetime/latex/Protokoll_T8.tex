@@ -13,6 +13,7 @@
 ]{scrreprt}
 
 \usepackage{../../lieb}
+\usepackage{rotating}
 
 \usepackage{feynmp}
 \DeclareGraphicsRule{.1}{mps}{*}{}
@@ -147,6 +148,44 @@ If the discrimination is disabled, the energy spectrum shows the typical form of
 
 \section{Time Calibration and Determination of the Electronic Resolution}
 The goal of this calibration experiment is to map the MCA channels to a physical delay between the PMT signals. 
+
+To simulate realistic conditions, the experimental setup is very similar to the one depicted in figure \ref{fig:full_circuit}. The only  exception is that the detectors as well as the radioactive source are replaced by a digital pulse generator. The pulse generator is configured such that the pulse heights and lengths resemble the signals from the PMTs.  
+The delay is manually entered into the pulse generator, delaying the stop circuit. A delay range of \SIrange{0}{20}{\nano\second} is sampled in \SI{1}{\nano\second} steps, additional points at \SI{25}{\nano\second} and \SI{30}{\nano\second} are recorded.
+
+\begin{sidewaysfigure}
+	\centering
+	\includegraphics{calibration_peaks}
+	\caption{Peaks of the time calibration. Each peak has been normalized to an area of \num{1}.}
+	\label{fig:calibration_raw}
+\end{sidewaysfigure}
+
+The measured data is shown in figure \ref{fig:calibration_raw}. As expected, the measurements show up as narrow equidistant peaks. Each peak has been normalized to contain \num{1} event in total. This way the peak shapes can be compared. As one can easily see (especially around \SIrange{4}{13}{\nano\second}), the peaks are actually made up from two separate Gaussian curves. By exchanging modules from the experimental setup this behavior can be traced back to the \SI{16}{\nano\second} delay between the stop-circuit-CFD and the TAC. Replacing the module by a different delay does not mitigate the issue.
+
+Since neither of the bumps is physically motivated, both will be considered in the calibration and the uncertainty adjusted accordingly.
+First the extend of a peak is calculated. Around a manually entered seed, the maximal bin value is calculated. All adjacent bins with more than \SI{2}{\percent} of the maximum value are assumed to belong to the peak. From the entire range, the centroid is calculated. This is the center value $\bar{x}$ of the curve. Symmetrically around the center value $\bar{x}$, a region from $\bar{x}-\sigma_x$ to $\bar{x}+\sigma_x$ is defined. $\sigma_x$ is initially set to \num{0}, but then increased until the integral of the region contains \SI{68}{\percent} of the total peak value ($ = \num{1}$). The value $\sigma_x$ can then be interpreted as uncertainty, analogous to the standard deviation of a Gaussian distribution.
+
+Each peak is now characterized by a delay time $\Delta t$, a center channel value $\bar{x}$ and a peak uncertainty $\sigma_x$.
+A linear regression is performed on this data. Using $\chi^2$ minimization, the parameters of $f(x) = a x + b$ are optimized. 
+The uncertainty of the parameters is determined by simulating "pseudo-experiments": \num{1000} times, all data points are chosen from a normal distribution around their measured value with their uncertainty. The fit is performed for each pseudo-experiment, mean and standard deviation of the fit result yield the final value and uncertainty on the fit parameters.
+
+\begin{figure}
+	\centering
+	\includegraphics{calibration}
+	\caption{Linear regression result.}
+	\label{fig:calibration_linreg}
+\end{figure}
+
+The regression result with the residuum is depicted in figure \ref{fig:calibration_linreg}. The residuum plot on the bottom contains the channel uncertainty projected onto the fitted function. Despite a small visible systematic deviation in the residuum plot, $\chi^2/\mathrm{ndof} = 1.74$ indicates that the fitted model describes the data. This explicitly justifies the choice of the delay-value in the stop-circuit since TAC and MCA seem to operate in a linear region.
+
+The final calibration function is
+\begin{equation}
+	\Delta t = \left[\left(\num{0.0023292 \pm 0.0000034}\right) \cdot \mathrm{channel} + \left(\num{-5.163 \pm 0.025}\right)\right] \si{\nano\second}
+\end{equation}
+
+This result can be combined with the mean and sample standard deviation of the obtained peak widths to calculate the pure electronic resolution:
+\begin{equation}
+	\sigma_{t,\mathrm{elec}} = \SI{64.4 \pm 15.5}{\pico\second}
+\end{equation}
 
 \chapter{Conduction and Analysis}
 

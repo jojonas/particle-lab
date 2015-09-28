@@ -1,6 +1,11 @@
 import math
 
 import numpy as np
+
+import matplotlib as mpl
+mpl.rcParams['savefig.bbox'] = 'tight'
+mpl.rcParams['font.size'] = 20
+
 import matplotlib.pyplot as plt
 from uncertainties import ufloat, umath, unumpy as unp
 
@@ -16,7 +21,7 @@ def _double_sort(list1, list2):
 def _ufloat_from_fitresult(popt, pcov):
 	return tuple(ufloat(a, b) for a, b in zip(popt, np.sqrt(np.diag(pcov))))
 	
-def _uarray_fit(func, x, y, x0, B=100, **kwargs):
+def _uarray_fit(func, x, y, x0, B=1000, **kwargs):
 
 	def _derivative(func, x, *params, h=1e-6):
 		return (-func(x+2*h, *params) + 8*func(x+h, *params) - 8*func(x-h, *params) + func(x-2*h, *params))/(12*h)
@@ -27,26 +32,43 @@ def _uarray_fit(func, x, y, x0, B=100, **kwargs):
 		chi = difference / error
 		return chi
 	
+	
+	xs = unp.std_devs(x)
+	ys = unp.std_devs(y)
+	
 	means = []
 	for i in range(B):
 		indices = np.random.randint(0, len(x), size=len(x))
+		
+		shifts1 = np.random.normal(loc=0, scale=1, size=len(x))
+		x_simulated = unp.nominal_values(x) + xs*shifts1
+		
+		shifts2 = np.random.normal(loc=0, scale=1, size=len(y))
+		y_simulated = unp.nominal_values(y) + ys*shifts2
+			
 		popt, pcov, infodict, mesg, ier = leastsq(
 			_chi, 
 			x0=tuple(x0),
-			args=(func, unp.nominal_values(x[indices]), unp.nominal_values(y[indices]), unp.std_devs(x[indices]), unp.std_devs(y[indices])),
+			args=(func, x_simulated, y_simulated, xs, ys),
 			full_output=True, 
 			**kwargs
 		)
-		if ier not in (1,2,3,4):
-			raise ValueError("Optimal parameters not found. Message:", mesg)
-		else:
+		if ier in (1,2,3,4):
 			means.append(popt)
 	
-	popt, pcov = np.mean(means, axis=0), np.std(means, axis=0)
-	results = tuple(ufloat(a, b) for a, b in zip(popt, pcov))
+	popt, pcov, infodict, mesg, ier = leastsq(
+		_chi, 
+		x0=tuple(x0),
+		args=(func, unp.nominal_values(x), unp.nominal_values(y), xs, ys),
+		full_output=True, 
+		**kwargs
+	)
+
+	errors = np.std(means, axis=0)
+	results = tuple(ufloat(a, b) for a, b in zip(popt, errors))
 	
-	#chisqndof = np.power(_chi(popt, func, unp.nominal_values(x), unp.nominal_values(y), unp.std_devs(x), unp.std_devs(y)), 2).sum() / (len(x)-len(x0))
-	#print("Chi^2/ndof =", chisqndof)
+	chisqndof = np.power(_chi(popt, func, unp.nominal_values(x), unp.nominal_values(y), unp.std_devs(x), unp.std_devs(y)), 2).sum() / (len(x)-len(x0))
+	print("Chi^2/ndof =", chisqndof)
 	
 	return results
 
@@ -62,7 +84,6 @@ def _apply_additional_proportional_error(uarray, factor):
 
 def stability(ux, ug_crit, omega, label=None):
 	formatter = FuncFormatter(lambda x, pos: "%g\u00B2" % np.sqrt(x))
-	locator = FixedLocator(np.power(unp.nominal_values(ux), 2), nbins=None)
 
 	ux, ug_crit = _double_sort(ux, ug_crit)
 	
@@ -73,7 +94,7 @@ def stability(ux, ug_crit, omega, label=None):
 	color = line.lines[0].get_color()
 	
 	plt.gca().xaxis.set_major_formatter(formatter)
-	plt.gca().xaxis.set_major_locator(locator)
+	plt.gca().xaxis.set_ticks(np.power(np.arange(4, 10)*100, 2))
 	plt.xlabel(r"$U_x^2$")
 	plt.ylabel(r"$U_g$")
 	
@@ -83,15 +104,15 @@ def stability(ux, ug_crit, omega, label=None):
 	x = np.linspace(0, unp.nominal_values(x).max()*1.1, 20)
 	y = linear(x, a.n)
 
-	plt.plot(x, linear(x, a.n), color=color, label="Slope: {:P}".format(a))
-	plt.fill_between(x, linear(x, a.n+a.s), linear(x, a.n-a.s), color=color, alpha=0.2)
+	plt.plot(x, linear(x, a.n), color=color)
+	plt.fill_between(x, linear(x, a.n+a.s), linear(x, a.n-a.s), color=color, alpha=0.1)
 	
 	a = _normalize_ufloat(a)
-	print("Slope:", a)
+	print("Slope:", a*1000, "1/kV")
 	
 	qm = -2/3 * a * r0**2 * omega**2 / K
 	
-	print(label, "q/m =", qm*1e6, "uC/kg")
+	print(label, "q/m = {:.4P} uC/kg".format(qm*1e6))
 	
 def day2_air():
 	plt.clf()
@@ -106,11 +127,10 @@ def day2_air():
 		ug_crit = _apply_additional_proportional_error(ug_crit, stability_uncertainty_air)
 		ug_crit *= ug_correction	
 		
-		stability(ux, ug_crit, omega, "Particle %d" % i)
+		stability(ux, ug_crit, omega, "Particle A%d" % i)
 	
-	plt.title("Air 1")
 	plt.legend(loc=2)
-	plt.show()
+	plt.savefig("images/stability_air_1.pdf")
 	
 	plt.clf()
 	ux = unp.uarray([550, 740, 870, 1040], ux_error)
@@ -121,11 +141,10 @@ def day2_air():
 	ux *= ux_correction
 	ug_crit *= ug_correction
 	
-	stability(ux, ug_crit, omega, label="Particle 1")
+	stability(ux, ug_crit, omega, label="Particle A4")
 	
-	plt.title("Air 2")
 	plt.legend(loc=2)
-	plt.show()
+	plt.savefig("images/stability_air_2.pdf")
 	
 def day3_vacuum():
 	plt.clf()
@@ -137,11 +156,11 @@ def day3_vacuum():
 	ux *= ux_correction
 	ug_crit *= ug_correction
 	
-	stability(ux, ug_crit, omega, label="Particle 1")
+	stability(ux, ug_crit, omega, label="Particle V1")
 	
-	plt.title("Vacuum 1 (300 mbar)")
+	plt.title("p = 300 mbar")
 	plt.legend(loc=2)
-	plt.show()
+	plt.savefig("images/stability_vacuum_1.pdf")
 	
 	plt.clf()
 	ux = unp.uarray([700, 800], ux_error) # V
@@ -152,11 +171,11 @@ def day3_vacuum():
 	ux *= ux_correction
 	ug_crit *= ug_correction
 	
-	stability(ux, ug_crit, omega, label="Particle 1")
+	stability(ux, ug_crit, omega, label="Particle V2")
 	
-	plt.title("Vacuum 2 (180 mbar)")
+	plt.title("p = 180 mbar")
 	plt.legend(loc=2)
-	plt.show()
+	plt.savefig("images/stability_vacuum_2.pdf")
 	
 	
 if __name__=="__main__":

@@ -31,6 +31,10 @@
 
 % floating figures (with [h])
 \RequirePackage{float}
+\RequirePackage[
+	font={small,singlespacing},
+	singlelinecheck=false,
+]{caption}
 \RequirePackage{subcaption}
 \RequirePackage{placeins}
 \floatplacement{table}{h}
@@ -146,7 +150,7 @@
 \def\arraystretch{1.3}
 
 % caption indentation
-\setcapmargin{2cm}
+%\setcapmargin{2cm}
 
 % fancy header
 \RequirePackage{fancyhdr}

@@ -27,7 +27,6 @@ class Hist:
 		
 		if nbins < 1:
 			raise ValueError("Number of bins must be >= 1")
-		
 
 		self.min = float(min)
 		self.max = float(max)
@@ -61,6 +60,8 @@ class Hist:
 			raise ValueError("Cannot slice if max < min")
 			
 		if not index:
+			lower = max(lower, self.min)
+			upper = min(upper, self.max)
 			lower_index = self.bin_index(lower)
 			upper_index = self.bin_index(upper)
 		else:
@@ -117,12 +118,15 @@ class Hist:
 			Y = np.concatenate(([0], self.histogram, [0]))
 			return plt.plot(X, Y, "-", **kwargs)
 			
-	def steps(self, **kwargs):
+	def steps(self, fill=False, **kwargs):
 		with self._plot_context():
 			edges = np.concatenate((self.bin_edges, [self.bin_edges[-1]+self.bin_width]))
 			X = np.repeat(edges, 2)
 			Y = np.concatenate(([0], np.repeat(self.histogram, 2), [0]))
-			return plt.plot(X, Y, "-", **kwargs)
+			if fill:
+				return plt.fill_between(X, 0, Y, **kwargs)
+			else:
+				return plt.plot(X, Y, "-", **kwargs)
 			
 	def bars(self, **kwargs):
 		with self._plot_context():
@@ -160,16 +164,19 @@ class Hist:
 		new_histogram = np.zeros(new_nbins, dtype=float)
 		for i in range(new_nbins):
 			new_histogram[i] = self.histogram[factor*i:factor*(i+1)].sum()
+			
 		overflow_bin_count = self.nbins - factor*new_nbins
 		overflow_entry_count = self.histogram[factor*new_nbins:].sum()
 		if overflow_entry_count != 0:
 			print("Warning: %g entries in %d bins could not be accomodated while rebinning, they will be inserted into overflow." % (overflow_entry_count, overflow_bin_count), file=sys.stderr)
+			
 		old_sum = self.count()
 		self.overflow += overflow_entry_count
 		self.histogram = new_histogram
 		self.nbins = new_nbins
 		new_sum = self.count()
-		if (old_sum - new_sum)/new_sum > 1e-5:
+		
+		if (old_sum - new_sum)/new_sum > 1e-9:
 			raise ValueError("Rebinning went wrong. Now %g instead of %g entries." % (new_sum, old_sum))
 
 	@contextmanager

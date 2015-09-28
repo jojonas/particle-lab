@@ -1,3 +1,4 @@
+import sys
 import numpy as np
 
 class TkaFile:
@@ -11,6 +12,8 @@ class TkaFile:
 			for line in file:
 				self.data.append(float(line.strip()))
 		self.data = np.array(self.data)
+		if self.live_time < self.real_time * 0.7:
+			print("Warning: more than 30%% dead time in '%s'" % self.filename, file=sys.stderr)
 
 	def __len__(self):
 		return len(self.data)

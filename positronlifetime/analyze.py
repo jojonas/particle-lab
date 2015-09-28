@@ -1,4 +1,11 @@
+import math
+
 import numpy as np
+
+import matplotlib as mpl
+mpl.rcParams['savefig.bbox'] = 'tight'
+#mpl.rcParams['font.size'] = 20
+
 import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid.anchored_artists import AnchoredText
 from scipy.optimize import curve_fit
@@ -70,28 +77,45 @@ def mca_calibration():
 	
 	
 	hist.rebin(hist.nbins/4)
-	hist.steps(color="black")
-	#hist.steps(color="gray")
 	
 	seeds = np.array(seeds)
 	times = np.array(times)
 	
 	peaks = np.zeros(len(seeds), dtype=object)
+	
+	plt.figure(figsize=(12*math.sqrt(2), 12))
 	for i, seed in enumerate(seeds):
 		peak = peak_finder(hist, seed-1, step=3, background_fraction=0.02)
+		peak.normalize()
+		peak.steps(color="black")
 		center = peak.mean()
 		width = find_68_interval(peak, center)
 		peaks[i] = ufloat(center, width)
-		plt.axvline(peaks[i].n, color="red")
-		plt.axvline(peaks[i].n-peaks[i].s, color="red", alpha=0.1)
-		plt.axvline(peaks[i].n+peaks[i].s, color="red", alpha=0.1)
+		y = np.max(peak.histogram)
+		plt.gca().annotate(
+			"%d ns" % times[i], 
+			xy=(center, y), 
+			xytext=(center, y), 
+			xycoords="data", 
+			textcoords="data",
+			horizontalalignment='center', 
+			verticalalignment='bottom',
+		)
+		#plt.axvline(peaks[i].n, color="red")
+		#plt.axvline(peaks[i].n-peaks[i].s, color="red", alpha=0.1)
+		#plt.axvline(peaks[i].n+peaks[i].s, color="red", alpha=0.1)
 	plt.xlabel("Channel")
-	plt.ylabel("Number of Events")
-	plt.show()
+	plt.ylabel("Normalized number of Events")
+	plt.yscale("log")
+	plt.xlim(2000, 16e3)
+	plt.ylim(0.01, 0.2)
+	plt.savefig("images/calibration_peaks.pdf", fontsize=10)
 	
 	plt.clf()
+	plt.figure(figsize=(8*math.sqrt(2), 8))
+	
 	linear = lambda x, a, b: a*x + b
-	params, chisqndof = uncertainty_curve_fit(linear, peaks, times, x0=(0.002, -5), epsfcn=1e-5)
+	params, chisqndof = uncertainty_curve_fit(linear, peaks, times, x0=(0.002, -5), epsfcn=1e-5, B=1000)
 	
 	ax1, ax2 = plot_fit(peaks, times, linear, params, xlabel="Channel", ylabel="Delay [ns]")
 	
@@ -100,11 +124,34 @@ def mca_calibration():
 	text += r"$\left({:.L}\right) x + \left({:.L}\right)$".format(*params)
 	
 	annotate(text, loc=2, ax=ax1)
-	plt.show()
+	plt.savefig("images/calibration.pdf")
 	
 	average_width = ufloat(unp.std_devs(peaks).mean(), unp.std_devs(peaks).std())
 	resolution = average_width * params[0] * 1000
 	print("Resolution: {:.3P} ps".format(resolution))
+	
+def windows():
+	filenames = [
+		"data/Na22_antikoin_start_.tka", 
+		"data/Na22_antikoin_stop_.tka", 
+	]
+	ranges = [(6000, 16000), (0, 8000)]
+	
+	for i, filename in enumerate(filenames):
+		hist = hist_from_tka(filename)
+		hist.rebin(hist.nbins/160)
+		filtered = hist.slice(int(ranges[i][0]/160), int(ranges[i][1]/160), index=True)
+		
+		filtered.steps(fill=True, color="red", hatch="/", facecolor="none")
+		hist.steps(label=("Start circuit", "Stop circuit")[i], color="black")
+		
+		plt.xlabel("Channel (Energy)")
+		plt.ylabel("Number of Events")
+		plt.yscale("log")
+		plt.ylim(1, hist.histogram.max()*1.2)
+		plt.legend()
+		plt.savefig("images/windows_%d.pdf" % i)
+		plt.clf()
 	
 def all_cobalt():
 	filenames = [
@@ -154,7 +201,7 @@ def resolution_curve():
 	plt.ylabel("Number of Events")
 	plt.yscale("log")
 	plt.xlim(hist.min, hist.max)
-	plt.ylim(np.min(hist.histogram[hist.histogram!=0]), np.max(hist.histogram))
+	plt.ylim(np.min(hist.histogram[hist.histogram!=0]), np.max(hist.histogram))	
 	plt.show()
 	
 	centroid = peak.mean()
@@ -214,8 +261,9 @@ def lifetime_aluminum():
 	print("Aluminum Delay:", centroid, "ns")
 	
 if __name__=="__main__":
-	#mca_calibration()
-	all_cobalt()
+	#windows()
+	mca_calibration()
+	#all_cobalt()
 	#sdeconvolution_test()
 	#resolution_curve()
 	#lifetime_aluminum()

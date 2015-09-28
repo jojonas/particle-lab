@@ -73,3 +73,6 @@ wboson/data/
 *.1
 *.mp
 *.t1
+
+# Windows temporary files
+~$$*

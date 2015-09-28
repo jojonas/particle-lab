@@ -115,14 +115,14 @@ The setup as presented in the last chapter has to be adjusted to optimize the ba
 
 To choose the window of accepted energies (dynode signal height), the circuit of the dynode is altered such that the MCA measures the energy spectrum of the detected photons, see figure \ref{fig:WD_circuit}. If the amplitude of the amplified dynode signal passes the window discrimator, the value is analyzed and added to the energy spectrum. 
  
-\begin{figure}
+\begin{figure}[h]
  	\centering
- 	\includegraphics{aufbau_wd}
+ 	\includegraphics[width=0.7\textwidth]{aufbau_wd}
  	\caption{Altered circuit of one dynode signal to adjust the window discriminator.}
 	\label{fig:WD_circuit}
 \end{figure}
  
-If the discrimination is disabled, the energy spectrum shows the typical form of a spectrum from a scintillation detector with the characteristic Compton edge. The WD of the start circuit has to be tuned to the high energy photon and the WD of the stop circuit to the annihilation photons. The windows are therefore chosen around the corresponding Compton edges. The choice of the parameters of the WDs are presented in figures \ref{fig:WD_start} and \ref{fig:WD_stop} and listed in table \ref{tbl:WD_values}. The values are not adjusted very tight because following measurements with a Cobalt source have to be conducted with the same setup.
+If the discrimination is disabled, the energy spectrum shows the typical form expected for a scintillation detector with the characteristic Compton edge. The WD of the start circuit has to be tuned to the high energy photon and the WD of the stop circuit to the annihilation photons. The windows are therefore chosen around the corresponding Compton edges. The choice of parameters for the window discriminators are listed in table \ref{tbl:WD_values} and the resulting spectra are presented figure \ref{fig:WD_spectra}. The values are not adjusted very tight because following measurements with a Cobalt source have to be conducted with the same setup.
 
 \begin{table}[htbp]
 	\centering
@@ -143,7 +143,42 @@ If the discrimination is disabled, the energy spectrum shows the typical form of
 	\label{tbl:WD_values}
 \end{table}
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{windows_0}
+	\includegraphics[width=0.7\textwidth]{windows_1}
+	\caption{Energy spectra (uncalibrated) of the dynode signals in the start and stop circuit. The chosen windows are shown dashed.}
+	\label{fig:WD_spectra}
+\end{figure}
+
+
+
+\FloatBarrier
 \section{Adjustment of the Constant Fraction Discriminators}
+
+In the processing of the anode signals, Constant Fraction Discriminators are used to reject background and noise. The threshold,Upper Level Discriminator and Lower Level Discriminator values are adjusted while the full electrical circuit is set up but no radioactive source is present between the scintillators: It is increased until the rate of misleadingly accepted events (energy windows passed, coincident and CFDs passed) becomes very low. The parameters are listed in table \ref{tbl:CFD_values}.
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{ 
+			l
+			l
+			l
+			l
+		}
+		\toprule
+		{Circuit} & {Threshold} & {ULD} & {LLD} \\ 
+		\midrule
+		Start & $45$ & $950$ & $160$ \\
+		Stop & $145$ & $960$ & $140$ \\
+		\bottomrule
+	\end{tabular}
+	\caption{Adjusted parameters of the two Constant Fraction Discriminators, tuned such that the rate of misleadingly accepted events is very low.}
+	\label{tbl:CFD_values}
+\end{table}
+
+
+
 \section{Synchronization of the Gate and the TAC Signal}
 
 \section{Time Calibration and Determination of the Electronic Resolution}

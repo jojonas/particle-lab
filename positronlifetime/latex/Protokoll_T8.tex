@@ -108,7 +108,7 @@ The two signals from each PMT are processed in a coincidence circuit which consi
 \end{figure}
 
 
-\chapter{Preparation and Calibration of the Circuit}
+\chapter{Preparation and Calibration of the Setup}
 The setup as presented in the last chapter has to be adjusted to optimize the background rejection and to synchronize the delay of different parts of the full electrical circuit. These adjustment steps and the final time calibration with a pulse generator are presented in this chapter.
 \section{Adjustment of the Window Discriminators}
 
@@ -121,7 +121,7 @@ To choose the window of accepted energies (dynode signal height), the circuit of
 	\label{fig:WD_circuit}
 \end{figure}
  
-If the discrimination is disabled, the energy spectrum shows the typical form expected for a scintillation detector with the characteristic Compton edge. The WD of the start circuit has to be tuned to the high energy photon and the WD of the stop circuit to the annihilation photons. The windows are therefore chosen around the corresponding Compton edges. The choice of parameters for the window discriminators are listed in table \ref{tbl:WD_values} and the resulting spectra are presented figure \ref{fig:WD_spectra}. The values are not adjusted very tight because following measurements with a Cobalt source have to be conducted with the same setup.
+If the discrimination is disabled, the energy spectrum shows the typical form expected for a scintillation detector with the two characteristic Compton edges. The WD of the start circuit has to be tuned to the high energy photon and the WD of the stop circuit to the annihilation photons. The windows are therefore chosen around the corresponding Compton edges. The choice of parameters for the window discriminators are listed in table \ref{tbl:WD_values} and the resulting spectra are presented in figure \ref{fig:WD_spectra}. The values are not adjusted very tight because following measurements with a Cobalt source have to be conducted with the same setup.
 
 \begin{table}[htbp]
 	\centering
@@ -144,18 +144,16 @@ If the discrimination is disabled, the energy spectrum shows the typical form ex
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.7\textwidth]{windows_0}
-	\includegraphics[width=0.7\textwidth]{windows_1}
+	\includegraphics[width=0.8\textwidth]{windows_0}
+	\includegraphics[width=0.8\textwidth]{windows_1}
 	\caption{Energy spectra (uncalibrated) of the dynode signals in the start and stop circuit. The chosen windows are shown dashed.}
 	\label{fig:WD_spectra}
 \end{figure}
 
-
-
 \FloatBarrier
 \section{Adjustment of the Constant Fraction Discriminators}
 
-In the processing of the anode signals, Constant Fraction Discriminators are used to reject background and noise. The threshold,Upper Level Discriminator and Lower Level Discriminator values are adjusted while the full electrical circuit is set up but no radioactive source is present between the scintillators: It is increased until the rate of misleadingly accepted events (energy windows passed, coincident and CFDs passed) becomes very low. The parameters are listed in table \ref{tbl:CFD_values}.
+In the processing of the anode signals, Constant Fraction Discriminators are used to reject background and noise. The threshold, Upper Level Discriminator and Lower Level Discriminator values are adjusted while the full electrical circuit is set up but no radioactive source is present between the scintillators: It is increased until the rate of misleadingly accepted events (energy windows passed, coincident and CFDs passed) becomes very low. The parameters are listed in table \ref{tbl:CFD_values}.
 
 \begin{table}[htbp]
 	\centering
@@ -176,10 +174,17 @@ In the processing of the anode signals, Constant Fraction Discriminators are use
 	\label{tbl:CFD_values}
 \end{table}
 
-
-
 \section{Synchronization of the Gate and the TAC Signal}
+An important parameter of the full electrical circuit is the timing between the gate-signal and the signal from the Time Amplitude Converter. The MCA accepts the pulse from the TAC only if the gate is already open. To adjust this timing, the two signals are investigated with an oscilloscope. The pulse of the TAC runs through a microsecond-delay because the energy circuit (dynode signals) is much slower. The synchronization is finally achieved by extending and delaying the gate signal in the Gate/Delay-module. The result is shown in figure \ref{fig:GateDynode_sync}.
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{../images/gate_vs_dynode/F0002TEK.png}
+	\caption{Snapshot from the oscilloscope showing the synchronized signals from the Gate (yellow) and TAC(cyan).}
+	\label{fig:GateDynode_sync}
+\end{figure}
+
+\FloatBarrier
 \section{Time Calibration and Determination of the Electronic Resolution}
 The goal of this calibration experiment is to map the MCA channels to a physical delay between the PMT signals. 
 

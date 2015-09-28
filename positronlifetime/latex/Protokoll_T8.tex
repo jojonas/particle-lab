@@ -76,7 +76,7 @@ Depending on the properties of the surrounding material, it is also possible for
 
 \subsection{Positrons in Plastic and the Decay of Positronium}
 
-In polyethylen on the other hand, the formation of positronium is possible. This bound state exists in two spin conifgurations: A singlet state (electron and positron spind add up to zero) and a triplet state (spin-sum equals 1). The decay of the two positronium states differ, see figure \ref{fig:feynman_positronium}. Since these electromagnetic processes conserve Parity, the singlet state has to decay to an even number of photons and the triplet state to an odd number\cite{Lab_manual_T8}. \\
+In polyethylen on the other hand, the formation of positronium is possible. This bound state exists in two spin configurations: A singlet state (electron and positron spin add up to zero) and a triplet state (spin-sum equals 1). The decay of the two positronium states differ, see figure \ref{fig:feynman_positronium}. Since these electromagnetic processes conserve Parity, the singlet state has to decay to an even number of photons and the triplet state to an odd number\cite{Lab_manual_T8}. \\
 Furthermore, the conversion between the two positronium states is possible in matter (e.g. exchange of the electron). This process is more likely and therefore faster than the decay of the triplet state. Concluding, in plastic the formation of positronium is expected which subsequently decays to two photons either directly (singlet state, short lifetime)  or after a conversion (triplet state, longer lifetime/conversion time).
 
 \begin{figure}
@@ -98,6 +98,19 @@ The measurement of the lifetime is based on the property of the positron source 
 	\label{fig:positron_setup}
 \end{figure}
 
+The two signals from each PMT are processed in a coincidence circuit which consists of different modules to reject background. The full electrical circuit is shown in figure \ref{fig:XXX}. The processing of the anode signal consists of the following steps: To reject background, the signal height is compared to a threshold in a Constant Fraction Discriminator (CFD) which provides a NIM-pulse and prevents 'time walk'\cite{Lab_manual_T8}. The actual measurement of the time difference between the start and the stop photons takes place in the Time Amplitude Converter (TAC) which charges a capacitor for the time between the two signals and delivers a pulse after discharging over a resistor. The pulse height is analyzed in a Multi Channel Analyzer module (MCA) and filled in a histogram. Parallel to this, the signals from the last dynode are processed and used to tune the setup for the photons of interest: The dynode signal is proportional to the energy of the initial photon and can thus be used to reject events where the energy does not match the expectation. The signal processing after the two PMTs is therefore specialized: One circuit accepts signals as expected from the first initial photon ($\gamma$ from \isotope[22]{Ne}) and the other from the annihilation photons ($e^+e^- \rightarrow 2\gamma$). The adjustment of these energy windows which are accepted is described in section \ref{sec:PrepandCal}. If both dynode signals pass the Window Discrimators (WD), they are used as coincidence signal and trigger the gate of the MCA. Only in this case, the pulse from the TAC is filled in the histogram. 
+
+\chapter{Preparation and Calibration of the Circuit}
+\section{Adjustment of the Window Discriminators}
+\section{Adjustment of the Constant Fraction Discriminators}
+\section{Synchronization of the Gate and the TAC Signal}
+\section{Time Calibration and Determination of the Electronical Resolution}
+
+\chapter{Conduction and Analysis}
+
+\chapter{Systematic Uncertainties}
+
+\chapter{Results and Conclusion}
 
 
 \cleardoublepage

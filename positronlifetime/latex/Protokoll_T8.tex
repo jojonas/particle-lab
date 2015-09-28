@@ -89,7 +89,7 @@ Furthermore, the conversion between the two positronium states is possible in ma
 
 \chapter{Experimental Setup}
 
-The measurement of the lifetime is based on the property of the positron source $\isotope[22]{Na}$ which emits nearly instantaneously a photon in the subsequent decay ($\isotope[22]{Ne}^*\rightarrow \isotope[22]{Ne} $). The idea is to use this gamma ray with an energy of $E = \SI{1.2}{\mega\electronvolt}$ as start signal for the time measuremnt and one of the photons from the positron annihilation as stop signal ($E=\SI{511}{\kilo\electronvolt}$). The high energy photons are detected with plastic scintillators where they mostly create a high energy compton electron which subsequently produces scintillation light. Next to the scintillators on each side of the sample, two photomultiplier tubes (PMTs) are installed where the scintillation photons are converted to an electrical signal. The PMTs provide two signals: One at the last dynode and finally an integrated signal from the anode. The detector setup is schematically shown in figure \ref{fig:positron_setup}.
+The measurement of the lifetime is based on the property of the positron source $\isotope[22]{Na}$ which emits nearly instantaneously a photon in the subsequent decay ($\isotope[22]{Ne}^*\rightarrow \isotope[22]{Ne} $). The idea is to use this gamma ray with an energy of $E = \SI{1.2}{\mega\electronvolt}$ as start signal for the time measurement and one of the photons from the positron annihilation as stop signal ($E=\SI{511}{\kilo\electronvolt}$). The high energy photons are detected with plastic scintillators where they mostly create a high energy compton electron which subsequently produces scintillation light. Next to the scintillators on each side of the sample, two photomultiplier tubes (PMTs) are installed where the scintillation photons are converted to an electrical signal. The PMTs provide two signals: One at the last dynode and finally an integrated signal from the anode. The detector setup is schematically shown in figure \ref{fig:positron_setup}. Additional to one \isotope[22]{Na} source in Aluminum and one in Polyethylen, a \isotope[60]{Co} source (two coincident $\gamma$) is used to measure the resolution of the experimental setup. Furthermore, the two detectors can be replaced by a pulse generator for time calibration.
 
 \begin{figure}
 	\centering
@@ -98,18 +98,50 @@ The measurement of the lifetime is based on the property of the positron source 
 	\label{fig:positron_setup}
 \end{figure}
 
-The two signals from each PMT are processed in a coincidence circuit which consists of different modules to reject background. The full electrical circuit is shown in figure \ref{fig:XXX}. The processing of the anode signal consists of the following steps: At first, the signals are amplified. To reject background, the signal height is afterwards compared to a threshold in a Constant Fraction Discriminator (CFD) which provides a NIM-pulse and prevents 'time walk'\cite{Lab_manual_T8}. The actual measurement of the time difference between the start and the stop photons takes place in the Time Amplitude Converter (TAC) which charges a capacitor for the time between the two signals and delivers a pulse after discharging over a resistor. The pulse height is analyzed in a Multi Channel Analyzer module (MCA) and filled in a histogram. Parallel to this, the signals from the last dynode are processed and used to tune the setup for the photons of interest: The dynode signal is proportional to the energy of the initial photon and can thus be used to reject events where the energy does not match the expectation. The signal processing after the two PMTs is therefore specialized: One circuit accepts signals as expected from the first initial photon ($\gamma$ from \isotope[22]{Ne}) and the other from the annihilation photons ($e^+e^- \rightarrow 2\gamma$). The adjustment of these energy windows which are accepted is described in section \ref{sec:PrepandCal}. If both dynode signals pass the Window Discrimators (WD), they are used as coincidence signal and trigger the gate of the MCA. Only in this case, the pulse from the TAC is filled in the histogram. 
+The two signals from each PMT are processed in a coincidence circuit which consists of different modules to reject background. The full electrical circuit is shown in figure \ref{fig:full_circuit}. The processing of the anode signal consists of the following steps (outer lines): At first, the signals are amplified. To reject background, the signal height is afterwards compared to a threshold in a Constant Fraction Discriminator (CFD) which provides a NIM-pulse and prevents 'time walk'\cite{Lab_manual_T8}. The actual measurement of the time difference between the start and the stop photons takes place in the Time Amplitude Converter (TAC) which charges a capacitor for the time between the two signals and delivers a pulse after discharging over a resistor. Finally, the pulse height is analyzed in a Multi Channel Analyzer module (MCA) and filled in a histogram. Parallel to this, the signals from the last dynode are processed and used to tune the setup for the photons of interest: The dynode signal is proportional to the energy of the initial photon and can thus be used to reject events where the energy does not match the expectation. The signal processing after the two PMTs is therefore specialized: One circuit accepts signals as expected from the first initial photon ($\gamma$ from \isotope[22]{Ne}) and the other from the annihilation photons ($e^+e^- \rightarrow 2\gamma$). The adjustment of these energy windows which are accepted is described in section \ref{sec:PrepandCal}. If both dynode signals pass the Window Discrimators (WD), they are used as coincidence signal and trigger the gate of the MCA. Only in this case, the pulse from the TAC is filled in the histogram. 
 
 \begin{figure}
 	\centering
 	\includegraphics{aufbau}
-	\caption{Full electrical circuit showing the processing of the two anode and dynode signals. }
+	\caption{Full electrical circuit showing the processing of the two anode and dynode signals. The outer lines describe the steps of the anode signals which result in the time-measurement with the TAC and MCA. The inner lines show the processing of the dynode signals which are used to reject events which do not match the energy expectation of the start or stop photons.}
 	\label{fig:full_circuit}
 \end{figure}
 
 
 \chapter{Preparation and Calibration of the Circuit}
+The setup as presented in the last chapter has to be adjusted to optimize the background rejection and to synchronize the delay of different parts of the full electrical circuit. These adjustment steps and the final time calibration with a pulse generator are presented in this chapter.
 \section{Adjustment of the Window Discriminators}
+
+To choose the window of accepted energies (dynode signal height), the circuit of the dynode is altered such that the MCA measures the energy spectrum of the detected photons, see figure \ref{fig:WD_circuit}. If the amplitude of the amplified dynode signal passes the window discrimator, the value is analyzed and added to the energy spectrum. 
+ 
+\begin{figure}
+ 	\centering
+ 	\includegraphics{aufbau_wd}
+ 	\caption{Altered circuit of one dynode signal to adjust the window discriminator.}
+	\label{fig:WD_circuit}
+\end{figure}
+ 
+If the discrimination is disabled, the energy spectrum shows the typical form of a spectrum from a scintillation detector with the characteristic Compton edge. The WD of the start circuit has to be tuned to the high energy photon and the WD of the stop circuit to the annihilation photons. The windows are therefore chosen around the corresponding Compton edges. The choice of the parameters of the WDs are presented in figures \ref{fig:WD_start} and \ref{fig:WD_stop} and listed in table \ref{tbl:WD_values}. The values are not adjusted very tight because following measurements with a Cobalt source have to be conducted with the same setup.
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{ 
+			l
+			l
+			l
+			l
+		}
+		\toprule
+		{Circuit} & {Threshold} & {Window} & {Time Constant} \\ 
+		\midrule
+		Start & $185$ & $450$ & $\SI{1}{\micro\second}$ \\
+		Stop & $0$ & $280$ & $\SI{1}{\micro\second}$ \\
+		\bottomrule
+	\end{tabular}
+	\caption{Adjusted parameters of the two Window Discriminators, one tuned for the start photon and the other for the annihilation photons.}
+	\label{tbl:WD_values}
+\end{table}
+
 \section{Adjustment of the Constant Fraction Discriminators}
 \section{Synchronization of the Gate and the TAC Signal}
 \section{Time Calibration and Determination of the Electronical Resolution}

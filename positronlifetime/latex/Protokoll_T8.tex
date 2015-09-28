@@ -114,14 +114,14 @@ The setup as presented in the last chapter has to be adjusted to optimize the ba
 
 To choose the window of accepted energies (dynode signal height), the circuit of the dynode is altered such that the MCA measures the energy spectrum of the detected photons, see figure \ref{fig:WD_circuit}. If the amplitude of the amplified dynode signal passes the window discrimator, the value is analyzed and added to the energy spectrum. 
  
-\begin{figure}
+\begin{figure}[h]
  	\centering
- 	\includegraphics{aufbau_wd}
+ 	\includegraphics[width=0.7\textwidth]{aufbau_wd}
  	\caption{Altered circuit of one dynode signal to adjust the window discriminator.}
 	\label{fig:WD_circuit}
 \end{figure}
  
-If the discrimination is disabled, the energy spectrum shows the typical form of a spectrum from a scintillation detector with the characteristic Compton edge. The WD of the start circuit has to be tuned to the high energy photon and the WD of the stop circuit to the annihilation photons. The windows are therefore chosen around the corresponding Compton edges. The choice of the parameters of the WDs are presented in figures \ref{fig:WD_start} and \ref{fig:WD_stop} and listed in table \ref{tbl:WD_values}. The values are not adjusted very tight because following measurements with a Cobalt source have to be conducted with the same setup.
+If the discrimination is disabled, the energy spectrum shows the typical form expected for a scintillation detector with the characteristic Compton edge. The WD of the start circuit has to be tuned to the high energy photon and the WD of the stop circuit to the annihilation photons. The windows are therefore chosen around the corresponding Compton edges. The choice of parameters for the window discriminators are listed in table \ref{tbl:WD_values} and the resulting spectra are presented figures \ref{fig:WD_start} and \ref{fig:WD_stop}. The values are not adjusted very tight because following measurements with a Cobalt source have to be conducted with the same setup.
 
 \begin{table}[htbp]
 	\centering
@@ -141,6 +141,17 @@ If the discrimination is disabled, the energy spectrum shows the typical form of
 	\caption{Adjusted parameters of the two Window Discriminators, one tuned for the start photon and the other for the annihilation photons.}
 	\label{tbl:WD_values}
 \end{table}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{window0}
+	\includegraphics[width=0.7\textwidth]{window1}
+	\caption{Energy spectra (uncalibrated) of the dynode signals in the start and stop circuit. The chosen windows are shown dashed.}
+	\label{fig:WD_spectra}
+\end{figure}
+
+
+
 
 \section{Adjustment of the Constant Fraction Discriminators}
 \section{Synchronization of the Gate and the TAC Signal}

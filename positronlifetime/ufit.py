@@ -5,16 +5,16 @@ import matplotlib.gridspec as gridspec
 
 from uncertainties import ufloat, unumpy as unp
 
-def curve_fit(func, x, y, x0, B=1000, **kwargs):
-	def _derivative(func, x, *params, h=1e-6):
+def _derivative(func, x, *params, h=1e-6):
 		return (-func(x+2*h, *params) + 8*func(x+h, *params) - 8*func(x-h, *params) + func(x-2*h, *params))/(12*h)
 		
-	def _chi(params, func, xvalue, yvalue, xerror, yerror):
-		difference = yvalue - func(xvalue, *params)
-		error = np.sqrt( np.power(_derivative(func, xvalue, *params) * xerror, 2) + np.power(yerror, 2) )
-		chi = difference / error
-		return chi
-	
+def _chi(params, func, xvalue, yvalue, xerror, yerror):
+	difference = yvalue - func(xvalue, *params)
+	error = np.sqrt( np.power(_derivative(func, xvalue, *params) * xerror, 2) + np.power(yerror, 2) )
+	chi = difference / error
+	return chi
+
+def curve_fit(func, x, y, x0, B=1000, **kwargs):
 	xerror = unp.std_devs(x)
 	yerror = unp.std_devs(y)
 	
@@ -75,7 +75,8 @@ def plot_fit(x, y, func, params, xlabel="", ylabel=""):
 	ax1.fill_between(X, np.minimum(Y1, Y2), np.maximum(Y1, Y2), color=line.get_color(), alpha=0.1)
 
 	ax2 = plt.subplot(gs[1], sharex=ax1)
-	ax2.errorbar(xvalue, residual, xerr=xerror, yerr=yerror, fmt='s', color="black")
+	combined_error = np.sqrt(np.power(xerror*_derivative(func, xvalue, *unp.nominal_values(params)),2) + np.power(yerror, 2))
+	ax2.errorbar(xvalue, residual, yerr=combined_error, fmt='s', color="black")
 	ax2.axhline(0, color="red")
 	
 	ax2.set_xlabel(xlabel)

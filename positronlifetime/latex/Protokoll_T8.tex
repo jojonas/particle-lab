@@ -251,7 +251,7 @@ The presented experimental setup results in a measurement of time differences be
 
 
 \section{Rebinning of Histograms and Background Subtraction}
-All following analysis steps are based on the measured numbers of events per channel in the MCA. The number of bins in the investigated histograms (frequency of occurred delays) is chosen smaller than the number of channels in the MCA($\approx 16000$). The reason lies in the number of events per bin which is requested for the interesting regions to be larger than $\approx 20$. This justifies poissonian error estimation $\sigma_\textrm{bin}=\sqrt{n_\textrm{bin}}$ during fit procedures. \\
+All following analysis steps are based on the measured numbers of events per channel in the MCA. The number of bins in the investigated histograms (frequency of occurred delays) is chosen to be \num{500}, which is smaller than the number of channels in the MCA ($\approx \num{16000}$). The reason lies in the number of events per bin which is requested for the interesting regions to be larger than $\approx 20$. This justifies Poissonian error estimation $\sigma_\textrm{bin}=\sqrt{n_\textrm{bin}}$ during fit procedures.
 
 Even though the experimental setup is tuned to reject background events, there is a certain fraction of events which do not come from actual positrons (noise in the PMT, natural radioactivity etc.). The random time between two background signals follows a uniform distribution. In all histograms, the tail corresponding to very large time differences is therefore investigated to determine the constant background: The procedure is exemplary shown in figure \ref{fig:resolution_background}(blue line) where the background is estimated in the range \SIrange{20}{30}{\nano\second} and then subtracted in all bins of the histogram. 
 
@@ -279,15 +279,40 @@ The time resolution of the full setup can now be obtained from a fitted Gauss fu
 \end{equation}
 
 \section{Lifetime/Conversion Time in Plastic}
+In this section, the \isotope[22]{Na} is placed inside a block of polyethylene. Polyethylene is an isolator, so the emitted positrons form positronium, which has a long lifetime. 
+
+The resulting time spectrum is depicted in \ref{fig:Na22_poly}. The background has already been estimated from the range of \SIrange{25}{30}{\nano\second} and subtracted from the spectrum. Afterwards, the histogram has been normalized to a total area of \num{1}.
+
+\begin{figure}
+	\centering
+	\includegraphics{na22_polyethylen}
+	\caption{Histogram of measured delays between the start and stop signal. The measurement of \isotope[22]{Na} in aluminum (red error bars) is shown together with the resolution curve (blue). The bold line describes the fitted function.}
+	\label{fig:Na22_poly}
+\end{figure}
+
+The same procedure is performed with the resolution peak of figure \ref{fig:resolution_peak}, which is depicted next to the histogram. The subsequent fit is only performed in the area between \SIrange{1.4}{12}{\nano\second}. Here, the condition $P(t) \ll F(t)$ (see \cite{Lab_manual_T8}) is fulfilled, thus the "tail method" of fitting an exponential function is justified.
+
+Since a combination of the short singlet decay ($\tau_1$) and the ${^3S} \rightarrow {^1S}$ conversion ($\tau_2$) is expected, a linear combination of exponentials is a suitable fit template:
+\begin{equation}
+	f(t) = N_1 \exp(-\frac{t}{\tau_1}) + N_2 \exp(-\frac{t}{\tau_2})
+\end{equation}
+The choice of appropriate initial values forces the least-squares optimization algorithm to converge into the fit drawn as bold black line in figure \ref{fig:Na22_poly}. One can clearly see the two different decays since they dominate in different regions: The fast singlet-decay up to \SI{3}{\nano\second}, the conversion in the longer regime.
+
+The errors on the fit parameters are estimated from the expected statistical deviation of the bin content $\sigma_N = \sqrt{N}$. This calculation is performed before the normalization and the errors are scaled with the same factor. $\chi^2/\mathrm{ndof} = \num{0.025}$ indicates that the uncertainties are overestimated. One possible origin for the overestimation is the rebinning procedure. Variation of the bin widths is able to bring $\chi^2/\mathrm{ndof}$ closer to \num{1}, but does not significantly affect the parameters, thus the $\chi^2$ value is ignored and the fit parameters including uncertainty from the fitting algorithm are presented.
+
+The final result on the life times is
+\begin{equation}
+	\tau_\mathrm{PE, fast} = \SI{362.4 \pm 1.7}{\pico\second},\quad \tau_\mathrm{PE, conv} = \SI{1837 \pm 10}{\pico\second}
+\end{equation}
+
 
 \section{Short Positronium Lifetime in Aluminum}
-
-The first measurement of the positron lifetime with the \isotope[22]{Na} in Aluminum is conducted over night (livetime stated in table \ref{tbl:Meas_times}). The resulting histogram showing the frequency of occurred time differences is presented in figure \ref{fig:Na22_alu}. 
+The measurement of the positron lifetime with the \isotope[22]{Na} in aluminum is conducted over night (live time stated in table \ref{tbl:Meas_times}). The resulting histogram showing the frequency of occurred time differences is presented in figure \ref{fig:Na22_alu}. 
 
 \begin{figure}
 	\centering
 	\includegraphics{na22_aluminum}
-	\caption{Histogram of occurred delays between the start and stop signal. The measurement of \isotope[22]{Na} in aluminum (red) is shown together with the resolution curve (blue). The vertical lines show the centroids of the colored ranges.}
+	\caption{Histogram of measured delays between the start and stop signal. The measurement of \isotope[22]{Na} in aluminum (red) is shown together with the resolution curve (blue). The vertical lines show the centroids of the colored ranges.}
 	\label{fig:Na22_alu}
 \end{figure}
 
@@ -299,7 +324,7 @@ The expected lifetime of positrons in aluminum (no positronium formed in metal) 
 
 In equation \ref{eq:centroid}, $N_x$ is the number of entries in one bin and $t_x$ stands for the delay which corresponds to this channel. The centroid of the measured curve of \isotope[22]{Na} (blue vertical line in figure \ref{fig:Na22_alu}) is shifted compared to the centroid of the resolution curve (red vertical line same figure). This method gives the following result for the lifetime of positrons in aluminum (error obtained from the standard deviation of both centroids propagated to the shift result):
 \begin{equation}
-	\tau_\textrm{alu}= \left( 510 \pm 10 \right) \si{\pico\second}
+	\tau_\textrm{alu}= \SI{510 \pm 10}{\pico\second}
 \end{equation}
 
 \section{Deviation to the Expected Lifetime in Metal}

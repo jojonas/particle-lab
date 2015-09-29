@@ -105,7 +105,7 @@ def mca_calibration():
 		#plt.axvline(peaks[i].n-peaks[i].s, color="red", alpha=0.1)
 		#plt.axvline(peaks[i].n+peaks[i].s, color="red", alpha=0.1)
 	plt.xlabel("Channel")
-	plt.ylabel("Normalized number of Events")
+	plt.ylabel("Normalized Number of Events")
 	plt.yscale("log")
 	plt.xlim(2000, 16e3)
 	plt.ylim(0.002, 0.04)
@@ -287,7 +287,7 @@ def resolution_and_aluminum_lifetime():
 	resolution_peak = resolution_hist.slice(-0.55, 2.1)
 	resolution_peak.steps(color="blue")
 	
-	signal_hist.steps(color="black")
+	signal_hist.steps(color="gray")
 	signal_peak.steps(color="red")
 	plt.axvline(signal_centroid, color="red")
 	
@@ -296,8 +296,8 @@ def resolution_and_aluminum_lifetime():
 	plt.xlabel("Delay [ns]")
 	plt.ylabel("Normalized Number of Events")
 	plt.yscale("log")
-	plt.xlim(-5, 20)
-	plt.ylim(0.00001, 0.2)
+	plt.xlim(-5, 30)
+	plt.ylim(0.000001, 0.2)
 	
 	
 	plt.savefig("images/na22_aluminum.pdf")
@@ -346,14 +346,15 @@ def lifetime_polyethylen():
 	chisq = np.power(signal_peak.histogram - f(signal_peak.bin_centers, *popt), 2).sum() / np.power(errors, 2).sum() 
 	chisqndof = chisq / (signal_peak.nbins - len(popt))
 	
-	params = list(abs(e/v)*100 for v, e in zip(popt, np.sqrt(np.diag(pcov))))
+	params = list(ufloat(v, e) for v, e in zip(popt, np.sqrt(np.diag(pcov))))
 	print("Fit:", params)
 	
 	plt.clf()
 	text = ""
 	text += r"$\chi^2$/ndof = " + "%.3g\n" % chisqndof
-	text += r"$N_1 / N2$ = " + "%.3g\n" % (popt[0]/popt[1])
-	text += r"$\tau_1$ = " + "%.3g ps, " % (1000*popt[2]) + r"$\tau_2$ = " + "%.4g ps" % (1000*popt[3])
+	#text += r"$N_1 / N_2$ = " + "%.3g\n" % (popt[0]/popt[1])
+	text += r"$\tau_1$ = " + "{:.3P} ps \n".format(1000*params[2]) 
+	text += r"$\tau_2$ = " + "{:.4P} ns".format(1000*params[3])
 	
 	annotate(text)
 	
@@ -364,12 +365,12 @@ def lifetime_polyethylen():
 	signal_peak.errorbar(errors=errors, fmt=",", color="red")
 	plt.plot(X, f(X, *popt), color="black", linewidth=3)
 	plt.xlabel("Delay [ns]")
-	plt.ylabel("Normalized number of Events")
+	plt.ylabel("Normalized Number of Events")
 	plt.yscale("log")
-	plt.xlim(signal_hist.min, signal_hist.max)
+	plt.xlim(-5, 30)
 	plt.ylim(0.000001, 0.2)
 	plt.savefig("images/na22_polyethylen.pdf")
-	
+	plt.show()
 	#centroid = peak.centroid()
 	#print("Aluminum Delay:", centroid, "ns")
 	
@@ -377,6 +378,5 @@ if __name__=="__main__":
 	#windows()
 	#mca_calibration()
 	#all_cobalt()
-	#sdeconvolution_test()
-	#resolution_and_aluminum_lifetime()
+	resolution_and_aluminum_lifetime()
 	lifetime_polyethylen()

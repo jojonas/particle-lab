@@ -48,12 +48,12 @@
 \cleardoublepage
 
 \chapter{Introduction and Theory}
-
+\label{ch:theory}
 In this laboratory report, a measurement of the positron lifetime in different materials is presented. The experiment uses the special properties of the positron source: Subsequent to the $\beta^+$-decay of $\isotope[22]{Na}$, the decay product $\isotope[22]{Ne}$ emits a high energy photon which can be used as start signal of the time-measurement. 
 
 \section{Positrons in Matter}
 The positron as elementary particle is stable in vacuum but behaves different in matter. It can interact electromagnetically and finally annihilate with an electron to photons. \\
-At first, the incoming positrons interact with the electrons of the material and are slowed down. The stopping process can be described by the Bethe-Bloch equation and yields in total to the following time values:
+At first, the incoming positrons interact with the electrons of the material and are slowed down. The stopping process can be described by the Bethe-Bloch equation and yields in total the following time values:
 
 \begin{table}[htbp]
 	\centering
@@ -72,7 +72,7 @@ At first, the incoming positrons interact with the electrons of the material and
 	\label{tbl:stop_times}
 \end{table}
 
-\subsection{Positrons in Metals}
+\subsection{Positrons in Metal}
 Depending on the properties of the surrounding material, it is also possible for a positron to form a bound state with an electron, the so called positronium. The conditions can be understood in the Oere-gap model and show that positrons in metal do not form bound states (too large electron-density)\cite{Lab_manual_T8}. In metals, the lifetime of an incoming positron is therefore expected in the $\si{\pico\second}$ regime.
 
 \subsection{Positrons in Plastic and the Decay of Positronium}
@@ -222,7 +222,7 @@ The final calibration function is
 	\Delta t = \left[\left(\num{0.002329 \pm 0.000003}\right) \cdot \mathrm{channel} + \left(\num{-5.16 \pm 0.03}\right)\right] \si{\nano\second}
 \end{equation}
 
-This result can be combined with the mean and sample standard deviation of the obtained peak widths to calculate the pure electronic resolution:
+This result can be combined with the mean and sample standard deviation of the obtained peak widths to calculate the time resolution due to electronics:
 \begin{equation}
 	\sigma_{t,\mathrm{elec}} = \SI{64.4 \pm 15.5}{\pico\second}
 \end{equation}
@@ -230,8 +230,82 @@ This result can be combined with the mean and sample standard deviation of the o
 \chapter{Conduction and Analysis}
 The presented experimental setup results in a measurement of time differences between the start and stop photons from the source. It is conducted with three different sources: \isotope[22]{Na} in Aluminum, \isotope[22]{Na} in Polyethylen and \isotope[60]{Co} in Polyethylen. The first two measurements aim to determine the lifetime/conversion time of positrons in metals and plastic and the third source provides two coincident photons which are investigated to determine the time resolution of the setup. Furthermore, the \isotope[60]{Co} source is used to investigate the stability of the setup by comparing the corresponding histogram before and after a measurement with another source.
 
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{ 
+			l
+			l
+		}
+		\toprule
+		{Source} & {Measurement Time}  \\ 
+		\midrule
+		\isotope[60]{Co} in Plastic  & $\SI{5880}{\second}$  \\
+		\isotope[22]{Na} in Aluminum & $\SI{43620}{\second}$  \\
+		\isotope[22]{Na} in Plastic  & $\SI{246900}{\second}$ \\
+		\bottomrule
+	\end{tabular}
+	\caption{Duration of the different measurements.}
+	\label{tbl:Meas_times}
+\end{table}
+
+
+
 \section{Rebinning of Histograms and Background Subtraction}
-All following analysis steps are based on the measured numbers of events per channel in the MCA. The number of bins in the investigated histograms is chosen smaller than the number of channels in the MCA($\approx 16000$). The reason lies in the number of events per bin which is requested for the interesting regions to be larger than $\approx 20$. This justifies poissonian error estimation $\sigma_\textrm{bin}=\sqrt{n_\textrm{bin}}$. 
+All following analysis steps are based on the measured numbers of events per channel in the MCA. The number of bins in the investigated histograms (frequency of occurred delays) is chosen smaller than the number of channels in the MCA($\approx 16000$). The reason lies in the number of events per bin which is requested for the interesting regions to be larger than $\approx 20$. This justifies poissonian error estimation $\sigma_\textrm{bin}=\sqrt{n_\textrm{bin}}$ during fit procedures. \\
+
+Even though the experimental setup is tuned to reject background events, there is a certain fraction of events which do not come from actual positrons (noise in the PMT, natural radioactivity etc.). The random time between two background signals follows a uniform distribution. In all histograms, the tail corresponding to very large time differences is therefore investigated to determine the constant background: The procedure is exemplary shown in figure \ref{fig:resolution_background}(blue line) where the background is estimated in the range \SIrange{20}{30}{\nano\second} and then subtracted in all bins of the histogram. 
+
+\begin{figure}
+	\centering
+	\includegraphics{resolution_background}
+	\caption{Demonstration of the Background Subtraction process which is applied in all following histograms.}
+	\label{fig:resolution_background}
+\end{figure}
+
+\section{Determination of the Full Time Resolution}
+The \isotope[60]{CO} source provides two coincident high energy photons which can be used to investigate the resolution of the full setup (time calibration used a setup excluding the detectors). It is placed between the scintillators and the time difference of the actually coincident photons is measured. The resulting histogram can be seen in figure \ref{fig:resolution_peak}. 
+
+\begin{figure}
+	\centering
+	\includegraphics{resolution_peak}
+	\caption{Determination of the Resolution Curve of the full setup using \isotope[60]{Co}.}
+	\label{fig:resolution_peak}
+\end{figure}
+
+The time resolution of the full setup can now be obtained from a fitted Gauss function. The fit shows deviations to larger delay times (asymmetry in the tail) and the $\chi^2$ value does not match the expectation. However, in a wide range around the peak, the curve can be described well by a Gaussian function and the result can be used as estimate for the resolution (no error is stated becaus of the described fit issues):
+
+\begin{equation}
+	\sigma_{t,full}=\SI{283}{\pico\second}
+\end{equation}
+
+\section{Lifetime/Conversion Time in Plastic}
+
+\section{Short Positronium Lifetime in Aluminum}
+
+The first measurement of the positron lifetime with the \isotope[22]{Na} in Aluminum is conducted over night (livetime stated in table \ref{tbl:Meas_times}). The resulting histogram showing the frequency of occurred time differences is presented in figure \ref{fig:Na22_alu}. 
+
+\begin{figure}
+	\centering
+	\includegraphics{na22_aluminum}
+	\caption{Histogram of occurred delays between the start and stop signal. The measurement of \isotope[22]{Na} in aluminum (red) is shown together with the resolution curve (blue). The vertical lines show the centroids of the colored ranges.}
+	\label{fig:Na22_alu}
+\end{figure}
+
+The expected lifetime of positrons in aluminum (no positronium formed in metal) is much smaller than the resolution of the presented setup. However, a measurement of this quantity is possible by the so called 'centroid-shift-method'. Assuming a model with an exponential decay and the convolution with a resolution curve, the decay constant can be extracted from the difference of the centroids \cite{Lab_manual_T8}:
+\begin{equation}
+	\tau = \frac{1}{\lambda} = \frac{\sum_i t_i N_{\textrm{Meas},i}}{\sum_i N_{\textrm{Meas},i}} - \frac{\sum_i t_i N_{\textrm{Res},i}}{\sum_i N_{\textrm{Res},i}} 
+\label{eq:centroid}
+\end{equation}
+
+In equation \ref{eq:centroid}, $N_x$ is the number of entries in one bin and $t_x$ stands for the delay which corresponds to this channel. The centroid of the measured curve of \isotope[22]{Na} (blue vertical line in figure \ref{fig:Na22_alu}) is shifted compared to the centroid of the resolution curve (red vertical line same figure). This method gives the following result for the lifetime of positrons in aluminum (error obtained from the standard deviation of both centroids propagated to the shift result):
+\begin{equation}
+	\tau_\textrm{alu}= \left( 510 \pm 10 \right) \si{\pico\second}
+\end{equation}
+
+\section{Deviation to the Expected Lifetime in Metal}
+
+The expectation for the lifetime of positrons in metals was stated in chapter \ref{ch:theory} in the \si{\pico\second} regime. The measured result is not compatible with this expectation. A suspicious observation is that the decay constants of the measurement in aluminum and plastic are very similar. It is thus not surprising that the centroid shift which aims for 
+
 
 
 \chapter{Systematic Uncertainties}

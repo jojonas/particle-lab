@@ -64,7 +64,7 @@ At first, the incoming positrons interact with the electrons of the material and
 		\toprule
 		{Material} & {Stopping Time [$\si{\pico\second}$]} \\ 
 		\midrule
-		Polyethylen & $\approx 300.22 $ \\
+		Polyethylene & $\approx 300.22 $ \\
 		Aluminum &  $\approx 3.11 $ \\
 		\bottomrule
 	\end{tabular}
@@ -77,7 +77,7 @@ Depending on the properties of the surrounding material, it is also possible for
 
 \subsection{Positrons in Plastic and the Decay of Positronium}
 
-In polyethylen on the other hand, the formation of positronium is possible. This bound state exists in two spin configurations: A singlet state (electron and positron spin add up to zero) and a triplet state (spin-sum equals 1). The decay of the two positronium states differ, see figure \ref{fig:feynman_positronium}. Since these electromagnetic processes conserve Parity, the singlet state has to decay to an even number of photons and the triplet state to an odd number\cite{Lab_manual_T8}. \\
+In polyethylene on the other hand, the formation of positronium is possible. This bound state exists in two spin configurations: A singlet state (electron and positron spin add up to zero) and a triplet state (spin-sum equals 1). The decay of the two positronium states differ, see figure \ref{fig:feynman_positronium}. Since these electromagnetic processes conserve Parity, the singlet state has to decay to an even number of photons and the triplet state to an odd number\cite{Lab_manual_T8}. \\
 Furthermore, the conversion between the two positronium states is possible in matter (e.g. exchange of the electron). This process is more likely and therefore faster than the decay of the triplet state. Concluding, in plastic the formation of positronium is expected which subsequently decays to two photons either directly (singlet state, short lifetime)  or after a conversion (triplet state, longer lifetime/conversion time).
 
 \begin{figure}
@@ -90,7 +90,7 @@ Furthermore, the conversion between the two positronium states is possible in ma
 
 \chapter{Experimental Setup}
 
-The measurement of the lifetime is based on the property of the positron source $\isotope[22]{Na}$ which emits nearly instantaneously a photon in the subsequent decay ($\isotope[22]{Ne}^*\rightarrow \isotope[22]{Ne} $). The idea is to use this gamma ray with an energy of $E = \SI{1.2}{\mega\electronvolt}$ as start signal for the time measurement and one of the photons from the positron annihilation as stop signal ($E=\SI{511}{\kilo\electronvolt}$). The high energy photons are detected with plastic scintillators where they mostly create a high energy compton electron which subsequently produces scintillation light. Next to the scintillators on each side of the sample, two photomultiplier tubes (PMTs) are installed where the scintillation photons are converted to an electrical signal. The PMTs provide two signals: One at the last dynode and finally an integrated signal from the anode. The detector setup is schematically shown in figure \ref{fig:positron_setup}. Additional to one \isotope[22]{Na} source in Aluminum and one in Polyethylen, a \isotope[60]{Co} source (two coincident $\gamma$) is used to measure the resolution of the experimental setup. Furthermore, the two detectors can be replaced by a pulse generator for time calibration.
+The measurement of the lifetime is based on the property of the positron source $\isotope[22]{Na}$ which emits nearly instantaneously a photon in the subsequent decay ($\isotope[22]{Ne}^*\rightarrow \isotope[22]{Ne} $). The idea is to use this gamma ray with an energy of $E = \SI{1.2}{\mega\electronvolt}$ as start signal for the time measurement and one of the photons from the positron annihilation as stop signal ($E=\SI{511}{\kilo\electronvolt}$). The high energy photons are detected with plastic scintillators where they mostly create a high energy compton electron which subsequently produces scintillation light. Next to the scintillators on each side of the sample, two photomultiplier tubes (PMTs) are installed where the scintillation photons are converted to an electrical signal. The PMTs provide two signals: One at the last dynode and finally an integrated signal from the anode. The detector setup is schematically shown in figure \ref{fig:positron_setup}. Additional to one \isotope[22]{Na} source in Aluminum and one in Polyethylene, a \isotope[60]{Co} source (two coincident $\gamma$) is used to measure the resolution of the experimental setup. Furthermore, the two detectors can be replaced by a pulse generator for time calibration.
 
 \begin{figure}
 	\centering
@@ -187,6 +187,7 @@ An important parameter of the full electrical circuit is the timing between the 
 
 \FloatBarrier
 \section{Time Calibration and Determination of the Electronic Resolution}
+\label{time_calib}
 The goal of this calibration experiment is to map the MCA channels to a physical delay between the PMT signals. 
 
 To simulate realistic conditions, the experimental setup is very similar to the one depicted in figure \ref{fig:full_circuit}. The only  exception is that the detectors as well as the radioactive source are replaced by a digital pulse generator. The pulse generator is configured such that the pulse heights and lengths resemble the signals from the PMTs.  
@@ -220,6 +221,7 @@ The regression result with the residuum is depicted in figure \ref{fig:calibrati
 The final calibration function is
 \begin{equation}
 	\Delta t = \left[\left(\num{0.0023292 \pm 0.0000034}\right) \cdot \mathrm{channel} + \left(\num{-5.163 \pm 0.025}\right)\right] \si{\nano\second}
+\label{eq:tim_calib_eq}
 \end{equation}
 
 This result can be combined with the mean and sample standard deviation of the obtained peak widths to calculate the time resolution due to electronics:
@@ -228,7 +230,7 @@ This result can be combined with the mean and sample standard deviation of the o
 \end{equation}
 
 \chapter{Conduction and Analysis}
-The presented experimental setup results in a measurement of time differences between the start and stop photons from the source. It is conducted with three different sources: \isotope[22]{Na} in Aluminum, \isotope[22]{Na} in Polyethylen and \isotope[60]{Co} in Polyethylen. The first two measurements aim to determine the lifetime/conversion time of positrons in metals and plastic and the third source provides two coincident photons which are investigated to determine the time resolution of the setup. Furthermore, the \isotope[60]{Co} source is used to investigate the stability of the setup by comparing the corresponding histogram before and after a measurement with another source.
+The presented experimental setup results in a measurement of time differences between the start and stop photons from the source. It is conducted with three different sources: \isotope[22]{Na} in Aluminum, \isotope[22]{Na} in Polyethylene and \isotope[60]{Co} in Polyethylene. The first two measurements aim to determine the lifetime/conversion time of positrons in metals and plastic and the third source provides two coincident photons which are investigated to determine the time resolution of the setup. Furthermore, the \isotope[60]{Co} source is used to investigate the stability of the setup by comparing the corresponding histogram before and after a measurement with another source.
 
 \begin{table}[htbp]
 	\centering
@@ -304,11 +306,32 @@ In equation \ref{eq:centroid}, $N_x$ is the number of entries in one bin and $t_
 
 \section{Deviation to the Expected Lifetime in Metal}
 
-The expectation for the lifetime of positrons in metals was stated in chapter \ref{ch:theory} in the \si{\pico\second} regime. The measured result is not compatible with this expectation. A suspicious observation is that the decay constants of the measurement in aluminum and plastic are very similar. It is thus not surprising that the centroid shift which aims for 
+The expectation for the lifetime of positrons in metals was stated in chapter \ref{ch:theory} in the picosecond regime. The measured result is not compatible with this expectation. A suspicious observation is that the decay constants of the measurements in aluminum and plastic are very similar. It is thus not surprising that the result is much larger than expected from theory, the centroid is obviously shifted if the curve has a long tail. One possibility to explain this unexpected result would be if the \isotope[60]{Co} source is in fact encased in plastic or some other material which is then surrounded by aluminum. However, this speculation can not be confirmed or refused in this analysis, the result is stated with it's strong discrepancy.
 
 
+\chapter{Investigation of Systematic Uncertainties and Problems in the Setup}
 
-\chapter{Systematic Uncertainties}
+In this chapter, the possible sources of systematic uncertainties are discussed. The different determination of statistical uncertainties is discussed in the corresponding section (poissonian error per bin, fit error, standard deviation etc.).
+
+\section{Position of the Samples}
+The radioactive sources are encased in plastic or aluminum and placed between the two scintillators. The actual position of the radioactive material inside this casing can not be verified. If the position is slightly asymmetric or differs between the sources, this results in systematic shifts of the measured delays. However, the systematic uncertainty can be estimated with the speed of light and will be neglected in the following:
+\begin{equation}
+\Delta t_\textrm{position} \approx \SI{0.5}{\centi\meter} / c_0 \approx \SI{17}{\pico\second}   
+\end{equation}
+
+\section{Photomultiplier Tube Signals}
+As can be see in figure \ref{fig:pmt_signals}, the amplitude of the signals differs between the two PMTs in the start and stop circuit (different voltage scale on the oscilloscope). Since the start signal is rather weak, also more noise is accepted and this in turn leads to more misleadingly identified coincidences (larger resolution curve etc.).
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.45\textwidth]{../images/gate_vs_dynode/F0003TEK.png}
+	\includegraphics[width=0.45\textwidth]{../images/gate_vs_dynode/F0004TEK.png}
+	\caption{Oscilloscope snapshots of the PMT signals. The yellow curve is the signal from the dynode and the cyan curve from the anode (integrated). The left picture shows the PMT to detect the start photon and the right the PMT in the stop circuit.}
+	\label{fig:pmt_signals}
+\end{figure}
+
+\section{Uncertainty of the Time Calibration}
+The conducted time calibration (see section \ref{time_calib}) yields a mapping between channel number and delay between the two pulses. The uncertainty on the parameters in equation \ref{eq:tim_calib_eq} remain constant for the following analysis steps and are therefore a systematic uncertainty. But since the relative uncertainty lies far below the determined resolution, this uncertainty is not taken into account in the final results. 
 
 \chapter{Results and Conclusion}
 

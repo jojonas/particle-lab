@@ -230,8 +230,53 @@ This result can be combined with the mean and sample standard deviation of the o
 \chapter{Conduction and Analysis}
 The presented experimental setup results in a measurement of time differences between the start and stop photons from the source. It is conducted with three different sources: \isotope[22]{Na} in Aluminum, \isotope[22]{Na} in Polyethylen and \isotope[60]{Co} in Polyethylen. The first two measurements aim to determine the lifetime/conversion time of positrons in metals and plastic and the third source provides two coincident photons which are investigated to determine the time resolution of the setup. Furthermore, the \isotope[60]{Co} source is used to investigate the stability of the setup by comparing the corresponding histogram before and after a measurement with another source.
 
+CO lang 50750s
+Na Alu 
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{ 
+			l
+			l
+		}
+		\toprule
+		{Source} & {Measurement Time}  \\ 
+		\midrule
+		\isotope[60]{Co} in Plastic  & $\SI{5880}{\second}$  \\
+		\isotope[22]{Na} in Aluminum & $\SI{43620}{\second}$  \\
+		\isotope[22]{Na} in Plastic  & $\SI{246900}{\second}$ \\
+		\bottomrule
+	\end{tabular}
+	\caption{Duration of the different measurements.}
+	\label{tbl:Meas_times}
+\end{table}
+
+
+
 \section{Rebinning of Histograms and Background Subtraction}
-All following analysis steps are based on the measured numbers of events per channel in the MCA. The number of bins in the investigated histograms is chosen smaller than the number of channels in the MCA($\approx 16000$). The reason lies in the number of events per bin which is requested for the interesting regions to be larger than $\approx 20$. This justifies poissonian error estimation $\sigma_\textrm{bin}=\sqrt{n_\textrm{bin}}$. 
+All following analysis steps are based on the measured numbers of events per channel in the MCA. The number of bins in the investigated histograms is chosen smaller than the number of channels in the MCA($\approx 16000$). The reason lies in the number of events per bin which is requested for the interesting regions to be larger than $\approx 20$. This justifies poissonian error estimation $\sigma_\textrm{bin}=\sqrt{n_\textrm{bin}}$ during fit procedures. \\
+
+Even though the experimental setup is tuned to reject background events, there is a certain fraction of events which do not come from actual positrons (noise in the PMT, radioactivity etc.). The random time between two background signals follows a uniform distribution. In all histograms, the tail corresponding to very large time differences is therefore investigated to determine the constant background: The procedure is exemplary shown in figure \ref{fig:resolution_background}(blue line) where the background is estimated in the range \SIrange{20}{30}{\nano\second} and then subtracted in all bins of the histogram. 
+
+\begin{figure}
+	\centering
+	\includegraphics{resolution_background}
+	\caption{Demonstration of the Background Subtraction process which is applied in all following histogram.}
+	\label{fig:resolution_background}
+\end{figure}
+
+
+\section{Determination of the Full Time Resolution and Further Measurements with \isotope[60]{Co}}
+The \isotope[69]{CO} source provides two coincident high energy photons which can be used to investigate the resolution of the full setup (time calibration used a setup excluding the detectors). It is placed between the scintillators and the time difference between the actually coincident photons is measured. The resulting histogram can be seen in figure \ref{fig:resolution_peak}. 
+
+\begin{figure}
+	\centering
+	\includegraphics{resolution_peak}
+	\caption{Determination of the Resolution Curve of the full setup using \isotope[60]{Co}.}
+	\label{fig:resolution_peak}
+\end{figure}
+
+
 
 
 \chapter{Systematic Uncertainties}

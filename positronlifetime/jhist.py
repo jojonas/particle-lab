@@ -67,8 +67,8 @@ class Hist:
 		else:
 			lower_index = lower
 			upper_index = upper
-			lower = self.bin_edge(lower)
-			upper = self.bin_edge(upper)
+		lower = self.bin_edge(lower_index)
+		upper = self.bin_edge(upper_index)
 			
 		nbins = upper_index - lower_index
 		hist = Hist(lower, upper, nbins)
@@ -81,11 +81,14 @@ class Hist:
 		self.overflow *= factor
 		self.underflow *= factor
 
-	def std(self):
-		return math.sqrt(np.power(self.histogram*(self.bin_centers-self.mean()), 2).sum() / self.histogram.sum())
-
-	def mean(self):
+	def centroid(self):
 		return (self.histogram*self.bin_centers).sum() / self.histogram.sum()
+		
+	def centroid_std(self):
+		return math.sqrt(np.power(self.histogram*(self.bin_centers-self.centroid()), 2).sum() / self.histogram.sum())
+
+	def centroid_error(self):
+		return self.centroid_std() / math.sqrt(self.histogram.sum())
 
 	def count(self):
 		return self.histogram.sum() + self.overflow + self.underflow
@@ -102,11 +105,12 @@ class Hist:
 	def bin_centers(self):
 		return self.bin_edges + self.bin_width/2
 
-	def errorbar(self, fmt="s", **kwargs):
+	def errorbar(self, fmt="s", errors=None, **kwargs):
 		with self._plot_context():
 			values = self.histogram
-			stat_errors = np.sqrt(values)
-			return plt.errorbar(self.bin_centers[values!=0], values[values!=0], yerr=stat_errors[values!=0], fmt=fmt, **kwargs)
+			if errors is None:
+				errors = np.sqrt(values)
+			return plt.errorbar(self.bin_centers[values!=0], values[values!=0], yerr=errors[values!=0], fmt=fmt, **kwargs)
 			
 	def dots(self, markers=".", **kwargs):
 		with self._plot_context():

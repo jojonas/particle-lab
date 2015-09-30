@@ -145,8 +145,8 @@ If the discrimination is disabled, the energy spectrum shows the typical form ex
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.8\textwidth]{windows_0}
-	\includegraphics[width=0.8\textwidth]{windows_1}
+	\includegraphics[width=0.48\textwidth]{windows_0}
+	\includegraphics[width=0.48\textwidth]{windows_1}
 	\caption{Energy spectra (uncalibrated) of the dynode signals in the start and stop circuit. The chosen windows are shown dashed.}
 	\label{fig:WD_spectra}
 \end{figure}
@@ -280,7 +280,7 @@ The time resolution of the full setup can now be obtained from a fitted Gauss fu
 \begin{equation}
 	\sigma_{t,full}=\SI{283}{\pico\second}
 \end{equation}
-
+\FloatBarrier
 \section{Lifetime/Conversion Time in Plastic}
 In this section, the \isotope[22]{Na} is placed inside a block of polyethylene. Polyethylene is an isolator, so the emitted positrons form positronium, which has a long lifetime. 
 
@@ -357,7 +357,7 @@ As can be seen in figure \ref{fig:pmt_signals}, the amplitude of the signals dif
 	\centering
 	\includegraphics[width=0.45\textwidth]{../images/gate_vs_dynode/F0003TEK.png}
 	\includegraphics[width=0.45\textwidth]{../images/gate_vs_dynode/F0004TEK.png}
-	\caption{Oscilloscope snapshots of the PMT signals. The yellow curve is the signal from the dynode and the cyan curve from the anode (integrated). The left picture shows the PMT to detect the start photon and the right the PMT in the stop circuit.}
+	\caption{Oscilloscope snapshots of the PMT signals. The yellow curve represents the signal from the dynode and the cyan curve from the anode (integrated). The left picture shows the PMT to detect the start photon and the right the PMT in the stop circuit.}
 	\label{fig:pmt_signals}
 \end{figure}
 
@@ -365,10 +365,18 @@ As can be seen in figure \ref{fig:pmt_signals}, the amplitude of the signals dif
 The conducted time calibration (see section \ref{time_calib}) yields a mapping between channel number and delay between the two pulses. The uncertainties on the parameters in equation \ref{eq:tim_calib_eq} remain constant for the following analysis steps and are therefore systematic. However, since the relative uncertainty lies far below the determined resolution, this uncertainty is not taken into account in the final results. 
 
 \section{Choice of Parameters in the Circuits}
-The choice of parameters and its motivation is described in sections \ref{ch_WD} and \ref{ch_CFD}. If this choice (and the choice of other parameters in the circuits) was different, the background rejection would become better or worse and the total rate would change. But for the presented analysis methods, this does not change the determined lifetimes since the delay between two signals remains untouched if the rate is changed.
+The choice of parameters and its motivation is described in sections \ref{ch_WD} and \ref{ch_CFD}. If this choice (and the choice of other parameters in the circuits) was different, the background rejection would become better or worse and the total rate would change. For the presented analysis methods, this does not change the determined lifetimes since the delay between two signals remains untouched if the rate is changed. 
 
 \section{Instability of the Setup}
-Since
+Since the measurements last over several days, the stability of the setup has an important influence. It is checked by repeated measurements of the calibration curve with the same \isotope[60]{Co} source.\\
+While the setup seems to remain stable during the measurement of positrons in the polyethylene sample, see left plot in figure \ref{fig:instability}, the resolution curve after the measurement of the aluminum sample shows a shift to shorter delays of $|\Delta t_\textrm{instab.} | \approx \SI{180}{\pico\second}$ (right plot same figure). To estimate the resulting systematic uncertainty, this value can be taken as upper limit. This corresponds to the worst case scenario where all events in the measurement of the aluminum sample were recorded just after the measurement of the first resolution curve. The effect can not explain the deviation found in the measurement of the aluminum sample.
+\begin{figure}
+	\centering
+	\includegraphics[width=0.45\textwidth]{all_cobalt_1}
+	\includegraphics[width=0.45\textwidth]{all_cobalt_0}
+	\caption{Repeated measurements of the resolution curve (\isotope[60]{Co}). Left: Before and after the measurement with the polyethylene sample. Right: Before and after the measurement with the aluminum sample.}
+	\label{fig:instability}
+\end{figure}
 
 \chapter{Results and Conclusion}
 

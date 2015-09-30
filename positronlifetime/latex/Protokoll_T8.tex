@@ -341,16 +341,16 @@ The expectation for the lifetime of positrons in metals was stated in chapter \r
 
 \chapter{Investigation of Systematic Uncertainties and Problems in the Setup}
 
-In this chapter, the possible sources of systematic uncertainties are discussed. The different determination of statistical uncertainties is discussed in the corresponding section (poissonian error per bin, fit error, standard deviation etc.).
+In this chapter, possible sources of systematic uncertainties and problems in the setup which were identified during conduction are discussed. The different statistical uncertainties are discussed in their corresponding section (poissonian error per bin, fit error, standard deviation etc.).
 
 \section{Position of the Samples}
 The radioactive sources are encased in plastic or aluminum and placed between the two scintillators. The actual position of the radioactive material inside this casing can not be verified. If the position is slightly asymmetric or differs between the sources, this results in systematic shifts of the measured delays. However, the systematic uncertainty can be estimated with the speed of light and will be neglected in the following:
 \begin{equation}
-\Delta t_\textrm{position} \approx \SI{0.5}{\centi\meter} / c_0 \approx \SI{17}{\pico\second}   
+\Delta t_\textrm{position} < \SI{0.5}{\centi\meter} / c_0 \approx \SI{17}{\pico\second}   
 \end{equation}
 
 \section{Photomultiplier Tube Signals}
-As can be see in figure \ref{fig:pmt_signals}, the amplitude of the signals differs between the two PMTs in the start and stop circuit (different voltage scale on the oscilloscope). Since the start signal is rather weak, also more noise is accepted and this in turn leads to more misleadingly identified coincidences (larger resolution curve etc.).
+As can be seen in figure \ref{fig:pmt_signals}, the amplitude of the signals differs between the two PMTs in the start and stop circuit (different voltage scale on the oscilloscope). Since the start signal is rather weak, also more noise is accepted and this in turn leads to more misleadingly identified coincidences (larger resolution curve etc.).
 
 \begin{figure}
 	\centering
@@ -361,7 +361,7 @@ As can be see in figure \ref{fig:pmt_signals}, the amplitude of the signals diff
 \end{figure}
 
 \section{Uncertainty of the Time Calibration}
-The conducted time calibration (see section \ref{time_calib}) yields a mapping between channel number and delay between the two pulses. The uncertainty on the parameters in equation \ref{eq:tim_calib_eq} remain constant for the following analysis steps and are therefore a systematic uncertainty. But since the relative uncertainty lies far below the determined resolution, this uncertainty is not taken into account in the final results. 
+The conducted time calibration (see section \ref{time_calib}) yields a mapping between channel number and delay between the two pulses. The uncertainties on the parameters in equation \ref{eq:tim_calib_eq} remain constant for the following analysis steps and are therefore systematic. However, since the relative uncertainty lies far below the determined resolution, this uncertainty is not taken into account in the final results. 
 
 \chapter{Results and Conclusion}
 

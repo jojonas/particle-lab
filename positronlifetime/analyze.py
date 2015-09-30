@@ -76,7 +76,7 @@ def mca_calibration():
 	times = (   0,    1,    2,    3,    4,    5,    6,    7,    8,    9,   10,   11,   12,   13,   14,   15,   16,   17,   18,    19,    20,    25,    30)
 	
 	
-	hist.rebin(hist.nbins/4)
+	#hist.rebin(hist.nbins/4)
 	
 	seeds = np.array(seeds)
 	times = np.array(times)
@@ -88,7 +88,7 @@ def mca_calibration():
 		peak = peak_finder(hist, seed-1, step=3, background_fraction=0.02)
 		peak.normalize()
 		peak.steps(color="black")
-		center = peak.mean()
+		center = peak.centroid()
 		width = find_68_interval(peak, center)
 		peaks[i] = ufloat(center, width)
 		y = np.max(peak.histogram)
@@ -105,10 +105,10 @@ def mca_calibration():
 		#plt.axvline(peaks[i].n-peaks[i].s, color="red", alpha=0.1)
 		#plt.axvline(peaks[i].n+peaks[i].s, color="red", alpha=0.1)
 	plt.xlabel("Channel")
-	plt.ylabel("Normalized number of Events")
+	plt.ylabel("Normalized Number of Events")
 	plt.yscale("log")
 	plt.xlim(2000, 16e3)
-	plt.ylim(0.01, 0.2)
+	plt.ylim(0.002, 0.04)
 	plt.savefig("images/calibration_peaks.pdf", fontsize=10)
 	
 	plt.clf()
@@ -117,7 +117,7 @@ def mca_calibration():
 	linear = lambda x, a, b: a*x + b
 	params, chisqndof = uncertainty_curve_fit(linear, peaks, times, x0=(0.002, -5), epsfcn=1e-5, B=1000)
 	
-	ax1, ax2 = plot_fit(peaks, times, linear, params, xlabel="Channel", ylabel="Delay [ns]")
+	ax1, ax2 = plot_fit(peaks, times, linear, params, xlabel="Channel", ylabel="Delay [ns]", range=(2000, 16000))
 	
 	text = ""
 	text += r"$\chi^2/\mathrm{{ndof}} = {:.3g}$".format(chisqndof) + "\n"
@@ -154,116 +154,279 @@ def windows():
 		plt.clf()
 	
 def all_cobalt():
-	filenames = [
-		#"data/Co60_1900_16nsDelay_.TKA",
-		#"data/Co60_Fr9_11_resolution.TKA",
-		#"data/Co60_Fr1240_resolution_short.TKA",
-		#"data/Co60_Mo0945.TKA",
-		"data/Co60_duenn_links.TKA",
-		"data/Co60_duenn_rechts.TKA",
-		"data/Co60_delay_vom_anfang.TKA",
+	bunch1 = [
+		("Pre Na22+Al", "data/Co60_1900_16nsDelay_.TKA"),
+		("After Na22+Al (long)", "data/Co60_Fr9_11_resolution.TKA"),
 	]
 	
-	channel2time = lambda c: 0.0023293*c - 5.163
+	bunch2 = [
+		("Pre Na22+PE", "data/Co60_Fr1240_resolution_short.TKA"),
+		("After Na22+PE", "data/Co60_Mo0945.TKA"),
+	]
 	
-	for filename in filenames:
-		hist = hist_from_tka(filename, frequencies=False)
-		hist.normalize()
-		hist.rebin(hist.nbins/4)			
-		hist.min = channel2time(hist.min)
-		hist.max = channel2time(hist.max)
-		hist.steps(label=filename)
-		print(filename, "Centroid:", hist.mean())
+	ranges = [
+		(-1, 4),
+		(-0.3, 2)
+	]
+	
+	channel2time = lambda c: 0.002329*c - 5.16
+	
+	for j, bunch in enumerate((bunch1, bunch2)):
+		plt.clf()
 		
-	plt.legend()
-	plt.xlabel("Delay [ns]")
-	plt.ylabel("Number of Events")
-	#plt.yscale("log")
-	plt.xlim(hist.min, hist.max)
-	#plt.ylim(np.min(hist.histogram[hist.histogram!=0]), np.max(hist.histogram))
-	plt.show()
+		centroids = []
+		
+		for i, (label, filename) in enumerate(bunch):
+			hist = hist_from_tka(filename, frequencies=False)
+			hist.rebin(500)
+			hist.min = channel2time(hist.min)
+			hist.max = channel2time(hist.max)
+			hist = hist.slice(-5, 25)
+			bg = np.mean(hist.slice(10, 20).histogram)
+			hist.histogram = np.maximum(0, hist.histogram - bg)
+			hist.normalize()
+			hist.steps(color="gray")
+			peak = hist.slice(*ranges[j])
+			peak.steps(color=("red", "blue")[i], label=label)
+			centroids.append(peak.centroid())
+		
+		centroid_shift = centroids[1] - centroids[0]
+		annotate("Centroid Shift: %.3g ps" % (centroid_shift*1000), loc=5)
+		
+		plt.legend()
+		plt.xlabel("Delay [ns]")
+		plt.ylabel("Normalized Number of Events")
+		plt.yscale("log")
+		plt.xlim(-1, 6)
+		plt.ylim(0.000001, 0.2)
+		plt.savefig("images/all_cobalt_%d.pdf" % j)
+		plt.show()
 	
-def resolution_curve():	
-	filename = "data/Co60_Fr9_11_resolution.TKA"
-	channel2time = lambda c: 0.0023293*c - 5.163
-
-	hist = hist_from_tka(filename, frequencies=False)
-	hist.rebin(hist.nbins/4)
-	
-	hist.min = channel2time(hist.min)
-	hist.max = channel2time(hist.max)
-	peak = hist.slice(-0.55, 2.1)
-	
-	plt.clf()
-	hist.steps(color="black")
-	peak.steps(color="red")
-	plt.xlabel("Delay [ns]")
-	plt.ylabel("Number of Events")
-	plt.yscale("log")
-	plt.xlim(hist.min, hist.max)
-	plt.ylim(np.min(hist.histogram[hist.histogram!=0]), np.max(hist.histogram))	
-	plt.show()
-	
-	centroid = peak.mean()
-	print("PMT Delay:", centroid, "ns")
-	
-def deconvolution_test():
-	channel2time = lambda c: 0.0023293*c - 5.163
-
+def resolution_and_aluminum_lifetime():	
+	signal_filename = "data/Na22_aluminum_overnight.TKA"
 	resolution_filename = "data/Co60_Fr9_11_resolution.TKA"
-	resolution = hist_from_tka(resolution_filename, frequencies=False)
-	resolution.rebin(resolution.nbins/20)
-	resolution.normalize()
-	resolution.min = channel2time(resolution.min)
-	resolution.max = channel2time(resolution.max)
-	#resolution = resolution.slice(-0.55, 2.1)
 	
-	signal_filename = "data/Co60_Fr1240_resolution_short.TKA"
-	signal = hist_from_tka(signal_filename, frequencies=False)
-	signal.rebin(signal.nbins/20)
-	#signal.normalize()
-	signal.min = channel2time(signal.min)
-	signal.max = channel2time(signal.max)
-	
-	result, _ = deconvolve(signal.histogram, resolution.histogram)
-	X = np.arange(len(result))
-	#print(len(signal.histogram)-len(resolution.histogram), len(result))
-	#plt.plot(X, result)
-	#signal.steps(color="red")
-	#resolution.steps(color="black")
-	plt.plot(X, result)
-	#plt.ylim(0, 100)
-	plt.yscale("log")
-	plt.show()
-	
-def lifetime_aluminum():
-	filename = "data/Na22_aluminum_overnight.TKA"
-	channel2time = lambda c: 0.0023293*c - 5.163
-	
-	hist = hist_from_tka(filename, frequencies=False)
-	hist.rebin(hist.nbins/4)
-	hist.min = channel2time(hist.min)
-	hist.max = channel2time(hist.max)
+	channel2time = lambda c: 0.002329*c - 5.16
 
-	peak = hist.slice(-1.6, 8.9)
+	resolution_hist = hist_from_tka(resolution_filename, frequencies=False)
+	resolution_hist.rebin(500)
+	resolution_hist.min = channel2time(resolution_hist.min)
+	resolution_hist.max = channel2time(resolution_hist.max)
 	
 	plt.clf()
-	hist.steps(color="black")
-	peak.steps(color="red")
+	resolution_hist.steps(color="black")
+	resolution_background = resolution_hist.slice(20, 30)
+	resolution_background.steps(color="blue")
+	resolution_background_level = np.mean(resolution_background.histogram)
+	plt.axhline(resolution_background_level, color="blue")
 	plt.xlabel("Delay [ns]")
 	plt.ylabel("Number of Events")
 	plt.yscale("log")
-	plt.xlim(hist.min, hist.max)
-	plt.ylim(np.min(hist.histogram[hist.histogram!=0]), np.max(hist.histogram))
-	plt.show()
+	plt.xlim(resolution_hist.min, resolution_hist.max)
+	plt.ylim(200, 1e5)	
+	plt.savefig("images/resolution_background.pdf")
 	
-	centroid = peak.mean()
-	print("Aluminum Delay:", centroid, "ns")
+	plt.clf()
+	resolution_hist.histogram = np.maximum(0, resolution_hist.histogram-resolution_background_level)
+	resolution_hist.steps(color="black")
+	resolution_peak = resolution_hist.slice(-0.55, 2.1)
+	resolution_peak.errorbar(fmt=",", color="red")
+	
+	gauss = lambda x, mu, sigma, N: N*np.exp(-np.power(x-mu, 2)/np.power(sigma, 2))
+	popt, pcov = curve_fit(gauss, resolution_peak.bin_centers, resolution_peak.histogram, sigma=np.sqrt(resolution_peak.histogram), p0=(0.54, 0.5, 1e5), absolute_sigma=True)
+	X = np.linspace(resolution_peak.min, resolution_peak.max, 1000)
+	plt.plot(X, gauss(X, *popt), color="blue")
+	params = list(ufloat(v, e) for v, e in zip(popt, np.sqrt(np.diag(pcov))))
+	print("Gauss fit:", params)
+	
+	chisq = np.power(resolution_peak.histogram - gauss(resolution_peak.bin_centers, *popt), 2).sum() / resolution_peak.histogram.sum() 
+	chisqndof = chisq / (resolution_peak.nbins - len(popt))
+	
+	text = ""
+	text += r"$\chi^2$/ndof = " + "%.3g\n" % chisqndof
+	text += r"$\mu$ = " + "%.3g ps, " % (1000*popt[0]) + r"$\sigma$ = " + "%.3g ps" % (1000*popt[1])
+	
+	annotate(text)
+	
+	plt.xlabel("Delay [ns]")
+	plt.ylabel("Number of Events")
+	plt.yscale("log")
+	plt.xlim(-2, 5)
+	plt.ylim(2, 1e5)	
+	plt.savefig("images/resolution_peak.pdf")
+	
+	resolution_centroid = resolution_peak.centroid()
+	
+	
+	signal_hist = hist_from_tka(signal_filename, frequencies=False)
+	signal_hist.rebin(500)
+	signal_hist.min = channel2time(signal_hist.min)
+	signal_hist.max = channel2time(signal_hist.max)
+	
+	signal_background = signal_hist.slice(20, 30)
+	signal_background_level = np.mean(signal_background.histogram)
+	signal_hist.histogram = np.maximum(0, signal_hist.histogram-signal_background_level)
+	
+	signal_N = signal_hist.count()
+	
+	signal_hist.normalize()
+	resolution_hist.normalize()
+	
+	signal_peak = signal_hist.slice(-5, 12)
+	signal_centroid = signal_peak.centroid()
+	
+	resolution_ucentroid = ufloat(resolution_peak.centroid(), resolution_peak.centroid_error())
+	signal_ucentroid = ufloat(signal_peak.centroid(), signal_peak.centroid_error())
+	
+	print("PMT delay:", resolution_ucentroid, "ns")
+	print("Aluminium delay:", signal_ucentroid, "ns")
+	print("Aluminium lifetime:", signal_ucentroid - resolution_ucentroid, "ns")
+	
+	plt.clf()
+	plt.gca().annotate(
+		"$^{60}$Co, %.3g ns" % resolution_centroid, 
+		xy=(resolution_centroid-0.4, 0.1), 
+		xytext=(resolution_centroid-0.4, 0.1), 
+		xycoords="data", 
+		textcoords="data",
+		horizontalalignment='right', 
+		verticalalignment='bottom',
+		color="blue"
+	)
+	plt.gca().annotate(
+		"$^{22}$Na in Al, %.4g ns" % signal_centroid, 
+		xy=(signal_centroid+0.4, 0.1), 
+		xytext=(signal_centroid+0.4, 0.1), 
+		xycoords="data", 
+		textcoords="data",
+		horizontalalignment='left', 
+		verticalalignment='bottom',
+		color="red",
+	)
+	
+	#resolution_hist.steps(color="gray")
+	resolution_peak = resolution_hist.slice(-0.55, 2.1)
+	resolution_peak.steps(color="blue")
+	
+	signal_hist.steps(color="gray")
+	signal_peak.steps(color="red")
+	plt.axvline(signal_centroid, color="red")
+	
+	plt.axvline(resolution_centroid, color="blue")
+	
+	plt.xlabel("Delay [ns]")
+	plt.ylabel("Normalized Number of Events")
+	plt.yscale("log")
+	plt.xlim(-5, 30)
+	plt.ylim(0.000001, 0.2)
+	plt.savefig("images/na22_aluminum.pdf")
+	
+	
+	plt.clf()
+	
+	signal_peak = signal_hist.slice(1.2, 12)
+	errors = np.sqrt(signal_peak.histogram * signal_N) / signal_N
+	
+	f = lambda x, N1, N2, tau1, tau2: N1*np.exp(-x/tau1) + N2*np.exp(-x/tau2)
+	popt = (0.7, 0.01, 0.4, 1.7)
+	popt, pcov = curve_fit(f, signal_peak.bin_centers, signal_peak.histogram, p0=popt, sigma=errors, absolute_sigma=True)
+	chisq = np.power(signal_peak.histogram - f(signal_peak.bin_centers, *popt), 2).sum() / np.power(errors, 2).sum() 
+	chisqndof = chisq / (signal_peak.nbins - len(popt))
+	
+	params = list(ufloat(v, e) for v, e in zip(popt, np.sqrt(np.diag(pcov))))
+	print("Fit:", params)
+	
+	X = np.linspace(signal_peak.min, signal_peak.max, 1000)
+	
+	signal_hist.steps(color="gray")
+	signal_peak.errorbar(color="red", fmt=",", errors=errors)
+	plt.plot(X, f(X, *popt), color="black", linewidth=3)
+	
+	text = ""
+	text += r"$\chi^2$/ndof = " + "%.3g\n" % chisqndof
+	#text += r"$N_1 / N_2$ = " + "%.3g\n" % (popt[0]/popt[1])
+	text += r"$\tau_1$ = " + "{:.3P} ps \n".format(1000*params[2]) 
+	text += r"$\tau_2$ = " + "{:.4P} ns".format(1000*params[3])
+	annotate(text)
+	
+	plt.xlabel("Delay [ns]")
+	plt.ylabel("Normalized Number of Events")
+	plt.yscale("log")
+	plt.xlim(-5, 30)
+	plt.ylim(0.000001, 0.2)
+	plt.savefig("images/na22_aluminum_fit.pdf")
+	
+def lifetime_polyethylen():
+	signal_filename = "data/Na22_plastik.TKA"
+	resolution_filename = "data/Co60_Fr9_11_resolution.TKA"
+	
+	channel2time = lambda c: 0.002329*c - 5.16
+	
+	signal_hist = hist_from_tka(signal_filename, frequencies=False)
+	signal_hist.rebin(500)
+	signal_hist.min = channel2time(signal_hist.min)
+	signal_hist.max = channel2time(signal_hist.max)
+	
+	signal_background = signal_hist.slice(20, 30)
+	signal_background_level = np.mean(signal_background.histogram)
+	signal_hist.histogram = np.maximum(0, signal_hist.histogram-signal_background_level)
+	
+	peak = (1.4, 12)
+	
+	signal_N = signal_hist.count()
+	signal_hist.normalize()
+	
+	resolution_hist = hist_from_tka(resolution_filename, frequencies=False)
+	resolution_hist.rebin(500)
+	resolution_hist.min = channel2time(resolution_hist.min)
+	resolution_hist.max = channel2time(resolution_hist.max)
+	resolution_background = resolution_hist.slice(20, 30)
+	resolution_background.steps(color="blue")
+	resolution_background_level = np.mean(resolution_background.histogram)
+	resolution_hist.histogram = np.maximum(0, resolution_hist.histogram-resolution_background_level)
+	resolution_hist.normalize()
+
+	signal_peak = signal_hist.slice(1.4, 12) # for unnormalized errrors
+	errors = np.sqrt(signal_peak.histogram * signal_N) / signal_N
+	
+	f = lambda x, N1, N2, tau1, tau2: N1*np.exp(-x/tau1) + N2*np.exp(-x/tau2)
+	popt = (0.8, 0.005, 1/2.5, 1/0.5)
+	popt, pcov = curve_fit(f, signal_peak.bin_centers, signal_peak.histogram, p0=popt, sigma=errors, absolute_sigma=True)
+	chisq = np.power(signal_peak.histogram - f(signal_peak.bin_centers, *popt), 2).sum() / np.power(errors, 2).sum() 
+	chisqndof = chisq / (signal_peak.nbins - len(popt))
+	
+	params = list(ufloat(v, e) for v, e in zip(popt, np.sqrt(np.diag(pcov))))
+	print("Fit:", params)
+	
+	plt.clf()
+	
+	#resolution_hist.steps(color="gray")
+	resolution_peak = resolution_hist.slice(-0.55, 2.1)
+	resolution_peak.steps(color="blue")
+	signal_hist.steps(color="gray")
+	signal_peak.errorbar(errors=errors, fmt=",", color="red")
+	
+	X = np.linspace(signal_peak.min, signal_peak.max, 1000)
+	plt.plot(X, f(X, *popt), color="black", linewidth=3)
+	
+	text = ""
+	text += r"$\chi^2$/ndof = " + "%.3g\n" % chisqndof
+	#text += r"$N_1 / N_2$ = " + "%.3g\n" % (popt[0]/popt[1])
+	text += r"$\tau_1$ = " + "{:.3P} ps \n".format(1000*params[2]) 
+	text += r"$\tau_2$ = " + "{:.4P} ns".format(1000*params[3])
+	annotate(text)
+	
+	plt.xlabel("Delay [ns]")
+	plt.ylabel("Normalized Number of Events")
+	plt.yscale("log")
+	plt.xlim(-5, 30)
+	plt.ylim(0.000001, 0.2)
+	plt.savefig("images/na22_polyethylen.pdf")
+	
 	
 if __name__=="__main__":
 	#windows()
-	mca_calibration()
-	#all_cobalt()
-	#sdeconvolution_test()
-	#resolution_curve()
-	#lifetime_aluminum()
+	#mca_calibration()
+	all_cobalt()
+	#resolution_and_aluminum_lifetime()
+	#lifetime_polyethylen()

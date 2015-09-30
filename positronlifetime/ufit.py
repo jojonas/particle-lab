@@ -54,7 +54,7 @@ def curve_fit(func, x, y, x0, B=1000, **kwargs):
 	return results, chisqndof
 	
 	
-def plot_fit(x, y, func, params, xlabel="", ylabel=""):
+def plot_fit(x, y, func, params, xlabel="", ylabel="", range=None):
 	gs = gridspec.GridSpec(2, 1, height_ratios=[3,1])
 	
 	xvalue = unp.nominal_values(x)
@@ -62,7 +62,10 @@ def plot_fit(x, y, func, params, xlabel="", ylabel=""):
 	xerror = unp.std_devs(x)
 	yerror = unp.std_devs(y)
 	
-	X = np.linspace(xvalue.min(), xvalue.max(), 100)
+	if range:
+		X = np.linspace(range[0], range[1], 1000)
+	else:
+		X = np.linspace(xvalue.min(), xvalue.max(), 1000)
 	Y = func(X, *unp.nominal_values(params))
 	Y1 = func(X, *(x.n + x.s for x in params))
 	Y2 = func(X, *(x.n - x.s for x in params))
@@ -86,6 +89,9 @@ def plot_fit(x, y, func, params, xlabel="", ylabel=""):
 	
 	ax1.grid(True)
 	ax2.grid(True)
+	
+	if range:
+		ax1.set_xlim(range[0], range[1])
 	
 	return ax1, ax2
 	

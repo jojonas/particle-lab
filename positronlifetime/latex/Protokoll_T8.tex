@@ -112,7 +112,7 @@ The two signals from each PMT are processed in a coincidence circuit which consi
 \chapter{Preparation and Calibration of the Setup}
 The setup as presented in the last chapter has to be adjusted to optimize the background rejection and to synchronize the delay of different parts of the full electrical circuit. These adjustment steps and the final time calibration with a pulse generator are presented in this chapter.
 \section{Adjustment of the Window Discriminators}
-
+\label{ch_WD}
 To choose the window of accepted energies (dynode signal height), the circuit of the dynode is altered such that the MCA measures the energy spectrum of the detected photons, see figure \ref{fig:WD_circuit}. If the amplitude of the amplified dynode signal passes the window discrimator, the value is analyzed and added to the energy spectrum. 
  
 \begin{figure}[h]
@@ -153,7 +153,7 @@ If the discrimination is disabled, the energy spectrum shows the typical form ex
 
 \FloatBarrier
 \section{Adjustment of the Constant Fraction Discriminators}
-
+\label{ch_CFD}
 In the processing of the anode signals, Constant Fraction Discriminators are used to reject background and noise. The threshold, Upper Level Discriminator and Lower Level Discriminator values are adjusted while the full electrical circuit is set up but no radioactive source is present between the scintillators: It is increased until the rate of misleadingly accepted events (energy windows passed, coincident and CFDs passed) becomes very low. The parameters are listed in table \ref{tbl:CFD_values}.
 
 \begin{table}[htbp]
@@ -237,16 +237,17 @@ The presented experimental setup results in a measurement of time differences be
 	\begin{tabular}{ 
 			l
 			l
+			l
 		}
 		\toprule
-		{Source} & {Measurement Time}  \\ 
+		{Source} & Source Name &{Measurement Time}  \\ 
 		\midrule
-		\isotope[60]{Co} in Plastic  & $\SI{5880}{\second}$  \\
-		\isotope[22]{Na} in Aluminum & $\SI{43620}{\second}$  \\
-		\isotope[22]{Na} in Plastic  & $\SI{246900}{\second}$ \\
+		\isotope[60]{Co} in Plastic & AF-9327 & $\SI{5880}{\second}$  \\
+		\isotope[22]{Na} in Aluminum& SV 283 & $\SI{43620}{\second}$  \\
+		\isotope[22]{Na} in Plastic & MW 969 & $\SI{246900}{\second}$ \\
 		\bottomrule
 	\end{tabular}
-	\caption{Duration of the different measurements.}
+	\caption{Duration and Source type of the different measurements.}
 	\label{tbl:Meas_times}
 \end{table}
 
@@ -332,6 +333,12 @@ As can be seen in figure \ref{fig:pmt_signals}, the amplitude of the signals dif
 
 \section{Uncertainty of the Time Calibration}
 The conducted time calibration (see section \ref{time_calib}) yields a mapping between channel number and delay between the two pulses. The uncertainties on the parameters in equation \ref{eq:tim_calib_eq} remain constant for the following analysis steps and are therefore systematic. However, since the relative uncertainty lies far below the determined resolution, this uncertainty is not taken into account in the final results. 
+
+\section{Choice of Parameters in the Circuits}
+The choice of parameters and its motivation is described in sections \ref{ch_WD} and \ref{ch_CFD}. If this choice (and the choice of other parameters in the circuits) was different, the background rejection would become better or worse and the total rate would change. But for the presented analysis methods, this does not change the determined lifetimes since the delay between two signals remains untouched if the rate is changed.
+
+\section{Instability of the Setup}
+Since
 
 \chapter{Results and Conclusion}
 

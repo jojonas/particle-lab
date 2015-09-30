@@ -292,11 +292,12 @@ The resulting time spectrum is depicted in \ref{fig:Na22_poly}. The background h
 	\label{fig:Na22_poly}
 \end{figure}
 
-The same procedure is performed with the resolution peak of figure \ref{fig:resolution_peak}, which is depicted next to the histogram. The subsequent fit is only performed in the area between \SIrange{1.4}{12}{\nano\second}. Here, the condition $P(t) \ll F(t)$ (see \cite{Lab_manual_T8}) is fulfilled, thus the "tail method" of fitting an exponential function is justified.
+The same procedure is performed with the resolution peak of figure \ref{fig:resolution_peak}, which is depicted next to the histogram. The subsequent fit is only performed in the area between \SIrange{1.4}{12}{\nano\second}. Here, the condition $P(t) \ll F(t)$ is fulfilled, thus the "tail-method" (see \cite{Lab_manual_T8}) of fitting an exponential function in the distribution tail is justified.
 
 Since a combination of the short singlet decay ($\tau_1$) and the ${^3S} \rightarrow {^1S}$ conversion ($\tau_2$) is expected, a linear combination of exponentials is a suitable fit template:
 \begin{equation}
 	f(t) = N_1 \exp(-\frac{t}{\tau_1}) + N_2 \exp(-\frac{t}{\tau_2})
+	\label{eq:plastic_fit}
 \end{equation}
 The choice of appropriate initial values forces the least-squares optimization algorithm to converge into the fit drawn as bold black line in figure \ref{fig:Na22_poly}. One can clearly see the two different decays since they dominate in different regions: The fast singlet-decay up to \SI{3}{\nano\second}, the conversion in the longer regime.
 
@@ -331,13 +332,18 @@ In equation \ref{eq:centroid}, $N_x$ is the number of entries in one bin and $t_
 
 \section{Deviation to the Expected Lifetime in Metal}
 
-The expectation for the lifetime of positrons in metals was stated in chapter \ref{ch:theory} in the picosecond regime. The measured result is not compatible with this expectation. A suspicious observation is that the decay constants of the measurements in aluminum and plastic are very similar. It is thus not surprising that the result is much larger than expected from theory, the centroid is obviously shifted if the curve has a long tail. One possibility to explain this unexpected result would be if the \isotope[60]{Co} source is in fact encased in plastic or some other material which is then surrounded by aluminum. However, this speculation can not be confirmed or refused in this analysis, the result is stated with it's strong discrepancy.
+The expectation for the lifetime of positrons in metals was stated in chapter \ref{ch:theory} in the picosecond regime. The measured result is not compatible with this expectation. A suspicious observation is that the shape of the aluminum decay spectrum resembles the one obtained from polyethylene earlier. It is thus not surprising that the result is much larger than expected from theory, the centroid is obviously shifted if the curve has a long tail. One possibility to explain this unexpected result would be if the \isotope[22]{Na} source is in fact encased in plastic or some other isolator which is then surrounded by aluminum. 
 
 \begin{figure}
 	\centering
 	\includegraphics{na22_aluminum_fit}
-	\caption{Fit}
+	\caption{Application of the "tail-method" on the \isotope[22]{Na} sample enclosed in aluminum. The parameter results are not statistically compatible but closely resemble the results from polyethylene, supporting the claim that the radioactive source is enclosed in an isolator material, which is then enclosed by aluminum.}
+	\label{fig:na22_alu_fit}
 \end{figure}
+
+To further investigate this discrepancy, equation \ref{eq:plastic_fit} is fitted to the aluminum spectrum, using the same methods as earlier. The result is shown in figure \ref{fig:na22_alu_fit}. The lifetime results are not directly compatible with the ones stated for polyethylene, but lie remarkably close.
+
+This further supports the hypothesis that the radioactive sources are enclosed in similar materials.
 
 \chapter{Investigation of Systematic Uncertainties and Problems in the Setup}
 
@@ -363,8 +369,23 @@ As can be seen in figure \ref{fig:pmt_signals}, the amplitude of the signals dif
 \section{Uncertainty of the Time Calibration}
 The conducted time calibration (see section \ref{time_calib}) yields a mapping between channel number and delay between the two pulses. The uncertainties on the parameters in equation \ref{eq:tim_calib_eq} remain constant for the following analysis steps and are therefore systematic. However, since the relative uncertainty lies far below the determined resolution, this uncertainty is not taken into account in the final results. 
 
-\chapter{Results and Conclusion}
+\chapter{Conclusion}
+This lab report has discussed one way to obtain the positron life time in matter: Measuring the time difference between a triggering photon and the positron-electron annihilation photon. The emission of a triggering photon shortly before or after the positron production is a requirement on the radioactive source. Using a two-detector setup and a timing circuit, the distribution of time differences can be aggregated by a multi-channel-analyzer and analyzed offline.
 
+Three different radioactive sources have been investigated: A \isotope[60]{Co} source, which emits two photons almost at the same time, used for calibration, and two \isotope[22]{Na} sources, enclosed in polyethylene and aluminum.
+
+In the calibration step, a mapping between channels and time differences, and the total resolution (\SI{283}{\pico\second}) of the setup has been determined. 
+
+Subsequently, the source in polyethylene was investigated using the "tail method". The fit of a linear combination of exponentials returned the short lifetime of the positronium singlet state and the conversion time from the triplet to the singlet state:
+\begin{equation}
+\tau_\mathrm{PE, fast} = \SI{362.4 \pm 1.7}{\pico\second},\quad \tau_\mathrm{PE, conv} = \SI{1837 \pm 10}{\pico\second}
+\end{equation}
+
+On performing the "centroid method" on the dataset for aluminum, a large discrepancy between theory and measurement was found: Instead of a few picoseconds, the obtained lifetime was \SI{510 \pm 10}{\pico\second}.
+
+The most promising resolution is that the radioactive source is not only contained in aluminum, but also in an isolator such as polyethylene, where positronium formation is possible. This has been supported by a fit in the tail of the distribution.
+
+Overall, the life times of positronium in polyethylene stand in agreement with the theoretical expectation. The measurement of positrons in aluminum has been unsuccessful, probably due to additional materials contained in the sample.
 
 \cleardoublepage
 
